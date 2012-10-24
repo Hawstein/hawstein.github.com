@@ -1,0 +1,14 @@
+markdown: rdiscount
+pygments: true
+permalink: /posts/:title.html
+auto: true
+rdiscount:
+  extensions: [smart]
+
+title: Hawstein's Blog
+author:
+  name: Hawstein
+  email: tomhawstein@gmail.com
+  github: Hawstein
+
+production_url: http://hawstein.github.com
