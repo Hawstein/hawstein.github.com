@@ -11,4 +11,6 @@ author:
   email: tomhawstein@gmail.com
   github: Hawstein
 
-production_url: http://hawstein.github.com
+production_url: http://hawstein.tk
+
+baseurl: /
