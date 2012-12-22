@@ -1,6 +1,6 @@
 ---
 layout: post
-category: Open Source
+category: Programming
 title: Chrome插件SwitchySharp源码学习
 ---
 

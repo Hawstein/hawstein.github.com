@@ -1,6 +1,6 @@
 ---
 layout: post
-category: 面试笔试题
+category: Programming
 title: Google面试笔试题(0)——聚合数(aggregated number)
 ---
 
