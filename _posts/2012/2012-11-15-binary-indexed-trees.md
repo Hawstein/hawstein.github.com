@@ -18,7 +18,7 @@ title: 树状数组(Binary Indexed Trees)
 [Binary Indexed Trees](http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=binaryIndexedTrees)
 ，并非严格逐字逐句翻译，其中加入了自己的一些理解。水平有限，还望指摘。
 
-## 本文大纲
+## 目录
 
 1. [简介](#intro)
 1. [符号含义](#notation)
