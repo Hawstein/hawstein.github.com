@@ -4,14 +4,6 @@ category: Programming
 title: 限制你上某些网站的Chrome插件——Website Postponer
 ---
 
-作者：Hawstein
-
-出处：<http://hawstein.com/posts/website-postponer.html>
-
-声明：本文采用以下协议进行授权：
-[自由转载-非商用-非衍生-保持署名|Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh)
-，转载请注明作者及出处。
-
 ## 前言
 
 写这样一个插件的想法是在某一天睡觉的时候产生的。为的是解决生活中遇到的一个问题——

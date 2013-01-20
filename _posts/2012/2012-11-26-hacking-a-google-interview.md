@@ -4,14 +4,6 @@ title: Google面试笔试题(1)——Hacking a Google Interview
 category: Programming
 ---
 
-作者：Hawstein
-
-出处：<http://hawstein.com/posts/hacking-a-google-interview.html>
-
-声明：本文采用以下协议进行授权：
-[自由转载-非商用-非衍生-保持署名|Creative Commons BY-NC-ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh)
-，转载请注明作者及出处
-
 ## 前言
 
 众所周知，Google的面试是出了名的，为此MIT还专门针对它开了一门课程！

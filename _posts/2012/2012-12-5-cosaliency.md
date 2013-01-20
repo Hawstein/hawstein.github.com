@@ -4,7 +4,6 @@ category: Research
 title: Co-saliency Notes
 ---
 
-
 ## Saliency Detection: A Spectral Residual Approach
 
 该论文的方法非常简单，与物体的特征，类别，及其他先验知识无关。通过分析输入图像光
