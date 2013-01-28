@@ -1,6 +1,6 @@
 ---
 layout: post
-category: Algorithm
+category: Data Structure & Algorithm
 title: 树状数组(Binary Indexed Trees)
 ---
 
