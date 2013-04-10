@@ -221,12 +221,33 @@ number of 1 bits in their binary representation.
 
 5.5
 [Write a function to determine the number of bits required to convert integer A to
-integer B.	
-Input: 31, 14
-Output: 2
+integer B. Input: 31, 14 Output: 2
 ](/posts/5.5.html)
 
 5.6
 [Write a program to swap odd and even bits in an integer with as few instructions as
 possible (e.g., bit 0 and bit 1 are swapped, bit 2 and bit 3 are swapped, etc).
 ](/posts/5.6.html)
+
+5.7
+[An array A[1...n] contains all the integers from 0 to n except for one number 
+which is missing. In this problem, we cannot access an entire integer in A with 
+a single operation. The elements of A are represented in binary, and the only 
+operation we can use to access them is “fetch the jth bit of A[i]”, which
+takes constant time. 
+Write code to find the missing integer. Can you do it in O(n) time?
+](/posts/5.7.html)
+
+Chapter 6 | Brain Teasers
+
+[Cracking the coding interview--Q6.1~Q6.6](/posts/brain-teasers.html)
+
+Chapter 7 | Object Oriented Design
+
+XDDDDDD
+
+Chapter 8 | Recursion
+
+8.1
+[Write a method to generate the nth Fibonacci number.
+](/posts/8.1.html)
