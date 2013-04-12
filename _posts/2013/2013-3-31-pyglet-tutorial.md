@@ -97,7 +97,78 @@ if __name__ == '__main__':
 **加载并显示图片**
 
 让我们创建一个game的子模块resources.py用来保存资源，
+由于图片所在的目录不在当前目录，因此我们需要告诉Pyglet去哪里找到它们：
 
+{% highlight python %}
+import pyglet
+pyglet.resource.path = ['../resources']
+pyglet.resource.reindex()
+{% endhighlight %}
+
+资源路径以"../"开头是因为resources文件夹与version1文件夹在同一目录下，
+它表示要返回到父目录才能找到resources文件夹。如果我们去掉"../"，
+pyglet就会在version1中查找resources文件夹(当然这样是查找不到的)。
+
+pyglet的resources模块初始化后，就可以加载图片了。
+
+{% highlight python %}
+player_image = pyglet.resource.image("player.png")
+bullet_image = pyglet.resource.image("bullet.png")
+asteroid_image = pyglet.resource.image("asteroid.png")
+{% endhighlight %}
+
+**使图片居中**
+
+pyglet默认是从左下角开始画图，但我们并不想这样，
+于是我们通过设置图片的锚点使其居中。
+
+{% highlight python %}
+def center_image(image):
+    """Sets an image's anchor point to its center"""
+    image.anchor_x = image.width/2
+    image.anchor_y = image.height/2
+{% endhighlight %}
+
+现在我们可以通过调用center_image()来使加载的图片居中：
+
+{% highlight python %}
+center_image(player_image)
+center_image(bullet_image)
+center_image(asteroid_image)
+{% endhighlight %}
+
+记住center_image()函数要先定义再调用，为了能在asteroids.py中访问图片，
+我们需要使用类似"from game import resources"的语句，
+这些内容将在下一节讲。
+
+### 初始化物体
+
+我们想在游戏窗口的顶部放置一些标签来显示当前游戏的分数与等级，
+在第一个版本中，我们将做出一个能显示分数，游戏等级和代表生命数的图标的游戏。
+
+**制作标签**
+
+想要在pyglet中使用文字标签，只需要初始化一个pyglet.text.Label对象即可。
+
+{% highlight python %}
+score_label = pyglet.text.Label(text="Score: 0", x=10, y=575)
+level_label = pyglet.text.Label(text="My Amazing Game", 
+                                x=400, y=575, anchor_x='center')
+{% endhighlight %}
+
+注意第二个标签使用anchor_x属性进行居中处理。
+
+**绘制标签**
+
+我们希望pyglet调用我们定制的函数进行窗口绘制，为了达到这个目的，
+我们有两种选择。第一种，继承pyglet中的Window类并重写on_draw()函数；
+第二种，在一个相同名字的函数上使用@Window.event装饰器：
+
+{% highlight python %}
+@game_window.event
+def on_draw():
+    # draw things here
+{% endhighlight %}
 ## <a id="motion">基本的运动</a>
 
 ## <a id="do">让玩家有事可做</a>
