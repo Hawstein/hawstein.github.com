@@ -365,7 +365,100 @@ def player_lives(num_icons, batch=None):
 
 ### 让物体动起来
 
+如果屏幕上的物体都不会动的话，那这个游戏显得就相当无趣了。为了使物体运动起来，
+我们需要写一些类来处理每帧的运动。此处，我们还需要写一个Player类来响应键盘输入。
 
+**创建基本运动类**
+
+由于每个可视物体由一个Sprite对象表示，我们从pyglet.sprite.Sprite
+中派生出基本运动类。另一种方法是让我们的类继承Object类并让他具有sprite属性，
+但我觉得直接继承Sprite类会更方便。
+
+我们创建一个新的子模块叫physicalobject.py并声明一个PhysicalObject类，
+我们只加入一个新的属性：速度，这样一来，构造函数就相当简单了：
+
+{% highlight python %}
+class PhysicalObject(pyglet.sprite.Sprite):
+
+    def __init__(self, *args, **kwargs):
+        super(PhysicalObject, self).__init__(*args, **kwargs)
+    
+        self.velocity_x, self.velocity_y = 0.0, 0.0
+{% endhighlight %}
+
+每一帧中，每个物体都需要更新，因此我们需要一个update函数：
+
+{% highlight python %}
+def update(self, dt):
+    self.x += self.velocity_x * dt
+    self.y += self.velocity_y * dt
+{% endhighlight %}
+
+dt是时间间隔，游戏中帧间的过渡并不是瞬时的，而且它们也并不总是相等的时间间隔。
+如果你曾经试过在一台老式机器上玩现代游戏，你会发现帧率变化很大(主要是低帧率吧)，
+有许多方法可以解决这个问题，最简单的一个就是把所有时间敏感的操作都乘以dt。
+
+如果给物体一个速度，让它们去运动，它们很快就会运动到屏幕外面。对于这款小行星游戏，
+我们更希望的是它能从屏幕的另一侧出来，而不是消失。
+用下面这个简单的函数就可以达到这个目的：
+
+{% highlight python %}
+def check_bounds(self):
+    min_x = -self.image.width/2
+    min_y = -self.image.height/2
+    max_x = 800 + self.image.width/2
+    max_y = 600 + self.image.height/2
+    if self.x < min_x:
+        self.x = max_x
+    elif self.x > max_x:
+        self.x = min_x
+    if self.y < min_y:
+        self.y = max_y
+    elif self.y > max_y:
+        self.y = min_y
+{% endhighlight %}
+
+正如你所见到的，它会检查物体在屏幕上是否仍然可见。如果物体从屏幕的一侧消失，
+就让它从屏幕的另一侧出来。为了使每一个PhysicalObject对象都能遵循这样的法则，
+我们在update函数的最后增加一个self.check_bounds()的调用。
+
+为了使小行星能使用新的运动代码，只需要import physicalobject模块，
+并改变"new_asteroid = ..."这一行，创建一个PhysicalObject对象，
+而不是Sprite。此外，我们再给它一个随机的初始速度，以下是新的改进后的
+load.asteroids()函数：
+
+{% highlight python %}
+def asteroids(num_asteroids, player_position, batch=None):
+    ...
+    new_asteroid = physicalobject.PhysicalObject(...)
+    new_asteroid.rotation = random.randint(0, 360)
+    new_asteroid.velocity_x = random.random()*40
+    new_asteroid.velocity_y = random.random()*40
+    ...
+{% endhighlight %}
+
+**游戏的update函数**
+
+为了调用每一个物体的update函数，我们首先需要一个列表来存放这些物体。
+现在我们只需要把所有物体都设置好后声明一下即可：
+
+{% highlight python %}
+game_objects = [player_ship] + asteroids
+{% endhighlight %}
+
+然后在这个列表上迭代一遍：
+
+{% highlight python %}
+def update(dt):
+    for obj in game_objects:
+        obj.update(dt)
+{% endhighlight %}
+
+**调用update函数**
+
+物体的更新至少一帧一次。我们看到的视频大部分是每秒60帧，
+但如果我们的程序也设定成这样的话，运动看起来就会有些不流畅。
+因此我们将刷新频率设定为每秒钟120次，这样运动看起来就会平滑很多。
 ## <a id="do">让玩家有事可做</a>
 
 ## <a id="collision">碰撞响应</a>
