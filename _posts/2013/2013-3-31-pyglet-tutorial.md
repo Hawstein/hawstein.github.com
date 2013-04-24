@@ -459,7 +459,181 @@ def update(dt):
 物体的更新至少一帧一次。我们看到的视频大部分是每秒60帧，
 但如果我们的程序也设定成这样的话，运动看起来就会有些不流畅。
 因此我们将刷新频率设定为每秒钟120次，这样运动看起来就会平滑很多。
+
+我们并不使用循环来更新每一帧，而是使用pyglet周期性地调用update函数，
+pyglet.clock模块中有许多方法可以周期性地调用某个函数，
+或是在未来指定时刻调用某个函数。这里我们使用pyglet.clock.schedule_interval():
+
+	pyglet.clock.schedule_interval(update, 1/120.0)
+	
+把上面的代码放在if __name__ == '__main__' 块的pyglet.app.run()函数前，
+告诉pyglet每秒去调用update函数120次。pyglet会传递经过的时间dt
+作为唯一的参数给update函数。
+
+现在如果你运行asteroids.py，你会发现之前静止的小行星已经动起来了，
+而且当小行星从屏幕的一边消失后，将从屏幕的另一侧出来。
+
+**编写Player类(即飞船类)**
+
+除了遵循物理定律，飞船还需要能够响应键盘输入。我们通过继承PhysicalObject，
+来编写我们的Player类：
+
+{% highlight python %}
+import physicalobject, resources
+
+class Player(physicalobject.PhysicalObject):
+
+    def __init__(self, *args, **kwargs):
+        super(Player, self).__init__(img=resources.player_image, 
+                                     *args, **kwargs)
+{% endhighlight %}
+
+到目前为止，Player和PhysicalObject唯一的区别就是Player总是使用相同的图片(
+img=resources.player_image)。当然，Player还需要更多的属性。
+不管飞船朝哪个方向运动，它总是使用相同的推力，因此我们需要定义一个推力常量：
+thrust。同时我们还要定义飞船的旋转速度：
+
+	self.thrust = 300.0
+	self.rotate_speed = 200.0
+
+现在我们需要让这个类来响应用户输入了。pyglet使用轮询方法(polling approach)
+来处理键盘输入，发送键被按下与释放的消息来注册事件句柄(event handlers)。
+我们需要经常去检查按键是否被按下，实现它的一个方法就是维护一个按键字典。
+首先，我们要初始化这个字典：
+
+	self.keys = dict(left=False, right=False, up=False)
+	
+接着我们需要写两个函数：`on_key_press()`和`on_key_release()`。
+当pyglet检查一个新的事件句柄，它会调用这两个函数。
+
+{% highlight python %}
+import math
+from pyglet.window import key
+import physicalobject, resources
+...
+class Player(physicalobject.PhysicalObject)
+    ...
+    def on_key_press(self, symbol, modifiers):    
+        if symbol == key.UP:
+            self.keys['up'] = True
+        elif symbol == key.LEFT:
+            self.keys['left'] = True
+        elif symbol == key.RIGHT:
+            self.keys['right'] = True
+
+    def on_key_release(self, symbol, modifiers):
+        if symbol == key.UP:
+            self.keys['up'] = False
+        elif symbol == key.LEFT:
+            self.keys['left'] = False
+        elif symbol == key.RIGHT:
+            self.keys['right'] = False
+{% endhighlight %}
+
+以上代码看起来相当不给力，后面我们会讲到更好的方法来实现同样的功能。不过，
+对于现在这个版本来说，这样就OK了。
+
+最后我们要做的是编写这个类的update函数，在PhysicalObject的update
+函数的基础上，它还要增加一些代码。我们先调用父类PhysicalObject的
+update函数，然后再去响应键盘输入。
+
+{% highlight python %}
+def update(self, dt):
+	super(Player, self).update(dt)
+
+	if self.keys['left']:
+		self.rotation -= self.rotate_speed * dt
+	if self.keys['right']:
+		self.rotation += self.rotate_speed * dt
+{% endhighlight %}
+
+到目前为止都非常的简单，为了旋转飞船，我们减去或是加上旋转速度乘以dt。
+注意这个旋转值的单位是角度，顺时针方向是正方向。这意味着你需要调用
+math.degrees()或math.radians()来做角度和弧度的转换，
+因为python内置的数学函数(比如sin，cos)使用的是弧度，
+而且它们规定逆时针方向为正方向。下面的代码是让飞船向前推进运动：
+
+{% highlight python %}
+if self.keys['up']:
+	angle_radians = -math.radians(self.rotation) #正方向定义不同，加负号
+	force_x = math.cos(angle_radians) * self.thrust * dt
+	force_y = math.sin(angle_radians) * self.thrust * dt
+	self.velocity_x += force_x
+	self.velocity_y += force_y
+{% endhighlight %}
+
+首先我们将角度值转化为弧度值，这样sin，cos才能接收到正确的参数值。
+然后我们计算出飞船x，y方向的速度值。
+
+**集成Player类**
+
+首先我们需要创建一个Player的实例：player_ship：
+
+	from game import player
+	...
+	player_ship = player.Player(x=400, y=300, batch=main_batch)
+
+然后告诉pyglet player_ship是一个事件句柄(event handler)。
+我们用game_window.push_handlers()函数把它压入事件栈中：
+
+	game_window.push_handlers(player_ship)
+	
+OK，现在你可以运行游戏并用方向键来控制飞船了。
+
 ## <a id="do">让玩家有事可做</a>
+
+在任何一款好游戏中，都要有与玩家对抗的东西。在小行星游戏中，
+就是来自小行星撞击的威胁。碰撞检测需要写比较多的代码，
+这一节我们只专注于如何让它工作起来。这一节中我们也将清理Player类，
+并在飞船加速前进的时候显示一些视觉效果。
+
+### 简化键盘输入
+
+到目前为止，我们让Player类自己处理了所有的键盘事件。
+我们写了13行代码来设置字典中的布尔变量，除此之外没做什么事情。
+我们不禁会想有没有更好的办法来处理这些键的状态变化，答案是有，使用
+pyglet.window.key.KeyStateHandler。这个类会自动地跟踪键盘上每个键的状态变化。
+
+我们该如何使用它呢？首先初始化它并将它压入事件栈中。
+我们需要将以下的代码加入Player类的构造函数：
+
+	self.key_handler = key.KeyStateHandler()
+	
+然后将key_handler压入事件栈，
+
+	game_window.push_handlers(player_ship.key_handler)
+
+由于Player类现在使用key_handler来读取键盘状态，
+我们需要改变update函数，需要改变的就只有if语句的条件：
+
+	if self.key_handler[key.LEFT]:
+		...
+	if self.key_handler[key.RIGHT]:
+		...
+	if self.key_handler[key.UP]:
+		...
+		
+这样一来，`on_key_press()`和`on_key_release()`就可以从这个类从移除了。
+一切就是这么简单，如果你需要查看按键常量(比如key.LEFT，key.RIGHT等)，
+可以查看pyglet.window.key下的API文档。
+
+### 加入引擎火焰
+
+没有视觉反馈的话，我们很难判断飞船是否在加速前进，尤其对于旁观者来说。
+其中一个视觉反馈就是当飞船在向前推进的时候，在其后面加上引擎火焰(向后喷射的火焰)。
+
+**加载火焰图片**
+
+飞船现在由两个sprites构成，我们可以让一个Sprite拥有另一个Sprite，
+因此我们给Player一个engine_sprite属性，并在每一帧中更新它。
+这种方法是最简易并且扩展性最强的。
+
+为了将火焰绘制在正确的位置上，我们可以选择在每一帧中做复杂的运算，
+或者只是移动图片的锚点。不管怎样，我们先要在resources.py中加载图片：
+
+	engine_image = pyglet.resource.image("engine_flame.png")
+
+
 
 ## <a id="collision">碰撞响应</a>
 
