@@ -569,9 +569,11 @@ if self.keys['up']:
 
 首先我们需要创建一个Player的实例：player_ship：
 
-	from game import player
-	...
-	player_ship = player.Player(x=400, y=300, batch=main_batch)
+{% highlight python %}
+from game import player
+...
+player_ship = player.Player(x=400, y=300, batch=main_batch)
+{% endhighlight %}
 
 然后告诉pyglet player_ship是一个事件句柄(event handler)。
 我们用game_window.push_handlers()函数把它压入事件栈中：
@@ -632,6 +634,82 @@ pyglet.window.key.KeyStateHandler。这个类会自动地跟踪键盘上每个�
 或者只是移动图片的锚点。不管怎样，我们先要在resources.py中加载图片：
 
 	engine_image = pyglet.resource.image("engine_flame.png")
+
+为了将火焰绘制在飞船尾部，我们要修改火焰图片的anchor_x 和anchor\_y属性：
+
+	engine_image.anchor_x = engine_image.width * 1.5
+	engine_image.anchor_y = engine_image.height / 2
+
+现在火焰图片已经准备好给飞船使用了，如果你对锚点(anchor points)还有困惑的话，
+可以多测试几组值来理解它。
+
+**创建及绘制火焰**
+
+引擎火焰的初始化与Player类的初始化一样(因为它们都是Sprite类)，
+不同的是它所需要的图片不一样并且一开始它是不可见的。
+我们在Player.__init__()中创建它：
+
+	self.engine_sprite = pyglet.sprite.Sprite(img=resources.engine_image, 
+                                          *args, **kwargs)
+	self.engine_sprite.visible = False
+
+为了使火焰只在飞船向前推进时显示，我们需要在update函数的
+if self.key_handler[key.UP]语句下加一些代码：
+
+{% highlight python %}
+if self.key_handler[key.UP]:
+	...
+	self.engine_sprite.visible = True
+else:
+	self.engine_sprite.visible = False
+{% endhighlight %}
+
+为了使火焰总是出现在飞船尾部，我们需要及时更新它的位置及旋转属性：
+
+{% highlight python %}
+if self.key_handler[key.UP]:
+	...
+	self.engine_sprite.rotation = self.rotation
+	self.engine_sprite.x = self.x
+	self.engine_sprite.y = self.y
+	self.engine_sprite.visible = True
+else:
+	self.engine_sprite.visible = False
+{% endhighlight %}
+
+**死亡后的清理工作**
+
+当飞船被小行星撞毁，它就应该从屏幕上消失，我们可以调用Sprite的delete
+函数来做这件事，但由于Player类有自己的Sprite对象(引擎火焰)，删除Player
+类实例时也需要删除引擎火焰。因此我们把这两个删除工作放在一个delete函数中：
+
+{% highlight python %}
+def delete(self):
+    self.engine_sprite.delete()
+    super(Player, self).delete()
+{% endhighlight %}
+
+这样一来，Player类就清理完毕了。
+
+### 碰撞检测
+
+为了使物体从屏幕上消失，我们需要操作game_objects列表。
+每个物体需要检查其它物体的位置与它的是否有冲突，然后决定是否从列表中移除它。
+游戏循环将不断检测出死亡的物体并将它们从列表中移除。
+
+**检查所有的物体对**
+
+物体两两之间都要进行碰撞检查，最简单的方法就是使用双重循环。当物体数量很多时，
+这种方法会很耗时，但对于我们的游戏来说是OK的(物体不多)。我们可以使用一点优化，
+避免重复检查同一对物体。以下是update函数中的循环代码，
+它迭代地取出所有的物体对，暂时什么事也不做：
+
+{% highlight python %}
+for i in xrange(len(game_objects)):
+    for j in xrange(i+1, len(game_objects)):
+        obj_1 = game_objects[i]
+        obj_2 = game_objects[j]
+{% endhighlight %}
 
 
 
