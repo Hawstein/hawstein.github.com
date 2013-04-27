@@ -9,9 +9,10 @@ title: Cracking the coding interview--Q11.1~Q11.6
 原文：
 
 Find the mistake(s) in the following code:	
-1. unsigned int i;
-1. for (i = 100; i <= 0; --i)
-1. 		printf(“%d\n”, i);
+
+	unsigned int i;
+	for (i = 100; i <= 0; --i)
+		printf(“%d\n”, i);
 
 ## 解答11.1
 
@@ -21,17 +22,17 @@ Find the mistake(s) in the following code:
 做这种题目，最好看一句，就思考一下这一句可能会带来的限制或是这一句可能的考点XD.
 如下：
 
-1. unsigned int i; //unsigned int类型，无符号整型，恒大于等于0
-1. for (i = 100; i <= 0; --i) //错误，100<=0为假，循环一次也不执行。
+	unsigned int i; //unsigned int类型，无符号整型，恒大于等于0
+	for (i = 100; i <= 0; --i) //错误，100<=0为假，循环一次也不执行。
 							  //改为i>=0,错误，因为i恒>=0，无限循环
 							  //改为i>0，正确，输出100到1的数。
-1. 		printf(“%d\n”, i);
+		printf(“%d\n”, i);
 
 上题还可以这样改：
 
-1. int i;
-1. for (i = 100; i >= 0; --i)
-1. 		printf(“%d\n”, i);
+	int i;
+	for (i = 100; i >= 0; --i)
+		printf(“%d\n”, i);
 
 输出100到0的数。
 
