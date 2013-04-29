@@ -20,7 +20,7 @@ title: Cracking the coding interview--问题与解答
 
 ## 目录
 
-Chapter 1 | Arrays and Strings
+**Chapter 1 | Arrays and Strings**
 
 1.1
 [Implement an algorithm to determine if a string has all unique 
@@ -64,7 +64,7 @@ another. Given two strings, s1 and s2, write code to check if s2 is a rotation o
 only one call to isSubstring (i.e., “waterbottle” is a rotation of “erbottlewat”).
 ](/posts/1.8.html)
 
-Chapter 2 | Linked Lists
+**Chapter 2 | Linked Lists**
 
 2.1
 [Write code to remove duplicates from an unsorted linked list.
@@ -104,7 +104,7 @@ input: A -> B -> C -> D -> E -> C (the same C as earlier)
 output: C
 ](/posts/2.5.html)
 
-Chapter 3 | Stacks and Queues
+**Chapter 3 | Stacks and Queues**
 
 3.1
 [Describe how you could use a single array to implement three stacks.
@@ -150,7 +150,7 @@ tions about how the stack is implemented. The following are the only functions t
 should be used to write this program: push | pop | peek | isEmpty.
 ](/posts/3.6.html)
 
-Chapter 4 | Trees and Graphs
+**Chapter 4 | Trees and Graphs**
 
 4.1
 [Implement a function to check if a tree is balanced. For the purposes of this question,
@@ -194,7 +194,7 @@ to print all paths which sum up to that value. Note that it can be any path in t
 - it does not have to start at the root.
 ](/posts/4.8.html)
 
-Chapter 5 | Bit Manipulation
+**Chapter 5 | Bit Manipulation**
 
 5.1
 [You are given two 32-bit numbers, N and M, and two bit positions, i and j. Write a
@@ -238,15 +238,15 @@ takes constant time.
 Write code to find the missing integer. Can you do it in O(n) time?
 ](/posts/5.7.html)
 
-Chapter 6 | Brain Teasers
+**Chapter 6 | Brain Teasers**
 
 [Cracking the coding interview--Q6.1~Q6.6](/posts/brain-teasers.html)
 
-Chapter 7 | Object Oriented Design
+**Chapter 7 | Object Oriented Design**
 
 XDDDDDD
 
-Chapter 8 | Recursion
+**Chapter 8 | Recursion**
 
 8.1
 [Write a method to generate the nth Fibonacci number.
@@ -265,3 +265,101 @@ Design an algorithm to get all possible paths for the robot.
 8.3
 [Write a method that returns all subsets of a set.
 ](/posts/8.3.html)
+
+8.4
+[Write a method to compute all permutations of a string.
+](/posts/8.4.html)
+
+8.5
+[Implement an algorithm to print all valid (e.g., properly opened 
+and closed) combinations of n-pairs of parentheses.
+EXAMPLE:
+input: 3 (e.g., 3 pairs of parentheses)
+output: ()()(), ()(()), (())(), ((()))
+](/posts/8.5.html)
+
+8.6
+[Implement the “paint fill” function that one might see on many 
+image editing programs. That is, given a screen (represented by a 2 
+dimensional array of Colors), a point, and a new color, fill in the 
+surrounding area until you hit a border of that color.
+](/posts/8.6.html)
+
+8.7
+[Given an infinite number of quarters (25 cents), dimes (10 cents), 
+nickels (5 cents) and pennies (1 cent), write code to calculate the
+number of ways of representing n cents.
+](/posts/8.7.html)
+
+8.8
+[Write an algorithm to print all ways of arranging eight queens on 
+a chess board so that none of them share the same row, column or 
+diagonal.
+](/posts/8.8.html)
+
+**Chapter 9 | Sorting and Searching**
+
+9.1
+[You are given two sorted arrays, A and B, and A has a large enough 
+buffer at the end to hold B. Write a method to merge B into A in 
+sorted order.
+](/posts/9.1.html)
+
+9.2
+[Write a method to sort an array of strings so that all the anagrams 
+are next to each other.
+](/posts/9.2.html)
+
+9.3
+[Given a sorted array of n integers that has been rotated an unknown 
+number of times, give an O(log n) algorithm that finds an element in 
+the array. You may assume that the array was originally sorted in 
+increasing order.
+EXAMPLE:
+Input: find 5 in array (15 16 19 20 25 1 3 4 5 7 10 14)
+Output: 8 (the index of 5 in the array)
+](/posts/9.3.html)
+
+9.4
+[If you have a 2 GB file with one string per line, which sorting 
+algorithm would you use to sort the file and why?
+](/posts/9.4.html)
+
+9.5
+[Given a sorted array of strings which is interspersed with empty 
+strings, write a method to find the location of a given string.
+Example: find “ball” in [“at”, “”, “”, “”, “ball”, “”, “”, “car”, 
+“”, “”, “dad”, “”, “”] will return 4
+Example: find “ballcar” in
+[“at”, “”, “”, “”, “”, “ball”, “car”, “”,
+“”, “dad”, “”, “”] will return -1
+](/posts/9.5.html)
+
+9.6
+[Given a matrix in which each row and each column is sorted, write a 
+method to find an element in it.
+](/posts/9.6.html)
+
+9.7
+[A circus is designing a tower routine consisting of people standing 
+atop one another’s shoulders. For practical and aesthetic reasons, 
+each person must be both shorter and lighter than the person below 
+him or her. Given the heights and weights of each person in the 
+circus, write a method to compute the largest possible number of 
+people in such a tower.
+EXAMPLE:
+Input (ht, wt): (65, 100) (70, 150) (56, 90) (75, 190) (60, 95) (68, 110)
+Output: The longest tower is length 6 and includes from top to bottom: (56, 90)
+(60,95) (65,100) (68,110) (70,150) (75,190)
+](/posts/9.7.html)
+
+**Chapter 10 | Mathematical**
+
+[Cracking the coding interview--Q10.1~Q10.7
+](/posts/ctci-ch10-math.html)
+
+**Chapter 11 | Testing**
+
+[Cracking the coding interview--Q11.1~Q11.6
+](/posts/ctci-ch11-testing.html)
+
