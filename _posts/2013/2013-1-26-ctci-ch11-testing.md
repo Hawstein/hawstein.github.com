@@ -206,6 +206,7 @@ How would you test an ATM in a distributed banking system?
 1. 当与银行的网络连接断开后进行取款
 1. 同时从多台ATM机取款
 
+全书题解目录：
 
 [Cracking the coding interview--问题与解答](/posts/ctci-solutions-contents.html)
 
