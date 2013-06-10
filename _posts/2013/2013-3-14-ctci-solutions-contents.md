@@ -413,3 +413,32 @@ detect the duplicate documents?
 It should support efficient range queries. How would you do it?
 ](/posts/12.7.html)
 
+**Chapter 17 | Networking**
+
+17.1
+[Explain what happens, step by step, after you type a URL into a 
+browser. Use as much detail as possible.	
+](/posts/17.1.html)
+
+17.2
+[Explain any common routing protocol in detail. For example: BGP, 
+OSPF, RIP.
+](/posts/17.2.html)
+
+17.3
+[Compare and contrast the IPv4 and IPv6 protocols.
+](/posts/17.3.html)
+
+17.4
+[What is a network / subnet mask? Explain how host A sends a 
+message / packet to host B when: (a) both are on same network 
+and (b) both are on different networks.
+Explain which layer makes the routing decision and how.
+](/posts/17.4.html)
+
+17.5
+[What are the differences between TCP and UDP? Explain how TCP 
+handles reliable delivery (explain ACK mechanism), flow control 
+(explain TCP sender’s / receiver’s window) and congestion control.	
+](/posts/17.5.html)
+
