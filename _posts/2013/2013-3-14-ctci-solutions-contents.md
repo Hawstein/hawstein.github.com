@@ -413,6 +413,23 @@ detect the duplicate documents?
 It should support efficient range queries. How would you do it?
 ](/posts/12.7.html)
 
+**Chapter 16 | Low Level**
+
+16.1
+[Explain the following terms: virtual memory, page fault, thrashing.
+](/posts/16.1.html)
+
+16.5
+[Write a program to find whether a machine is big endian or little 
+endian.
+](/posts/16.5.html)
+
+16.10
+[Write a function called my2DAlloc which allocates a two dimensional 
+array. Minimize the number of calls to malloc and make sure that the 
+memory is accessible by the notation arr[i][j].	
+](/posts/16.10.html)
+
 **Chapter 17 | Networking**
 
 17.1
