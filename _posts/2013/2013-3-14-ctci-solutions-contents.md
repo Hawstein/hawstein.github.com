@@ -413,6 +413,54 @@ detect the duplicate documents?
 It should support efficient range queries. How would you do it?
 ](/posts/12.7.html)
 
+**Chapter 13 | C++**
+
+13.1
+[Write a method to print the last K lines of an input file using C++.
+](/posts/13.1.html)
+
+13.2
+[Compare and contrast a hash table vs. an STL map. How is a hash 
+table implemented?If the number of inputs is small, what data 
+structure options can be used instead of a hash table?
+](/posts/13.2.html)
+
+13.3
+[How do virtual functions work in C++?
+](/posts/13.3.html)
+
+13.4
+[What is the difference between deep copy and shallow copy? Explain 
+how you would use each.
+](/posts/13.4.html)
+
+13.5
+[What is the significance of the keyword “volatile” in C?
+](/posts/13.5.html)
+
+13.6
+[What is name hiding in C++?
+](/posts/13.6.html)
+
+13.7
+[Why does a destructor in base class need to be declared virtual?
+](/posts/13.7.html)
+
+13.8
+[Write a method that takes a pointer to a Node structure as a 
+parameter and returns a complete copy of the passed-in data 
+structure. The Node structure contains two pointers to other Node 
+structures.
+](/posts/13.8.html)
+
+13.9
+[Write a smart pointer (smart_ptr) class.
+](/posts/13.9.html)
+
+**Chapter 14 | Java**
+
+Pass
+
 **Chapter 16 | Low Level**
 
 16.1
