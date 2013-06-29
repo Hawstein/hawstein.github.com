@@ -461,6 +461,33 @@ structures.
 
 Pass
 
+**Chapter 15 | Databases**
+
+15.1
+[Write a method to find the number of employees in each department.
+](/posts/15.1.html)
+
+15.2
+[What are the different types of joins? Please explain how they 
+differ and why certain types are better in certain situations.
+](/posts/15.2.html)
+
+15.3
+[What is denormalization? Explain the pros and cons.
+](/posts/15.3.html)
+
+15.4
+[Draw an entity-relationship diagram for a database with companies, 
+people, and professionals (people who work for companies).
+](/posts/15.4.html)
+
+15.5
+[Imagine a simple database storing information for students’ grades. 
+Design what this database might look like, and provide a SQL query 
+to return a list of the honor roll students (top 10%), sorted by 
+their grade point average.
+](/posts/15.5.html)
+
 **Chapter 16 | Low Level**
 
 16.1
