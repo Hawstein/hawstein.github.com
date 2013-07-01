@@ -534,3 +534,32 @@ handles reliable delivery (explain ACK mechanism), flow control
 (explain TCP sender’s / receiver’s window) and congestion control.	
 ](/posts/17.5.html)
 
+**Chapter 18 | Threads and Locks**
+
+18.1
+[What’s the difference between a thread and a process?
+](/posts/18.1.html)
+
+18.2
+[How can you measure the time spent in a context switch?
+](/posts/18.2.html)
+
+18.3
+[Implement a singleton design pattern as a template such that, for 
+any given class Foo, you can call Singleton::instance() and get a 
+pointer to an instance of a singleton of type Foo. Assume the 
+existence of a class Lock which has acquire() and release()
+methods. How could you make your implementation thread safe and 
+exception safe?
+](/posts/18.3.html)
+
+18.5
+[Suppose we have the following code:...
+i) 	Can you design a mechanism to make sure that B is executed after 
+A, and C is executed after B?
+ii) Suppose we have the following code to use class Foo. We do not 
+know how the threads will be scheduled in the OS.
+Can you design a mechanism to make sure that all the methods will be 
+executed in sequence?
+](/posts/18.5.html)
+
