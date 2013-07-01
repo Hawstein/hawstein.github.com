@@ -81,9 +81,11 @@ struct Node{
 Node* AddSinglyLinkedList(Node* list1, Node* list2){
     Node *q1=list1, *q2=list2;
     Node *ans=NULL, *p=NULL, *pre=NULL, *q=NULL;//pre指向q的前驱结点
+    bool highest = false;//只有最高位可能有进位，才考虑去掉前导0。0+0=0不去掉
     // 处理最高位的结点
     char first = q1->data + q2->data;
     if(first >= 9){// 和大于等于9，要多开一个结点来保存进位
+        highest = true;
         ans = new Node();
         pre = new Node();
         pre->data = first % 10;
@@ -117,8 +119,9 @@ Node* AddSinglyLinkedList(Node* list1, Node* list2){
             p = q;
         }
         pre = q; // 更新前一结点pre的指针
-    }
-    if(ans->data == 0) // 如果最高位没有因为连续进位而变成1
+    }// num等于9时，p不用更新
+    
+    if(highest && ans->data == 0) // 如果最高位没有因为连续进位而变成1
         ans = ans->next;
     
     return ans;
@@ -136,12 +139,12 @@ Node* MakeLinkedList(int d[], int n){
     return head;
 }
 int main(){
-    int n = 4;
+    int n = 7;
     int a[] = {
-        5, 2, 3, 4
+        2,0,0,0,7,0,1
     };
     int b[] = {
-        4, 7, 6, 6
+        9,9,9,9,9,9,9
     };
     Node *list1 = MakeLinkedList(a, n);
     Node *list2 = MakeLinkedList(b, n);
