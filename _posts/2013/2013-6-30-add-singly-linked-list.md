@@ -78,6 +78,7 @@ struct Node{
     Node *next;
 };
 
+// version 1
 Node* AddSinglyLinkedList(Node* list1, Node* list2){
     Node *q1=list1, *q2=list2;
     Node *ans=NULL, *p=NULL, *pre=NULL, *q=NULL;//pre指向q的前驱结点
@@ -138,19 +139,63 @@ Node* MakeLinkedList(int d[], int n){
     }
     return head;
 }
+
+// version 2, 在处理最高位上，比version1要简洁
+Node* AddSinglyLinkedList1(Node* list1, Node* list2){
+    Node *q1=list1, *q2=list2;
+    Node *ans=NULL, *p=NULL, *pre=NULL, *q=NULL;//pre指向q的前驱结点
+    
+	// 处理最高位的结点，先不考虑进位问题
+    char first = q1->data + q2->data;
+    ans = new Node();
+    ans->data = first; // 第一个结点不管有没进位，都存着先
+    p = pre = ans;
+    
+    // 处理后面的结点
+    while((q1=q1->next) && (q2=q2->next)){
+        q = new Node(); // 当前输出结点
+        pre->next = q; // 上一结点指向当前结点
+        char num = q1->data + q2->data;
+        q->data = num % 10; // q结点存储的值
+        if(num > 9){
+            p->data = p->data + 1; // p指向的结点值加1
+            for(p=p->next; p!=q; p=p->next)// p,q间的结点值置0，p指向q
+                p->data = 0;
+        }
+        else if(num < 9){// 和小于9，p移动到当前位置q
+            p = q;
+        }
+        pre = q; // 更新前一结点pre的指针
+    }// num等于9时，p不用更新
+    
+    if(ans->data > 9){// 全部加完后，如果最高位需要进位
+        q = new Node();
+        q->data = 1;
+        ans->data = ans->data - 10;
+        q->next = ans;
+        ans = q;
+    }
+    
+    return ans;
+}
+
 int main(){
     int n = 7;
     int a[] = {
         2,0,0,0,7,0,1
     };
     int b[] = {
-        9,9,9,9,9,9,9
+        7,9,9,9,9,9,9
     };
     Node *list1 = MakeLinkedList(a, n);
     Node *list2 = MakeLinkedList(b, n);
     Node *ans = AddSinglyLinkedList(list1, list2);
     for(; ans; ans=ans->next)
         cout<<(int)ans->data;
+    cout<<endl;
+    Node *ans1 = AddSinglyLinkedList1(list1, list2);
+    for(; ans1; ans1=ans1->next)
+        cout<<(int)ans1->data;
     return 0;
 }
 {% endhighlight %}
