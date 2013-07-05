@@ -134,66 +134,68 @@ options_page：
 因为该插件需要用户设置网址和时间，所以需要这么一个选项页。
 选项页的图已经在第二节看过了，代码如下：
 
-	<html>
-	<head><title>Options</title>
-	<script type="text/javascript" src="options.js"></script>
-	</head>
+{% highlight html %}
+<html>
+<head><title>Options</title>
+<script type="text/javascript" src="options.js"></script>
+</head>
 
-	<body>
-	<center>
+<body>
+<center>
 
-	<table height="400" width="600" border="1">
-	  <tr height="60">
-	    <td align="top">
-			<p>选择时间:</p>
-		</td>
-		<td>
-			<select id="time">
-				<option value="2">02:00</option>
-				<option value="4">04:00</option>
-				<option value="6">06:00</option>
-				<option value="8">08:00</option>
-				<option value="10">10:00</option>
-				<option value="12">12:00</option>
-				<option value="14">14:00</option>
-				<option value="16">16:00</option>
-				<option value="18">18:00</option>
-				<option value="20">20:00</option>
-				<option value="22">22:00</option>
-				<option value="24">24:00</option>			
-			</select>
-		</td>
-	    <td>
-			<p>在以下时刻到来前，无法访问列表中的网址:</p>
-			<label id="selectedtime">  </label>
-		</td>
-	  </tr>
-	  <tr>
-	    <td valign="middle" width="40%" height="60" colspan="2">
-			<form>
-				<p>http://<input type="text" id="url" /></p>
-			</form>
-		</td>
-	    <td>
-			<p>延迟访问名单:</p> 
-		</td>
-	  </tr>
-	  <tr>
-	    <td align="right" valign="bottom" colspan="2">
-			<button id="btnSave">保存</button>
-			<button id="btnClear">清除</button>
-		</td>
-		<td valign="top">
-			<label id="weblist"></label>
-		</td>
-	  </tr>
-	</table>
+<table height="400" width="600" border="1">
+  <tr height="60">
+	<td align="top">
+		<p>选择时间:</p>
+	</td>
+	<td>
+		<select id="time">
+			<option value="2">02:00</option>
+			<option value="4">04:00</option>
+			<option value="6">06:00</option>
+			<option value="8">08:00</option>
+			<option value="10">10:00</option>
+			<option value="12">12:00</option>
+			<option value="14">14:00</option>
+			<option value="16">16:00</option>
+			<option value="18">18:00</option>
+			<option value="20">20:00</option>
+			<option value="22">22:00</option>
+			<option value="24">24:00</option>			
+		</select>
+	</td>
+	<td>
+		<p>在以下时刻到来前，无法访问列表中的网址:</p>
+		<label id="selectedtime">  </label>
+	</td>
+  </tr>
+  <tr>
+	<td valign="middle" width="40%" height="60" colspan="2">
+		<form>
+			<p>http://<input type="text" id="url" /></p>
+		</form>
+	</td>
+	<td>
+		<p>延迟访问名单:</p> 
+	</td>
+  </tr>
+  <tr>
+	<td align="right" valign="bottom" colspan="2">
+		<button id="btnSave">保存</button>
+		<button id="btnClear">清除</button>
+	</td>
+	<td valign="top">
+		<label id="weblist"></label>
+	</td>
+  </tr>
+</table>
 
-	</center>
+</center>
 
 
-	</body>
-	</html>
+</body>
+</html>
+{% endhighlight %}
 
 这里有两个需要注意的地方：
 
@@ -227,79 +229,80 @@ document.querySelector()找到相应id的元素，然后设置事件监听器。
 
 选项页options.html中事件对应的执行代码在options.js中，options.js文件如下：
 	
-
-	function checkExisted(newUrl){ //检查加入的网址是不是已经在列表中了
-		var num = localStorage["count"];
-		for(var i=0; i<num; ++i){
-			var urli = "url" + i;
-			var url = localStorage[urli];
-			if(newUrl==url) return true;
-		}
-		return false;
-	}
-	// Saves options to localStorage.
-	function save_options() {//用户填完信息后，保存选项，保存到localStorage
-	  var select = document.getElementById("time");  //get the time
-	  var time = select.children[select.selectedIndex].value;
-	  var timeshow = select.children[select.selectedIndex].text;
-	  localStorage["time"] = time;
-	  localStorage["timeshow"] = timeshow;
-	  //alert(time);
-
-	  var url = document.getElementById("url").value;  //get the url
-	  if(url){	//url: not null
-	    var existed = checkExisted(url);
-		if(!existed){	// add url when it is not existed in the localStorage
-			var num = localStorage["count"];
-			var urli = "url" + num;
-			localStorage[urli] = url;
-			localStorage["count"] = parseInt(num) + 1;
-		}
-	
-	  }
-	  
-	  //alert(url);
-	  
-	  restore_options();
-	}
-	// Restores value from localStorage.
-	function restore_options() {//当打开选项页时，恢复保存的信息
-	  var timeshow = localStorage["timeshow"];
-	  document.getElementById("selectedtime").innerHTML = ""; //clear the old time first
-	  if (timeshow) {
-	    document.getElementById("selectedtime").innerHTML = timeshow;
-	  }
-	  var num = localStorage["count"];
-	  document.getElementById("weblist").innerHTML = ""; //clear the old weblist first
-	  for(var i=0; i<num; ++i){
-	    var urli = "url" + i;
+{% highlight javascript %}
+function checkExisted(newUrl){ //检查加入的网址是不是已经在列表中了
+	var num = localStorage["count"];
+	for(var i=0; i<num; ++i){
+		var urli = "url" + i;
 		var url = localStorage[urli];
-		if(url) {
-			document.getElementById("weblist").innerHTML = document.getElementById("weblist").innerHTML + "</br>" + url;
-		}
-	  }
-	  
-	  
+		if(newUrl==url) return true;
+	}
+	return false;
+}
+// Saves options to localStorage.
+function save_options() {//用户填完信息后，保存选项，保存到localStorage
+  var select = document.getElementById("time");  //get the time
+  var time = select.children[select.selectedIndex].value;
+  var timeshow = select.children[select.selectedIndex].text;
+  localStorage["time"] = time;
+  localStorage["timeshow"] = timeshow;
+  //alert(time);
+
+  var url = document.getElementById("url").value;  //get the url
+  if(url){	//url: not null
+	var existed = checkExisted(url);
+	if(!existed){	// add url when it is not existed in the localStorage
+		var num = localStorage["count"];
+		var urli = "url" + num;
+		localStorage[urli] = url;
+		localStorage["count"] = parseInt(num) + 1;
 	}
 
-	function clear_options() {//清除选项
-	  var num = localStorage["count"];
-	  for(var i=0; i<num; ++i){
-	    var urli = "url" + i;
-		localStorage[urli] = "";
-		//if(!localStorage[urli]) alert("done");
-	  }
-	  localStorage["count"] = 0;
-	  localStorage["time"] = "";
-	  localStorage["timeshow"] = "";
-	  restore_options();
+  }
+
+  //alert(url);
+
+  restore_options();
+}
+// Restores value from localStorage.
+function restore_options() {//当打开选项页时，恢复保存的信息
+  var timeshow = localStorage["timeshow"];
+  document.getElementById("selectedtime").innerHTML = ""; //clear the old time first
+  if (timeshow) {
+	document.getElementById("selectedtime").innerHTML = timeshow;
+  }
+  var num = localStorage["count"];
+  document.getElementById("weblist").innerHTML = ""; //clear the old weblist first
+  for(var i=0; i<num; ++i){
+	var urli = "url" + i;
+	var url = localStorage[urli];
+	if(url) {
+		document.getElementById("weblist").innerHTML = document.getElementById("weblist").innerHTML + "</br>" + url;
 	}
-	//添加事件监听器
-	document.addEventListener('DOMContentLoaded', function () {
-	  document.querySelector('#btnSave').addEventListener('click', save_options);  //通过id找到相应元素
-	  document.querySelector('#btnClear').addEventListener('click', clear_options);
-	  window.addEventListener('load', restore_options);
-	});
+  }
+
+
+}
+
+function clear_options() {//清除选项
+  var num = localStorage["count"];
+  for(var i=0; i<num; ++i){
+	var urli = "url" + i;
+	localStorage[urli] = "";
+	//if(!localStorage[urli]) alert("done");
+  }
+  localStorage["count"] = 0;
+  localStorage["time"] = "";
+  localStorage["timeshow"] = "";
+  restore_options();
+}
+//添加事件监听器
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelector('#btnSave').addEventListener('click', save_options);  //通过id找到相应元素
+  document.querySelector('#btnClear').addEventListener('click', clear_options);
+  window.addEventListener('load', restore_options);
+});
+{% endhighlight %}
 
 当用户填写完信息后，点击保存。save_options函数会从网页中找到相应的元素，
 取出其相应的值，并将它保存在localStorage中。localStorage是html5中的新特性，
@@ -313,62 +316,64 @@ localStorage以key/value的方式存储在浏览器中，没有时间限制。�
 
 最后是背景页的js脚本，如下：
 
-	//localStorage只初始化一次
-	if(!localStorage["count"])	//init only once
-		localStorage["count"] = 0;  //the total number of urls
+{% highlight javascript %}
+//localStorage只初始化一次
+if(!localStorage["count"])	//init only once
+	localStorage["count"] = 0;  //the total number of urls
 
-	// Called when the url of a tab changes.
-	function showPageAction(url, tabId) {//设置在哪些页面显示图标
-	  // If the url is:chrome://chrome/extensions
-	  if (url.indexOf('chrome://chrome/extensions') > -1) {
-	    // ... show the page action.
-	    chrome.pageAction.show(tabId);
-	  }
-	};
-	//如果网站在列表中，且时间未到，重定向。目前我是将它重定向到google.ca
-	function blockWebsite(newUrl, tabId, tab) {
-		if(!newUrl) return;
-		var num = localStorage["count"];
-		var time = localStorage["time"];
-		var today=new Date();
-		var now=today.getHours();
-		for(var i=0; i<num; ++i){
-			var urli = "url" + i;
-			var url = localStorage[urli];
-			if(newUrl.indexOf(url)>-1 && now<time) { //if the website is in the list and the time is less what you set,redirect.
-				chrome.tabs.update(tabId, { url: "http://www.google.ca" });	
-				break;
-			}
+// Called when the url of a tab changes.
+function showPageAction(url, tabId) {//设置在哪些页面显示图标
+  // If the url is:chrome://chrome/extensions
+  if (url.indexOf('chrome://chrome/extensions') > -1) {
+	// ... show the page action.
+	chrome.pageAction.show(tabId);
+  }
+};
+//如果网站在列表中，且时间未到，重定向。目前我是将它重定向到google.ca
+function blockWebsite(newUrl, tabId, tab) {
+	if(!newUrl) return;
+	var num = localStorage["count"];
+	var time = localStorage["time"];
+	var today=new Date();
+	var now=today.getHours();
+	for(var i=0; i<num; ++i){
+		var urli = "url" + i;
+		var url = localStorage[urli];
+		if(newUrl.indexOf(url)>-1 && now<time) { //if the website is in the list and the time is less what you set,redirect.
+			chrome.tabs.update(tabId, { url: "http://www.google.ca" });	
+			break;
 		}
 	}
-	// Listen for any changes to the URL of any tab.
-	chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
-		var myurl = tab.url;
-		showPageAction(myurl, tabId); //show pageAction or not
-		blockWebsite(myurl, tabId); //if the website is in the list, block it;
-	});
+}
+// Listen for any changes to the URL of any tab.
+chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab){
+	var myurl = tab.url;
+	showPageAction(myurl, tabId); //show pageAction or not
+	blockWebsite(myurl, tabId); //if the website is in the list, block it;
+});
 
-	//open the options page
-	function openOptions(){
-		var url = "options.html";
-		var fullUrl = chrome.extension.getURL(url);//chrome-extension://your extension id//options.html	
-		chrome.tabs.getAllInWindow(null, function(tabs){
-			for(var i in tabs){
-				var tab = tabs[i];
-				if(tab.url == fullUrl){//如果选项页已经打开了，就定位到那
-					chrome.tabs.update(tab.id, {selected: true});
-					return;
-				}
+//open the options page
+function openOptions(){
+	var url = "options.html";
+	var fullUrl = chrome.extension.getURL(url);//chrome-extension://your extension id//options.html	
+	chrome.tabs.getAllInWindow(null, function(tabs){
+		for(var i in tabs){
+			var tab = tabs[i];
+			if(tab.url == fullUrl){//如果选项页已经打开了，就定位到那
+				chrome.tabs.update(tab.id, {selected: true});
+				return;
 			}
-			//如果选项页没有打开，则打开它
-			chrome.tabs.getSelected(null, function(tab){
-				chrome.tabs.create({ url: url, index: tab.index+1});
-			});
+		}
+		//如果选项页没有打开，则打开它
+		chrome.tabs.getSelected(null, function(tab){
+			chrome.tabs.create({ url: url, index: tab.index+1});
 		});
-	}
-	//点击图标时，调用openOptions函数
-	chrome.pageAction.onClicked.addListener(openOptions);
-	
+	});
+}
+//点击图标时，调用openOptions函数
+chrome.pageAction.onClicked.addListener(openOptions);
+{% endhighlight %}
+
 背景页会监听两个事件。
 
 1. 当page action图标疲点击时，调用openOptions来打开选项页。如果选项页已经打开，
