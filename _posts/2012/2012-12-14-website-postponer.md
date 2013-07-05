@@ -74,26 +74,28 @@ OK，开始吧。
 manifest.json， 提供一些重要的信息。本插件的manifest.json如下，
 注释已经写在每一行后面，需要详细讲解的会在下文给出。
 
-	{
-	  "name": "Website Postponer", //插件的名字，该名字会显示在扩展程序页面
-	  "version": "12.12.13", //插件版本，你自己定。
-	  "description": "Postpone the time you go to the specified websites",//插件描述
-	  "background": { "scripts": ["background.js"] },//背景页脚本
-	  "page_action" ://定义处理特定页面的事件
-	  {
-		"default_icon" : "images/icon-19.png",//出现在地址栏的图标
-		"default_title" : "Settings"//鼠标停留在图标上显示的文字
-	  },
-	  "permissions" : [//扩展或app使用的权限，tabs声明使用标签页的权限
-		"tabs"
-	  ],
-	  "icons" : {//图标，一般有三种大小：16/48/128，在不同的地方使用
-		"48" : "images/icon-48.png",
-		"128" : "images/icon-128.png"
-	  },
-	  "options_page": "options.html",//选项页，就是上一节那张图
-	  "manifest_version": 2 //manifest文件的版本号
-	}
+{% highlight json %}
+{
+  "name": "Website Postponer", //插件的名字，该名字会显示在扩展程序页面
+  "version": "12.12.13", //插件版本，你自己定。
+  "description": "Postpone the time you go to the specified websites",//插件描述
+  "background": { "scripts": ["background.js"] },//背景页脚本
+  "page_action" ://定义处理特定页面的事件
+  {
+	"default_icon" : "images/icon-19.png",//出现在地址栏的图标
+	"default_title" : "Settings"//鼠标停留在图标上显示的文字
+  },
+  "permissions" : [//扩展或app使用的权限，tabs声明使用标签页的权限
+	"tabs"
+  ],
+  "icons" : {//图标，一般有三种大小：16/48/128，在不同的地方使用
+	"48" : "images/icon-48.png",
+	"128" : "images/icon-128.png"
+  },
+  "options_page": "options.html",//选项页，就是上一节那张图
+  "manifest_version": 2 //manifest文件的版本号
+}
+{% endhighlight %}
 
 上面有几个地方需要着重讲一下。
 

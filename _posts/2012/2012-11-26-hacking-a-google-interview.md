@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Google面试笔试题(1)——Hacking a Google Interview
+title: Hacking a Google Interview
 category: Programming
 ---
 
