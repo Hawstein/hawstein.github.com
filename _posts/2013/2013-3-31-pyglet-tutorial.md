@@ -310,7 +310,7 @@ batch)
 score_label = pyglet.text.Label(text="Score: 0", x=10, y=575, batch=main_batch)
 {% endhighlight %}
 
-我们要做的就是给每个需要绘制的物体的构建函数加一个batch关键字参数。
+我们要做的就是给每个需要绘制的物体的构造函数加一个batch关键字参数。
 
 为了将小行星加入到batch中，我们需要将batch传递给game.load.asteroid()函数，
 然后每创建一个小行星时只要加入这个关键字参数即可。
@@ -358,7 +358,7 @@ def player_lives(num_icons, batch=None):
     return player_lives
 {% endhighlight %}
 
-飞船大小是50*50的，所以小图标的大小是25*25。我们需要在两个图标间留一点空间，
+飞船大小是50\*50的，所以小图标的大小是25\*25。我们需要在两个图标间留一点空间，
 于是我们从窗口的右端起，每隔30个像素绘制一个图标(这样图标间就有5个像素的间距)。
 注意，就像asteroids()函数，player_lives()函数也有一个batch参数，
 初始的None值表示默认是没有batch的。
@@ -711,8 +711,430 @@ for i in xrange(len(game_objects)):
         obj_2 = game_objects[j]
 {% endhighlight %}
 
+我们需要某种方法来检测一个物体是否已经被干掉了，现在我们先不去理它，
+而专注于当前的循环。假设game\_objects中的物体都有一个死亡属性并且初始化为false，
+当它被设为true时，表示物体已经死亡，可以从列表中移除。
 
+我们还需要另外两个方法来处理碰撞：一个方法判断两个物体是否发生碰撞，
+另一个方法是让物体去处理碰撞。直接看下面代码，很容易理解：
+
+{% highlight python %}
+if not obj_1.dead and not obj_2.dead:
+	if obj_1.collides_with(obj_2):
+		obj_1.handle_collision_with(obj_2)
+		obj_2.handle_collision_with(obj_1)
+{% endhighlight %}
+
+接下来就只需要将列表中的死亡物体移除即可。
+
+{% highlight python %}
+...update game objects...
+
+for to_remove in [obj for obj in game_objects if obj.dead]: 
+	to_remove.delete() 
+	game_objects.remove(to_remove)
+{% endhighlight %}
+
+正如你所看到的，物体调用delete方法将它从任一batches中移除，
+然后从列表中移除该物体。上述代码中，中括号里表示的是列表推导式(list 
+comprehensions)，它将game\_objects列表中已经死亡的物体拿出来形成一个新的列表。
+
+**实现碰撞函数**
+
+我们需要往PhysicalObject类里加3个东西：dead属性，collides\_with()方法和
+handle\_collision\_with()方法。collides\_with()方法需要用到distance()
+函数，因此我们先将该函数放到game中的一个子模块，命名为util.py：
+
+{% highlight python %}
+import pyglet, math 
+def distance(point_1=(0, 0), point_2=(0, 0)): 
+	return math.sqrt(
+		(point_1[0] - point_2[0]) ** 2 + 
+		(point_1[1] - point_2[1]) ** 2)
+{% endhighlight %}
+
+记得要在load.py中调用`from util import distance`，现在我们可以来完成
+collides_with()函数了：
+
+{% highlight python %}
+def collides_with(self, other_object): 
+	collision_distance = self.image.width/2 + other_object.image.width/2 
+	actual_distance = util.distance( 
+		self.position, other_object.position) 
+	return (actual_distance <= collision_distance)
+{% endhighlight %}
+
+碰撞处理函数就更加简单了，
+因为目前我们想要的只是一个物体在撞到另一个物体时立即死亡。
+
+{% highlight python %}
+def handle_collision_with(self, other_object): 
+	self.dead = True
+{% endhighlight %}
+
+最后一件事，将物体的死亡属性在`PhysicalObject.__init__()`设为False。
+
+That's it!现在你应该可以让你的飞船在屏幕上喷着火焰飞来飞去。如果飞船撞上一个东西，
+飞船和那个东西都会从屏幕上消失。这还称不上是一个游戏，但明显我们一直在进步着。
 
 ## <a id="collision">碰撞响应</a>
 
+在这一节中，我们将加入子弹。这项新特性要求我们在游戏的过程中需要向game\_objects
+里加入东西，与此同时，我们需要去判断相撞物体的类别来决定他们是否应该死亡。
+
+### 在游戏过程中加入物体
+
+**How**
+
+我们用一个布尔变量来处理物体的移除问题，加入物体就没那么简单了。一方面，
+一个物体不能简单地喊一句：嘿，把我回到列表中。它需要来自某个地方。另一方面，
+一个物体可能需要一次加入多个物体。
+
+我们有不同的方法可以来解决这个问题，这里选择一个简单的方案，
+让每一个物体维护一个列表，这个列表用来保存它的子对象(这里是子弹)。
+这种方法可以非常简单地在游戏中向每个物体加入子对象。
+
+**对游戏循环做微调**
+
+一种简单的思路是每次检查物体的子对象并将它的子对象加到game\_objects列表中。
+如下所示：(只需加两行代码，其中new\_objects是一个子对象列表)
+
+{% highlight python %}
+for obj in game_objects: 
+	obj.update(dt) 
+	game_objects.extend(obj.new_objects) 
+	obj.new_objects = []
+{% endhighlight %}
+
+不幸的是，上面的做法是有问题的。我们本意是想从game\_objects
+列表中迭代地取出元素进行操作，可是我们却在函数体中改变了这个列表。当然了，
+这个问题很容易解决，我们只需要将新的对象添加到另一个列表，然后在这个for
+循环结束后再将这个列表添加到game\_objects列表即可。看代码：
+
+{% highlight python %}
+...collision...
+
+to_add = []
+
+for obj in game_objects:
+    obj.update(dt)
+    to_add.extend(obj.new_objects)
+    obj.new_objects = []
+
+...removal...
+
+game_objects.extend(to_add)
+{% endhighlight %}
+
+**在PhysicalObject类中加入新属性**
+
+在上面的代码中，我们用到了new\_objects，因此我们需要在PhysicalObject
+中添加一下：
+
+{% highlight python %}
+def __init__(self, *args, **kwargs):
+    ....
+    self.new_objects = []
+{% endhighlight %}
+
+如果要加入新物体，我们所需要做的就是将它添加到new\_objects。
+然后在主循环中它会被添加到game\_objects列表，而new\_objects会被清空。
+
+### 加入子弹
+
+**编写子弹类**
+
+大部分时候，子弹与其他PhysicalObject类的表现没有什么区别。
+不过在这个游戏中，至少有两点是不一样的：1.子弹只与部分物体发生碰撞(只与小行星)，
+2.子弹会在一定的时间内消息，否则的话如果它不碰上小行星将会导致满屏都是子弹。
+
+首先，我们在game下创建一个子模块叫bullet.py，将Bullet作为PhysicalObject
+的子类：
+
+{% highlight python %}
+import pyglet
+import physicalobject, resources
+
+class Bullet(physicalobject.PhysicalObject):
+    """Bullets fired by the player"""
+
+    def __init__(self, *args, **kwargs):
+        super(Bullet, self).__init__(
+            resources.bullet_image, *args, **kwargs)
+{% endhighlight %}
+
+为了使子弹在一段时间之后从屏幕消失，我们可以维护子弹的当前年龄及寿命属性，
+或者让pyglet来帮我们做这些事。我不知道你们怎么想的，反正我是喜欢第二种方案。
+首先我们定义一个函数在子弹消亡时调用：
+
+{% highlight python %}
+def die(self, dt):
+    self.dead = True
+{% endhighlight %}
+
+现在我们要告诉pyglet在子弹创建后大约0.5秒调用上面的函数，
+我们可以在构造函数中加入pyglet.clock.schedule_once()来实现：
+
+{% highlight python %}
+def __init__(self, *args, **kwargs):
+    super(Bullet, self).__init__(
+        resources.bullet_image, *args, **kwargs)
+    pyglet.clock.schedule_once(self.die, 0.5)
+{% endhighlight %}
+
+Bullet类还有许多地方需要完善，但在些之前，我们先把子弹呈现到屏幕上。无图无真相，
+对吧。
+
+**让子弹飞**
+
+Player类是唯一需要子弹的类，因此打开这个文件，往里面import bullet模块，
+并在构造函数中添加子弹速度bullet\_speed：
+
+{% highlight python %}
+...
+import bullet
+
+class Player(physicalobject.PhysicalObject):
+    def __init__(self, *args, **kwargs):
+        super(Player, self).__init__(
+            img=resources.player_image, *args, **kwargs)
+        ...
+        self.bullet_speed = 700.0
+{% endhighlight %}
+
+现在我们可以写代码来生成子弹并把它发射出去了。首先，我们需要定义`on_key_press`
+事件处理程序：
+
+{% highlight python %}
+def on_key_press(self, symbol, modifiers):
+    if symbol == key.SPACE:
+        self.fire()
+{% endhighlight %}
+
+发射子弹的函数fire()要稍微复杂一些。大部分的计算与上文推力的处理相似，
+不过还是有一些不同的地方。比如，我们要让子弹从飞船的头部发射出去而非飞船中心；
+此外，我们还需要将飞船的当前速度加到子弹的初始速度上，
+否则当飞船运行过快时将超过子弹，显然这不是我们想看到的。
+
+一开始我们要将角度转换成弧度并逆转方向：
+
+{% highlight python %}
+def fire(self):
+    angle_radians = -math.radians(self.rotation)
+{% endhighlight %}
+
+接着，计算子弹的位置并实例化它：
+
+{% highlight python %}
+ship_radius = self.image.width/2
+    bullet_x = self.x + math.cos(angle_radians) * ship_radius
+    bullet_y = self.y + math.sin(angle_radians) * ship_radius
+    new_bullet = bullet.Bullet(bullet_x, bullet_y, batch=self.batch)
+{% endhighlight %}
+
+子弹速度的计算与飞船速度计算类似：
+
+{% highlight python %}
+ bullet_vx = (
+        self.velocity_x +
+        math.cos(angle_radians) * self.bullet_speed
+    )
+    bullet_vy = (
+        self.velocity_y +
+        math.sin(angle_radians) * self.bullet_speed
+    )
+    new_bullet.velocity_x = bullet_vx
+    new_bullet.velocity_y = bullet_vy
+{% endhighlight %}
+
+最后把子弹加到`new_objects`列表，这样主循环就会把它加到`game_objects`中。
+
+{% highlight python %}
+self.new_objects.append(new_bullet)
+{% endhighlight %}
+
+到了这一步，你应该可以在你的飞船头部发射子弹了。不过你会发现一个问题，
+当你发射子弹时，你的飞船就消失了。不仅如此，你会发现当两个小行星碰撞时，
+它们也会消失。这些都是因为我们在前面的代码中设置了，当两个物体发生碰撞时，
+它们就会消失。为了解决这个问题，我们需要去定制每个类的`handle_collision_with`
+方法。
+
+### 定制碰撞后的行为
+
+在当前版本的游戏中，存在5类碰撞：子弹-小行星，子弹-飞船，子弹-子弹，小行星-飞船，
+小行星-小行星。更复杂的游戏将存在更多样的碰撞。
+
+一般来说，相同物体发生碰撞不应该销毁，我们要在PhysicalObject类中实现这个行为。
+其他类型的碰撞需要稍微多做一些工作。
+
+**忽略同类间的碰撞**
+
+如果两个小行星或两颗子弹发生碰撞，直接忽略，让它们沿原来的轨迹运行，什么也不做。
+我们只需要在`PhysicalObject.handle_collision_with()`方法中加入类型判断：
+
+{% highlight python %}
+def handle_collision_with(self, other_object):
+    if other_object.__class__ == self.__class__:
+        self.dead = False
+    else:
+        self.dead = True
+{% endhighlight %}
+
+上述代码也可以使用`type(self) == type(other_object)`
+来判断两个物体是否属于同一类。
+
+**定制子弹的碰撞**
+
+由于子弹对于不同物体的碰撞会有不同的反应，我们向PhysicalObjects
+添加`reacts_to_bullets`属性，这个属性表明是否需要对子弹做出响应(飞船不用响应)
+。此外我们可以再添加一个`is_bullet`属性来表示一个物体是否是子弹。
+
+(这些设计并不怎么好，不过他们可以work)
+
+首先，在PhysicalObject的构造函数里把`reacts_to_bullets`设为True：
+
+{% highlight python %}
+class PhysicalObject(pyglet.sprite.Sprite):
+    def __init__(self, *args, **kwargs):
+        ...
+        self.reacts_to_bullets = True
+        self.is_bullet = False
+        ...
+
+class Bullet(physicalobject.PhysicalObject):
+    def __init__(self, *args, **kwargs):
+        ...
+        self.is_bullet = True
+{% endhighlight %}
+
+然后，在`PhysicalObject.collides_with()`函数中添加一些代码，
+使其在适当的情况下忽略子弹：
+
+{% highlight python %}
+def collides_with(self, other_object):
+        if not self.reacts_to_bullets and other_object.is_bullet:
+            return False
+        if self.is_bullet and not other_object.reacts_to_bullets:
+            return False
+        ...
+{% endhighlight %}
+
+最后，在`Player.__init__()`中设置`self.reacts_to_bullets = False`。
+这样一来，Bullet类就完成了！现在，我们需要决定当子弹击中小行星时，
+要发生些什么。
+
+### 令小行星爆炸
+
+为了使游戏更好玩一些，我们采用这样的思路：当你击中小行星时，它会变成更多的，
+更小的小行星，这相当于把游戏难度加大了。当然了，当然了这种变化要控制在有限次，
+否则小行星只会越打越多。该游戏把它限制为2次。假如初始小行星大小为Large，
+击中后则会变化若干个大小为Middle的小行星，击中Middle的小行星的话，
+则会变成若干个大小为Small的小行星，击中大小为Small的小行星则小行星死亡。
+
+接下来，我们要实现一个小行星类Asteroid并定制它的`handle_collision_with()`
+方法。
+
+**写一个小行星类**
+
+在game文件夹下创建一个新的子模块叫`asteroid.py`，
+在构造函数中把小行星的图片传给它的超类。
+
+{% highlight python %}
+import pyglet
+import resources, physicalobject
+
+class Asteroid(physicalobject.PhysicalObject):
+    def __init__(self, *args, **kwargs):
+        super(Asteroid, self).__init__(
+            resources.asteroid_image, *args, **kwargs)
+{% endhighlight %}
+
+现在我们需要写一个新的`handle_collision_with()`方法，使得小行星被击中时，
+会产生随机数目的、随机速度的更小的小行星。而且一个小行星最多变小2次，
+即从Large到Middle再到Small，每次变为原来大小的1/2。
+
+我们要忽略两个小行星间的碰撞，这一情况可以调用它超类的方法来处理：
+
+{% highlight python %}
+ def handle_collision_with(self, other_object):
+        super(Asteroid, self).handle_collision_with(other_object)
+{% endhighlight %}
+
+当小行星被击中而变成更小的小行星时，我们要把大的小行星的速度加到小的小行星上，
+使其看起来是来自原来的小行星。
+
+{% highlight python %}
+import random
+...
+class Asteroid...
+    def handle_collision_with(self, other_object):
+        super(Asteroid, self).handle_collision_with(other_object)
+        if self.dead and self.scale > 0.25:
+            num_asteroids = random.randint(2, 3) #产生2个或3个小行星
+            for i in xrange(num_asteroids):
+                new_asteroid = Asteroid(
+                    x=self.x, y=self.y, batch=self.batch)
+                new_asteroid.rotation = random.randint(0, 360)
+                new_asteroid.velocity_x = (
+                    random.random() * 70 + self.velocity_x)
+                new_asteroid.velocity_y = (
+                    random.random() * 70 + self.velocity_y)
+                new_asteroid.scale = self.scale * 0.5
+                self.new_objects.append(new_asteroid)
+{% endhighlight %}
+
+我们可以为每个小行星加上些旋转使得画面更有动感。为此，我们需要定义一个旋转速度
+`rotate_speed`并给它一个随机的值。然后写一个`update()`将旋转应用到第一帧。
+
+在构造函数中加入`rotate_speed`：
+
+{% highlight python %}
+ def __init__(self, *args, **kwargs):
+        super(Asteroid, self).__init__(
+            resources.asteroid_image, *args, **kwargs)
+        self.rotate_speed = random.random() * 100.0 - 50.0
+{% endhighlight %}
+
+`update()`函数：
+
+{% highlight python %}
+def update(self, dt):
+        super(Asteroid, self).update(dt)
+        self.rotation += self.rotate_speed * dt
+{% endhighlight %}
+
+最后一件事，在`load.py`的`asteroids()`方法中创建`Asteroid`对象，
+而不是`PhysicalObject`对象。
+
+{% highlight python %}
+import asteroid
+
+def asteroids(num_asteroids, player_position, batch=None):
+    ...
+    for i in range(num_asteroids):
+        ...
+        new_asteroid = asteroid.Asteroid(
+            x=asteroid_x, y=asteroid_y, batch=batch)
+        ...
+    return asteroids
+{% endhighlight %}
+
 ## <a id="next">接下来做什么</a>
+
+教程到这里就结束了，接下来你可以自己去扩展，或者去读源码：
+<http://github.com/irskep/pyglettutorial>。我不再讲解下去，原因：
+
+1. 如果你自己不动手，你是不会学到更多的
+1. 我已经筋疲力尽了
+1. 你不需要我了
+
+因此接下来就靠你自己去发挥了，以下是一些练习：
+
+1. 实现计分器
+1. 如果game over了，可以让玩家从头开始
+1. 实现生命计数及"Game Over"字幕
+1. 加入粒子效果(使用[Lepton](http://code.google.com/p/py-lepton/)或你自己的粒子引擎)
+
+Good luck!
+
+原文链接：<http://steveasleep.com/pyglettutorial.html>
