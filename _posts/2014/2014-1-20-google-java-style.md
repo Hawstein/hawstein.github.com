@@ -662,16 +662,5 @@ public int method(String p1) { ... }
 
 ## <a id="End">后记</a>
 
-本文档翻译自[Google Java Style](http://google-styleguide.googlecode.com/svn/trunk/javaguide.html)，作者@Hawstein。
-
-
-
-
-
-
-
-
-
-
-
-
+本文档翻译自[Google Java Style](http://google-styleguide.googlecode.com/svn/trunk/javaguide.html)，
+作者[@Hawstein](http://weibo.com/hawstein)。
