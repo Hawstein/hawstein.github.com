@@ -10,3 +10,5 @@ title: Chrome插件SwitchySharp源码学习
 该页中按钮onclick的响应函数在options.js中，且通过
 chrome.extension.getBackgroundPage()获得背景页main.html，
 而背景页main.html又调用了scripts及libs文件夹下的许多脚本。
+
+this is a test line.
