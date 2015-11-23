@@ -590,7 +590,7 @@ somethingThatYieldsAFoo().aStaticMethod(); // very bad
 
 ### 6.4 Finalizers: 禁用
 
-极少会去重载`Object.finalize`。
+极少会去重写`Object.finalize`。
 
 >> Tip：不要使用finalize。如果你非要使用它，请先仔细阅读和理解[Effective Java](http://books.google.com/books?isbn=8131726592)
 第7条款：“Avoid Finalizers”，然后不要使用它。
@@ -651,9 +651,9 @@ public int method(String p1) { ... }
 >> Tip：如果有一些相关信息是需要读者了解的，那么以上的例外不应作为忽视这些信息的理由。例如，对于方法名`getCanonicalName`，
 就不应该忽视文档说明，因为读者很可能不知道词语`canonical name`指的是什么。
 
-#### 7.3.2 例外：重载
+#### 7.3.2 例外：重写
 
-如果一个方法重载了超类中的方法，那么Javadoc并非必需的。
+如果一个方法重写了超类中的方法，那么Javadoc并非必需的。
 
 #### 7.3.3 可选的Javadoc
 
