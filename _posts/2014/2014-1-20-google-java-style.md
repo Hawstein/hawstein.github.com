@@ -159,7 +159,7 @@ import语句可分为以下几组，按照这个顺序，每组由一个空行�
 
 示例：
 
-{% highlight java %}
+```java
 return new MyClass() {
   @Override public void method() {
     if (condition()) {
@@ -171,7 +171,7 @@ return new MyClass() {
     }
   }
 };
-{% endhighlight %}
+```
 
 4.8.1节给出了enum类的一些例外。
 
