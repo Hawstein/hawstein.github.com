@@ -1,9 +1,5 @@
-markdown: rdiscount
-pygments: true
+highlighter: pygments
 permalink: /posts/:title.html
-auto: true
-rdiscount:
-  extensions: [smart]
 
 title: Hawstein's Blog
 author:
