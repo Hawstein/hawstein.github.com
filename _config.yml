@@ -1,4 +1,4 @@
-highlighter: pygments
+highlighter: rouge
 permalink: /posts/:title.html
 
 title: Hawstein's Blog
