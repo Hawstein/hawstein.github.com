@@ -47,10 +47,10 @@ LRU的典型实现是`hash map + doubly linked list`，
 
 Cache主要有两个接口：
 
-{% highlight cpp %}
+```cpp
 T Get(K key);
 void Put(K key, T data);
-{% endhighlight %}
+```
 
 当我们通过键值来访问类型为T的数据时，调用Get函数。如果键值为key的数据已经在
 Cache中，那就返回该数据，同时将存储该数据的结点移到双向链表头部。
@@ -71,7 +71,7 @@ Linux平台可以切换到c++的include目录：cd /usr/include/c++/版本
 
 当然如果你已经很fashion地在使用C++ 11，就不会有这些小困扰了。
 
-{% highlight cpp %}
+```cpp
 // A simple LRU cache written in C++
 // Hash map + doubly linked list
 #include <iostream>
@@ -173,7 +173,7 @@ int main(){
     cout<<lru_cache.Get(2);
     return 0;
 }
-{% endhighlight %}
+```
 
 ## 参考链接
 

@@ -67,7 +67,7 @@ or not?
 
 代码如下：
 
-{% highlight cpp %}
+```cpp
 #include <iostream>
 #include <sstream>
 #include <string>
@@ -110,7 +110,7 @@ int main()
     cout << isAggregatedNum(s) << endl;
     return 0;
 }
-{% endhighlight %}
+```
 
 以上代码基于这样的假设：这个数分解成部分后，每个部分都不会超过long long
 的表示范围。如果超出了，程序将无法给出正解答案。那么，如果我要判断的数非常大，
@@ -119,7 +119,7 @@ int main()
 
 代码如下：
 
-{% highlight cpp %}
+```cpp
 #include <iostream>
 #include <string>
 using namespace std;
@@ -189,7 +189,7 @@ int main()
     cout << isAggregatedNum(s) << endl;
     return 0;
 }
-{% endhighlight %}
+```
 
 第二个程序中要判断的数字非常大，使用第一个程序得到的是错误的判断，
 认为它不是聚合数。而第二个程序无论数字多大，都可以给出正确的判断。

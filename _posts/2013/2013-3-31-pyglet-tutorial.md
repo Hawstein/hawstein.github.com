@@ -84,13 +84,13 @@ Asteroids的第一个版本将简单地显示分数(0分)，程序的名字，�
 想要显示一个窗口，只需要简单地import pyglet，创建一个pyglet.window.Window
 的实例，然后调用pyglet.app.run()即可。
 
-{% highlight python %}
+```python
 import pyglet
 game_window = pyglet.window.Window(800, 600)
 
 if __name__ == '__main__':
     pyglet.app.run()
-{% endhighlight %}
+```
 
 当你运行上面的代码，将显示一个窗口，按Esc退出。
 
@@ -99,11 +99,11 @@ if __name__ == '__main__':
 让我们创建一个game的子模块resources.py用来保存资源，
 由于图片所在的目录不在当前目录，因此我们需要告诉Pyglet去哪里找到它们：
 
-{% highlight python %}
+```python
 import pyglet
 pyglet.resource.path = ['../resources']
 pyglet.resource.reindex()
-{% endhighlight %}
+```
 
 资源路径以"../"开头是因为resources文件夹与version1文件夹在同一目录下，
 它表示要返回到父目录才能找到resources文件夹。如果我们去掉"../"，
@@ -111,31 +111,31 @@ pyglet就会在version1中查找resources文件夹(当然这样是查找不到�
 
 pyglet的resources模块初始化后，就可以加载图片了。
 
-{% highlight python %}
+```python
 player_image = pyglet.resource.image("player.png")
 bullet_image = pyglet.resource.image("bullet.png")
 asteroid_image = pyglet.resource.image("asteroid.png")
-{% endhighlight %}
+```
 
 **使图片居中**
 
 pyglet默认是从左下角开始画图，但我们并不想这样，
 于是我们通过设置图片的锚点使其居中。
 
-{% highlight python %}
+```python
 def center_image(image):
     """Sets an image's anchor point to its center"""
     image.anchor_x = image.width/2
     image.anchor_y = image.height/2
-{% endhighlight %}
+```
 
 现在我们可以通过调用center_image()来使加载的图片居中：
 
-{% highlight python %}
+```python
 center_image(player_image)
 center_image(bullet_image)
 center_image(asteroid_image)
-{% endhighlight %}
+```
 
 记住center_image()函数要先定义再调用，为了能在asteroids.py中访问图片，
 我们需要使用类似"from game import resources"的语句，
@@ -150,11 +150,11 @@ center_image(asteroid_image)
 
 想要在pyglet中使用文字标签，只需要初始化一个pyglet.text.Label对象即可。
 
-{% highlight python %}
+```python
 score_label = pyglet.text.Label(text="Score: 0", x=10, y=575)
 level_label = pyglet.text.Label(text="My Amazing Game", 
                                 x=400, y=575, anchor_x='center')
-{% endhighlight %}
+```
 
 注意第二个标签使用anchor_x属性进行居中处理。
 
@@ -164,11 +164,11 @@ level_label = pyglet.text.Label(text="My Amazing Game",
 我们有两种选择。第一种，继承pyglet中的Window类并重写on_draw()函数；
 第二种，在一个相同名字的函数上使用@Window.event装饰器：
 
-{% highlight python %}
+```python
 @game_window.event
 def on_draw():
     # draw things here
-{% endhighlight %}
+```
 
 @game_window.event装饰器使得窗口实例知道on\_draw()函数是个事件句柄(event 
 handler)。当窗口需要被重绘时，触发on\_draw事件。其它事件包括on\_mouse\_press,
@@ -177,14 +177,14 @@ on\_key\_press。
 现在我们来完善这个函数让它来绘制标签。在我们进行绘制前，我们先清屏。清完屏后，
 只需要简单地调用每个对象的draw()函数即可。
 
-{% highlight python %}
+```python
 @game_window.event
 def on_draw():
     game_window.clear()
 
     level_label.draw()
     score_label.draw()
-{% endhighlight %}
+```
 
 现在你运行asteroids.py，可以看到一个窗口，左上角显示0分，在顶部居中的地方写着：
 “Version 1: Static Graphics”。
@@ -193,25 +193,25 @@ def on_draw():
 
 飞船应该是pyglet.sprite.Sprite的一个实例或是子类，比如：
 
-{% highlight python %}
+```python
 from game import resources
 ...
 player_ship = pyglet.sprite.Sprite(img=resources.player_image, x=400, y=300)
-{% endhighlight %}
+```
 
 只需要在on\_draw()函数中加一行，即可在窗口中绘制出飞船。
 
-{% highlight python %}
+```python
 @game_window.event
 def on_draw():
     ...
     player_ship.draw()
-{% endhighlight %}
+```
 
 加载小行星要稍微复杂一些，因为我们要随机地加载多个小行星在不同的位置上，
 而且一开始还不能与飞船发生碰撞。我们把加载部分的代码放在一个新的模块，叫load.py。
 
-{% highlight python %}
+```python
 import pyglet, random
 import resources
 
@@ -225,27 +225,27 @@ def asteroids(num_asteroids):
         new_asteroid.rotation = random.randint(0, 360)
         asteroids.append(new_asteroid)
     return asteroids
-{% endhighlight %}
+```
 
 我们这里所做的就是在随机的位置上制造一些小行星。但这里还有一个问题，
 由于小行星出现的位置是随机的，所以它有可能出现在飞船的位置。这样一来，
 会导致飞船直接就挂掉。为了解决这个问题，
 我们写一个简单的函数来计算小行星到飞船的距离。
 
-{% highlight python %}
+```python
 import math
 ...
 def distance(point_1=(0, 0), point_2=(0, 0)):
     """Returns the distance between two points"""
     return math.sqrt((point_1[0]-point_2[0])**2+(point_1[1]-point_2[1])**2)
-{% endhighlight %}
+```
 
 为了使新产生的小行星与飞船之间保持一定的距离，我们需要将飞船的位置传递给
 asteroids()函数，然后不断地产生新的小行星坐标，直到它离飞船足够远。
 pyglet sprites记录它们的位置有两种方法：元组(Sprite.position)和x,y属性，
 (Sprite.x和Sprite.y)。为了保持代码简洁，我们将位置元组传递给函数。
 
-{% highlight python %}
+```python
 def asteroids(num_asteroids, player_position):
     asteroids = []
     for i in range(num_asteroids):
@@ -258,29 +258,29 @@ def asteroids(num_asteroids, player_position):
         new_asteroid.rotation = random.randint(0, 360)
         asteroids.append(new_asteroid)
     return asteroids
-{% endhighlight %}
+```
 
 对于每个小行星，不断地产生随机位置，直到这个位置离飞船比较远才生成它，
 并给它一个随机的旋转角度。每个小行星都被加入到列表中返回。
 
 现在你可以通过以下的方式加载3个小行星：
 
-{% highlight python %}
+```python
 from game import resources, load
 ...
 asteroids = load.asteroids(3, player_ship.position)
-{% endhighlight %}
+```
 
 变量asteroids是一个包含了若干个小行星的列表(文中是3个)，
 绘制它们和绘制飞船同样容易，只需要调用它们的draw函数即可。
 
-{% highlight python %}
+```python
 @game_window.event
 def on_draw():
     ...
     for asteroid in asteroids:
         asteroid.draw()
-{% endhighlight %}
+```
 
 ## <a id="motion">基本的运动</a>
 
@@ -299,38 +299,38 @@ pyglet的批量绘制可以让你只通过一次简单的函数调用就将所�
 
 创建一个batch非常简单，代码如下：
 
-{% highlight python %}
+```python
 main_batch = pyglet.graphics.Batch()
-{% endhighlight %}
+```
 
 为了使物体成为batch的一员，只需要将batch对象传递给物体的构造函数(使用关键字
 batch)
 
-{% highlight python %}
+```python
 score_label = pyglet.text.Label(text="Score: 0", x=10, y=575, batch=main_batch)
-{% endhighlight %}
+```
 
 我们要做的就是给每个需要绘制的物体的构造函数加一个batch关键字参数。
 
 为了将小行星加入到batch中，我们需要将batch传递给game.load.asteroid()函数，
 然后每创建一个小行星时只要加入这个关键字参数即可。
 
-{% highlight python %}
+```python
 def asteroids(num_asteroids, player_position, batch=None):
     ...
     new_asteroid = pyglet.sprite.Sprite(img=resources.asteroid_image, 
                                             x=asteroid_x, y=asteroid_y,
                                             batch=batch)
-{% endhighlight %}
+```
 
 这样调用以上函数：
 asteroids = load.asteroids(3, playership.position, main_batch)
 
 现在我们可以用一行代码将所有的draw函数都替换掉：
 
-{% highlight python %}
+```python
 main_batch.draw()
-{% endhighlight %}
+```
 
 你现在运行asteroids.py，效果和之前的是一模一样的。
 
@@ -346,7 +346,7 @@ main_batch.draw()
 产生小图标的函数与产生小行星的函数基本是一样的，对于每个图标，
 我们只需要创建一个sprite对象，给它一个位置及缩放尺度，然后加入到返回列表即可。
 
-{% highlight python %}
+```python
 def player_lives(num_icons, batch=None):
     player_lives = []
     for i in range(num_icons):
@@ -356,7 +356,7 @@ def player_lives(num_icons, batch=None):
         new_sprite.scale = 0.5
         player_lives.append(new_sprite)
     return player_lives
-{% endhighlight %}
+```
 
 飞船大小是50\*50的，所以小图标的大小是25\*25。我们需要在两个图标间留一点空间，
 于是我们从窗口的右端起，每隔30个像素绘制一个图标(这样图标间就有5个像素的间距)。
@@ -377,22 +377,22 @@ def player_lives(num_icons, batch=None):
 我们创建一个新的子模块叫physicalobject.py并声明一个PhysicalObject类，
 我们只加入一个新的属性：速度，这样一来，构造函数就相当简单了：
 
-{% highlight python %}
+```python
 class PhysicalObject(pyglet.sprite.Sprite):
 
     def __init__(self, *args, **kwargs):
         super(PhysicalObject, self).__init__(*args, **kwargs)
     
         self.velocity_x, self.velocity_y = 0.0, 0.0
-{% endhighlight %}
+```
 
 每一帧中，每个物体都需要更新，因此我们需要一个update函数：
 
-{% highlight python %}
+```python
 def update(self, dt):
     self.x += self.velocity_x * dt
     self.y += self.velocity_y * dt
-{% endhighlight %}
+```
 
 dt是时间间隔，游戏中帧间的过渡并不是瞬时的，而且它们也并不总是相等的时间间隔。
 如果你曾经试过在一台老式机器上玩现代游戏，你会发现帧率变化很大(主要是低帧率吧)，
@@ -402,7 +402,7 @@ dt是时间间隔，游戏中帧间的过渡并不是瞬时的，而且它们也
 我们更希望的是它能从屏幕的另一侧出来，而不是消失。
 用下面这个简单的函数就可以达到这个目的：
 
-{% highlight python %}
+```python
 def check_bounds(self):
     min_x = -self.image.width/2
     min_y = -self.image.height/2
@@ -416,7 +416,7 @@ def check_bounds(self):
         self.y = max_y
     elif self.y > max_y:
         self.y = min_y
-{% endhighlight %}
+```
 
 正如你所见到的，它会检查物体在屏幕上是否仍然可见。如果物体从屏幕的一侧消失，
 就让它从屏幕的另一侧出来。为了使每一个PhysicalObject对象都能遵循这样的法则，
@@ -427,7 +427,7 @@ def check_bounds(self):
 而不是Sprite。此外，我们再给它一个随机的初始速度，以下是新的改进后的
 load.asteroids()函数：
 
-{% highlight python %}
+```python
 def asteroids(num_asteroids, player_position, batch=None):
     ...
     new_asteroid = physicalobject.PhysicalObject(...)
@@ -435,24 +435,24 @@ def asteroids(num_asteroids, player_position, batch=None):
     new_asteroid.velocity_x = random.random()*40
     new_asteroid.velocity_y = random.random()*40
     ...
-{% endhighlight %}
+```
 
 **游戏的update函数**
 
 为了调用每一个物体的update函数，我们首先需要一个列表来存放这些物体。
 现在我们只需要把所有物体都设置好后声明一下即可：
 
-{% highlight python %}
+```python
 game_objects = [player_ship] + asteroids
-{% endhighlight %}
+```
 
 然后在这个列表上迭代一遍：
 
-{% highlight python %}
+```python
 def update(dt):
     for obj in game_objects:
         obj.update(dt)
-{% endhighlight %}
+```
 
 **调用update函数**
 
@@ -478,7 +478,7 @@ pyglet.clock模块中有许多方法可以周期性地调用某个函数，
 除了遵循物理定律，飞船还需要能够响应键盘输入。我们通过继承PhysicalObject，
 来编写我们的Player类：
 
-{% highlight python %}
+```python
 import physicalobject, resources
 
 class Player(physicalobject.PhysicalObject):
@@ -486,7 +486,7 @@ class Player(physicalobject.PhysicalObject):
     def __init__(self, *args, **kwargs):
         super(Player, self).__init__(img=resources.player_image, 
                                      *args, **kwargs)
-{% endhighlight %}
+```
 
 到目前为止，Player和PhysicalObject唯一的区别就是Player总是使用相同的图片(
 img=resources.player_image)。当然，Player还需要更多的属性。
@@ -506,7 +506,7 @@ thrust。同时我们还要定义飞船的旋转速度：
 接着我们需要写两个函数：`on_key_press()`和`on_key_release()`。
 当pyglet检查一个新的事件句柄，它会调用这两个函数。
 
-{% highlight python %}
+```python
 import math
 from pyglet.window import key
 import physicalobject, resources
@@ -528,7 +528,7 @@ class Player(physicalobject.PhysicalObject)
             self.keys['left'] = False
         elif symbol == key.RIGHT:
             self.keys['right'] = False
-{% endhighlight %}
+```
 
 以上代码看起来相当不给力，后面我们会讲到更好的方法来实现同样的功能。不过，
 对于现在这个版本来说，这样就OK了。
@@ -537,7 +537,7 @@ class Player(physicalobject.PhysicalObject)
 函数的基础上，它还要增加一些代码。我们先调用父类PhysicalObject的
 update函数，然后再去响应键盘输入。
 
-{% highlight python %}
+```python
 def update(self, dt):
 	super(Player, self).update(dt)
 
@@ -545,7 +545,7 @@ def update(self, dt):
 		self.rotation -= self.rotate_speed * dt
 	if self.keys['right']:
 		self.rotation += self.rotate_speed * dt
-{% endhighlight %}
+```
 
 到目前为止都非常的简单，为了旋转飞船，我们减去或是加上旋转速度乘以dt。
 注意这个旋转值的单位是角度，顺时针方向是正方向。这意味着你需要调用
@@ -553,14 +553,14 @@ math.degrees()或math.radians()来做角度和弧度的转换，
 因为python内置的数学函数(比如sin，cos)使用的是弧度，
 而且它们规定逆时针方向为正方向。下面的代码是让飞船向前推进运动：
 
-{% highlight python %}
+```python
 if self.keys['up']:
 	angle_radians = -math.radians(self.rotation) #正方向定义不同，加负号
 	force_x = math.cos(angle_radians) * self.thrust * dt
 	force_y = math.sin(angle_radians) * self.thrust * dt
 	self.velocity_x += force_x
 	self.velocity_y += force_y
-{% endhighlight %}
+```
 
 首先我们将角度值转化为弧度值，这样sin，cos才能接收到正确的参数值。
 然后我们计算出飞船x，y方向的速度值。
@@ -569,11 +569,11 @@ if self.keys['up']:
 
 首先我们需要创建一个Player的实例：player_ship：
 
-{% highlight python %}
+```python
 from game import player
 ...
 player_ship = player.Player(x=400, y=300, batch=main_batch)
-{% endhighlight %}
+```
 
 然后告诉pyglet player_ship是一个事件句柄(event handler)。
 我们用game_window.push_handlers()函数把它压入事件栈中：
@@ -656,17 +656,17 @@ pyglet.window.key.KeyStateHandler。这个类会自动地跟踪键盘上每个�
 为了使火焰只在飞船向前推进时显示，我们需要在update函数的
 if self.key_handler[key.UP]语句下加一些代码：
 
-{% highlight python %}
+```python
 if self.key_handler[key.UP]:
 	...
 	self.engine_sprite.visible = True
 else:
 	self.engine_sprite.visible = False
-{% endhighlight %}
+```
 
 为了使火焰总是出现在飞船尾部，我们需要及时更新它的位置及旋转属性：
 
-{% highlight python %}
+```python
 if self.key_handler[key.UP]:
 	...
 	self.engine_sprite.rotation = self.rotation
@@ -675,7 +675,7 @@ if self.key_handler[key.UP]:
 	self.engine_sprite.visible = True
 else:
 	self.engine_sprite.visible = False
-{% endhighlight %}
+```
 
 **死亡后的清理工作**
 
@@ -683,11 +683,11 @@ else:
 函数来做这件事，但由于Player类有自己的Sprite对象(引擎火焰)，删除Player
 类实例时也需要删除引擎火焰。因此我们把这两个删除工作放在一个delete函数中：
 
-{% highlight python %}
+```python
 def delete(self):
     self.engine_sprite.delete()
     super(Player, self).delete()
-{% endhighlight %}
+```
 
 这样一来，Player类就清理完毕了。
 
@@ -704,12 +704,12 @@ def delete(self):
 避免重复检查同一对物体。以下是update函数中的循环代码，
 它迭代地取出所有的物体对，暂时什么事也不做：
 
-{% highlight python %}
+```python
 for i in xrange(len(game_objects)):
     for j in xrange(i+1, len(game_objects)):
         obj_1 = game_objects[i]
         obj_2 = game_objects[j]
-{% endhighlight %}
+```
 
 我们需要某种方法来检测一个物体是否已经被干掉了，现在我们先不去理它，
 而专注于当前的循环。假设game\_objects中的物体都有一个死亡属性并且初始化为false，
@@ -718,22 +718,22 @@ for i in xrange(len(game_objects)):
 我们还需要另外两个方法来处理碰撞：一个方法判断两个物体是否发生碰撞，
 另一个方法是让物体去处理碰撞。直接看下面代码，很容易理解：
 
-{% highlight python %}
+```python
 if not obj_1.dead and not obj_2.dead:
 	if obj_1.collides_with(obj_2):
 		obj_1.handle_collision_with(obj_2)
 		obj_2.handle_collision_with(obj_1)
-{% endhighlight %}
+```
 
 接下来就只需要将列表中的死亡物体移除即可。
 
-{% highlight python %}
+```python
 ...update game objects...
 
 for to_remove in [obj for obj in game_objects if obj.dead]: 
 	to_remove.delete() 
 	game_objects.remove(to_remove)
-{% endhighlight %}
+```
 
 正如你所看到的，物体调用delete方法将它从任一batches中移除，
 然后从列表中移除该物体。上述代码中，中括号里表示的是列表推导式(list 
@@ -745,32 +745,32 @@ comprehensions)，它将game\_objects列表中已经死亡的物体拿出来形�
 handle\_collision\_with()方法。collides\_with()方法需要用到distance()
 函数，因此我们先将该函数放到game中的一个子模块，命名为util.py：
 
-{% highlight python %}
+```python
 import pyglet, math 
 def distance(point_1=(0, 0), point_2=(0, 0)): 
 	return math.sqrt(
 		(point_1[0] - point_2[0]) ** 2 + 
 		(point_1[1] - point_2[1]) ** 2)
-{% endhighlight %}
+```
 
 记得要在load.py中调用`from util import distance`，现在我们可以来完成
 collides_with()函数了：
 
-{% highlight python %}
+```python
 def collides_with(self, other_object): 
 	collision_distance = self.image.width/2 + other_object.image.width/2 
 	actual_distance = util.distance( 
 		self.position, other_object.position) 
 	return (actual_distance <= collision_distance)
-{% endhighlight %}
+```
 
 碰撞处理函数就更加简单了，
 因为目前我们想要的只是一个物体在撞到另一个物体时立即死亡。
 
-{% highlight python %}
+```python
 def handle_collision_with(self, other_object): 
 	self.dead = True
-{% endhighlight %}
+```
 
 最后一件事，将物体的死亡属性在`PhysicalObject.__init__()`设为False。
 
@@ -799,19 +799,19 @@ That's it!现在你应该可以让你的飞船在屏幕上喷着火焰飞来飞�
 一种简单的思路是每次检查物体的子对象并将它的子对象加到game\_objects列表中。
 如下所示：(只需加两行代码，其中new\_objects是一个子对象列表)
 
-{% highlight python %}
+```python
 for obj in game_objects: 
 	obj.update(dt) 
 	game_objects.extend(obj.new_objects) 
 	obj.new_objects = []
-{% endhighlight %}
+```
 
 不幸的是，上面的做法是有问题的。我们本意是想从game\_objects
 列表中迭代地取出元素进行操作，可是我们却在函数体中改变了这个列表。当然了，
 这个问题很容易解决，我们只需要将新的对象添加到另一个列表，然后在这个for
 循环结束后再将这个列表添加到game\_objects列表即可。看代码：
 
-{% highlight python %}
+```python
 ...collision...
 
 to_add = []
@@ -824,18 +824,18 @@ for obj in game_objects:
 ...removal...
 
 game_objects.extend(to_add)
-{% endhighlight %}
+```
 
 **在PhysicalObject类中加入新属性**
 
 在上面的代码中，我们用到了new\_objects，因此我们需要在PhysicalObject
 中添加一下：
 
-{% highlight python %}
+```python
 def __init__(self, *args, **kwargs):
     ....
     self.new_objects = []
-{% endhighlight %}
+```
 
 如果要加入新物体，我们所需要做的就是将它添加到new\_objects。
 然后在主循环中它会被添加到game\_objects列表，而new\_objects会被清空。
@@ -851,7 +851,7 @@ def __init__(self, *args, **kwargs):
 首先，我们在game下创建一个子模块叫bullet.py，将Bullet作为PhysicalObject
 的子类：
 
-{% highlight python %}
+```python
 import pyglet
 import physicalobject, resources
 
@@ -861,26 +861,26 @@ class Bullet(physicalobject.PhysicalObject):
     def __init__(self, *args, **kwargs):
         super(Bullet, self).__init__(
             resources.bullet_image, *args, **kwargs)
-{% endhighlight %}
+```
 
 为了使子弹在一段时间之后从屏幕消失，我们可以维护子弹的当前年龄及寿命属性，
 或者让pyglet来帮我们做这些事。我不知道你们怎么想的，反正我是喜欢第二种方案。
 首先我们定义一个函数在子弹消亡时调用：
 
-{% highlight python %}
+```python
 def die(self, dt):
     self.dead = True
-{% endhighlight %}
+```
 
 现在我们要告诉pyglet在子弹创建后大约0.5秒调用上面的函数，
 我们可以在构造函数中加入pyglet.clock.schedule_once()来实现：
 
-{% highlight python %}
+```python
 def __init__(self, *args, **kwargs):
     super(Bullet, self).__init__(
         resources.bullet_image, *args, **kwargs)
     pyglet.clock.schedule_once(self.die, 0.5)
-{% endhighlight %}
+```
 
 Bullet类还有许多地方需要完善，但在些之前，我们先把子弹呈现到屏幕上。无图无真相，
 对吧。
@@ -890,7 +890,7 @@ Bullet类还有许多地方需要完善，但在些之前，我们先把子弹�
 Player类是唯一需要子弹的类，因此打开这个文件，往里面import bullet模块，
 并在构造函数中添加子弹速度bullet\_speed：
 
-{% highlight python %}
+```python
 ...
 import bullet
 
@@ -900,16 +900,16 @@ class Player(physicalobject.PhysicalObject):
             img=resources.player_image, *args, **kwargs)
         ...
         self.bullet_speed = 700.0
-{% endhighlight %}
+```
 
 现在我们可以写代码来生成子弹并把它发射出去了。首先，我们需要定义`on_key_press`
 事件处理程序：
 
-{% highlight python %}
+```python
 def on_key_press(self, symbol, modifiers):
     if symbol == key.SPACE:
         self.fire()
-{% endhighlight %}
+```
 
 发射子弹的函数fire()要稍微复杂一些。大部分的计算与上文推力的处理相似，
 不过还是有一些不同的地方。比如，我们要让子弹从飞船的头部发射出去而非飞船中心；
@@ -918,23 +918,23 @@ def on_key_press(self, symbol, modifiers):
 
 一开始我们要将角度转换成弧度并逆转方向：
 
-{% highlight python %}
+```python
 def fire(self):
     angle_radians = -math.radians(self.rotation)
-{% endhighlight %}
+```
 
 接着，计算子弹的位置并实例化它：
 
-{% highlight python %}
+```python
 ship_radius = self.image.width/2
     bullet_x = self.x + math.cos(angle_radians) * ship_radius
     bullet_y = self.y + math.sin(angle_radians) * ship_radius
     new_bullet = bullet.Bullet(bullet_x, bullet_y, batch=self.batch)
-{% endhighlight %}
+```
 
 子弹速度的计算与飞船速度计算类似：
 
-{% highlight python %}
+```python
  bullet_vx = (
         self.velocity_x +
         math.cos(angle_radians) * self.bullet_speed
@@ -945,13 +945,13 @@ ship_radius = self.image.width/2
     )
     new_bullet.velocity_x = bullet_vx
     new_bullet.velocity_y = bullet_vy
-{% endhighlight %}
+```
 
 最后把子弹加到`new_objects`列表，这样主循环就会把它加到`game_objects`中。
 
-{% highlight python %}
+```python
 self.new_objects.append(new_bullet)
-{% endhighlight %}
+```
 
 到了这一步，你应该可以在你的飞船头部发射子弹了。不过你会发现一个问题，
 当你发射子弹时，你的飞船就消失了。不仅如此，你会发现当两个小行星碰撞时，
@@ -972,13 +972,13 @@ self.new_objects.append(new_bullet)
 如果两个小行星或两颗子弹发生碰撞，直接忽略，让它们沿原来的轨迹运行，什么也不做。
 我们只需要在`PhysicalObject.handle_collision_with()`方法中加入类型判断：
 
-{% highlight python %}
+```python
 def handle_collision_with(self, other_object):
     if other_object.__class__ == self.__class__:
         self.dead = False
     else:
         self.dead = True
-{% endhighlight %}
+```
 
 上述代码也可以使用`type(self) == type(other_object)`
 来判断两个物体是否属于同一类。
@@ -993,7 +993,7 @@ def handle_collision_with(self, other_object):
 
 首先，在PhysicalObject的构造函数里把`reacts_to_bullets`设为True：
 
-{% highlight python %}
+```python
 class PhysicalObject(pyglet.sprite.Sprite):
     def __init__(self, *args, **kwargs):
         ...
@@ -1005,19 +1005,19 @@ class Bullet(physicalobject.PhysicalObject):
     def __init__(self, *args, **kwargs):
         ...
         self.is_bullet = True
-{% endhighlight %}
+```
 
 然后，在`PhysicalObject.collides_with()`函数中添加一些代码，
 使其在适当的情况下忽略子弹：
 
-{% highlight python %}
+```python
 def collides_with(self, other_object):
         if not self.reacts_to_bullets and other_object.is_bullet:
             return False
         if self.is_bullet and not other_object.reacts_to_bullets:
             return False
         ...
-{% endhighlight %}
+```
 
 最后，在`Player.__init__()`中设置`self.reacts_to_bullets = False`。
 这样一来，Bullet类就完成了！现在，我们需要决定当子弹击中小行星时，
@@ -1039,7 +1039,7 @@ def collides_with(self, other_object):
 在game文件夹下创建一个新的子模块叫`asteroid.py`，
 在构造函数中把小行星的图片传给它的超类。
 
-{% highlight python %}
+```python
 import pyglet
 import resources, physicalobject
 
@@ -1047,7 +1047,7 @@ class Asteroid(physicalobject.PhysicalObject):
     def __init__(self, *args, **kwargs):
         super(Asteroid, self).__init__(
             resources.asteroid_image, *args, **kwargs)
-{% endhighlight %}
+```
 
 现在我们需要写一个新的`handle_collision_with()`方法，使得小行星被击中时，
 会产生随机数目的、随机速度的更小的小行星。而且一个小行星最多变小2次，
@@ -1055,15 +1055,15 @@ class Asteroid(physicalobject.PhysicalObject):
 
 我们要忽略两个小行星间的碰撞，这一情况可以调用它超类的方法来处理：
 
-{% highlight python %}
+```python
  def handle_collision_with(self, other_object):
         super(Asteroid, self).handle_collision_with(other_object)
-{% endhighlight %}
+```
 
 当小行星被击中而变成更小的小行星时，我们要把大的小行星的速度加到小的小行星上，
 使其看起来是来自原来的小行星。
 
-{% highlight python %}
+```python
 import random
 ...
 class Asteroid...
@@ -1081,32 +1081,32 @@ class Asteroid...
                     random.random() * 70 + self.velocity_y)
                 new_asteroid.scale = self.scale * 0.5
                 self.new_objects.append(new_asteroid)
-{% endhighlight %}
+```
 
 我们可以为每个小行星加上些旋转使得画面更有动感。为此，我们需要定义一个旋转速度
 `rotate_speed`并给它一个随机的值。然后写一个`update()`将旋转应用到第一帧。
 
 在构造函数中加入`rotate_speed`：
 
-{% highlight python %}
+```python
  def __init__(self, *args, **kwargs):
         super(Asteroid, self).__init__(
             resources.asteroid_image, *args, **kwargs)
         self.rotate_speed = random.random() * 100.0 - 50.0
-{% endhighlight %}
+```
 
 `update()`函数：
 
-{% highlight python %}
+```python
 def update(self, dt):
         super(Asteroid, self).update(dt)
         self.rotation += self.rotate_speed * dt
-{% endhighlight %}
+```
 
 最后一件事，在`load.py`的`asteroids()`方法中创建`Asteroid`对象，
 而不是`PhysicalObject`对象。
 
-{% highlight python %}
+```python
 import asteroid
 
 def asteroids(num_asteroids, player_position, batch=None):
@@ -1117,7 +1117,7 @@ def asteroids(num_asteroids, player_position, batch=None):
             x=asteroid_x, y=asteroid_y, batch=batch)
         ...
     return asteroids
-{% endhighlight %}
+```
 
 ## <a id="next">接下来做什么</a>
 

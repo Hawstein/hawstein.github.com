@@ -74,7 +74,7 @@ OK，开始吧。
 manifest.json， 提供一些重要的信息。本插件的manifest.json如下，
 注释已经写在每一行后面，需要详细讲解的会在下文给出。
 
-{% highlight json %}
+```json
 {
   "name": "Website Postponer", //插件的名字，该名字会显示在扩展程序页面
   "version": "12.12.13", //插件版本，你自己定。
@@ -95,7 +95,7 @@ manifest.json， 提供一些重要的信息。本插件的manifest.json如下�
   "options_page": "options.html",//选项页，就是上一节那张图
   "manifest_version": 2 //manifest文件的版本号
 }
-{% endhighlight %}
+```
 
 上面有几个地方需要着重讲一下。
 
@@ -136,7 +136,7 @@ options_page：
 因为该插件需要用户设置网址和时间，所以需要这么一个选项页。
 选项页的图已经在第二节看过了，代码如下：
 
-{% highlight html %}
+```html
 <html>
 <head><title>Options</title>
 <script type="text/javascript" src="options.js"></script>
@@ -197,7 +197,7 @@ options_page：
 
 </body>
 </html>
-{% endhighlight %}
+```
 
 这里有两个需要注意的地方：
 
@@ -231,7 +231,7 @@ document.querySelector()找到相应id的元素，然后设置事件监听器。
 
 选项页options.html中事件对应的执行代码在options.js中，options.js文件如下：
 	
-{% highlight javascript %}
+```javascript
 function checkExisted(newUrl){ //检查加入的网址是不是已经在列表中了
 	var num = localStorage["count"];
 	for(var i=0; i<num; ++i){
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelector('#btnClear').addEventListener('click', clear_options);
   window.addEventListener('load', restore_options);
 });
-{% endhighlight %}
+```
 
 当用户填写完信息后，点击保存。save_options函数会从网页中找到相应的元素，
 取出其相应的值，并将它保存在localStorage中。localStorage是html5中的新特性，
@@ -318,7 +318,7 @@ localStorage以key/value的方式存储在浏览器中，没有时间限制。�
 
 最后是背景页的js脚本，如下：
 
-{% highlight javascript %}
+```javascript
 //localStorage只初始化一次
 if(!localStorage["count"])	//init only once
 	localStorage["count"] = 0;  //the total number of urls
@@ -374,7 +374,7 @@ function openOptions(){
 }
 //点击图标时，调用openOptions函数
 chrome.pageAction.onClicked.addListener(openOptions);
-{% endhighlight %}
+```
 
 背景页会监听两个事件。
 

@@ -30,110 +30,110 @@ vector：一个有着N个(或更多)连续存储的元素的数组。
 常用成员函数：
 
 * vector构造函数
-{% highlight cpp %}
+```cpp
 vector<int> v1;	//int可换成其它数据类型，包括自定义的结构体和类
 vector<int> v2(v1);	//用v1初始化v2
 vector<int> v1(7, 10);	//v1中有7个元素，都是10
 vector<int> v1(7);	//v1中有7个元素，都是默认值0
 vector<int> v2(v1.begin(), v1.end());	//使用迭代器初始化
-{% endhighlight %}
+```
 
 * assign：给一个vector对象赋值
-{% highlight cpp %}
+```cpp
 v1.assign(7, 10);	//v1中有7个元素，都是10
 v2.assign(v1.begin(), v1.end());	//将v1中的值赋给v2
-{% endhighlight %}
+```
 
 * at：返回vector中指定位置的元素
-{% highlight cpp %}
+```cpp
 v1.at(7);	//与v1[7]等价，但使用at更安全，因为当下标越界时会抛出异常
-{% endhighlight %}
+```
 
 * back：返回vector中最后一个元素的引用
-{% highlight cpp %}
+```cpp
 v1.back();	//返回v1中最后一个元素
-{% endhighlight %}
+```
 
 * begin：返回指向vector第一个元素的迭代器
-{% highlight cpp %}
+```cpp
 vector<int>::iterator it = v1.begin();	//迭代器it指向v1的第一个元素
 cout<<*it<<endl;	//打印第一个元素
-{% endhighlight %}
+```
 
 * capacity：返回vector能存储的元素数量(注意与size的差别)
-{% highlight cpp %}
+```cpp
 vector<int> v1(10);
 cout<<v1.capacity()<<endl;	//输出v1的容量10
-{% endhighlight %}
+```
 
 * clear：移除vector中所有的元素
-{% highlight cpp %}
+```cpp
 vector<int> v1(7, 1);	//v1中有7个1
 v1.clear();	//清除v1中元素，此时v1的capacity为7，size为0
-{% endhighlight %}
+```
 
 * empty：如果vector中没有元素，返回true
-{% highlight cpp %}
+```cpp
 if(!v1.empty()) cout<<v1.back();	//如果v1不为空，打印v1的最后一个元素
-{% endhighlight %}
+```
 
 * end：返回指向vector最后元素的后一个位置的迭代器
-{% highlight cpp %}
+```cpp
 vector<int>::iterator it;
 for(it=v1.begin(); it!=v1.end(); ++it)	//将v1中的元素都打印出来
 	cout<<*it<<endl;
-{% endhighlight %}
+```
 
 * erase：从vector中移除元素
-{% highlight cpp %}
+```cpp
 vector<int>::iterator bit = v1.begin();
 v1.erase(bit);	//移除v1中的第一个元素
 v1.erase(v1.begin(), v1.end());	//移除v1中的所有元素
-{% endhighlight %}
+```
 
 * front：返回vector中第一个元素的引用
-{% highlight cpp %}
+```cpp
 v1.front();	//返回v1中的第一个元素
-{% endhighlight %}
+```
 
 * insert：往vector中插入元素
-{% highlight cpp %}
+```cpp
 vector<int> v1(5, 1);	//v1: 1,1,1,1,1
 vector<int> v2(3, 7);	//v2: 7,7,7
 v1.insert(v1.begin(), 100);//往v1的第一个位置插入100，100,1,1,1,1,1
 v1.insert(v1.begin(), 4, 100);//插入4个100, 100,100,100,100,1,1,1,1,1
 v1.insert(v1.end(), v2.begin(), v2.end());//1,1,1,1,1,7,7,7
-{% endhighlight %}
+```
 
 * max_size：返回vector中能存储元素的最大数目(注意与capacity和size的区别)
-{% highlight cpp %}
+```cpp
 vector<int> v1(700);
 v1.max_size();	//我的计算机返回的是：1073741823
-{% endhighlight %}
+```
 
 * pop_back：移除vector中的最后一个元素
-{% highlight cpp %}
+```cpp
 v1.pop_back();	//移除v1的最后一个元素
-{% endhighlight %}
+```
 
 * push_back：向vector的尾部追加一个元素
-{% highlight cpp %}
+```cpp
 vector<int> v1(5, 1);	//v1: 1,1,1,1,1
 v1.push_back(7);	//v1: 1,1,1,1,1,7
-{% endhighlight %}
+```
 
 * size：返回vector中的元素数量
-{% highlight cpp %}
+```cpp
 vector<int> v1(5, 1);	//capacity: 5, size: 5
 v1.clear();
 cout<<v1.capacity()<<" "<<v1.size(); //capacity: 5, size: 0
-{% endhighlight %}
+```
 
 * swap：交换两个vector的内容
-{% highlight cpp %}
+```cpp
 vector<int> v1, v2;
 v1.push_back(111);	//v1: 111
 v2.push_back(222);	//v2: 222
 v1.swap(v2);	//v1: 222, v2: 111
-{% endhighlight %}
+```
 

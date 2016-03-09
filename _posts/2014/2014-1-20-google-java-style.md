@@ -69,11 +69,13 @@ title:  Google Java编程风格指南
 
 例如：
 
-	String unitAbbrev = "μs";                                 | 赞，即使没有注释也非常清晰
-	String unitAbbrev = "\u03bcs"; // "μs"                    | 允许，但没有理由要这样做
-	String unitAbbrev = "\u03bcs"; // Greek letter mu, "s"    | 允许，但这样做显得笨拙还容易出错
-	String unitAbbrev = "\u03bcs";                            | 很糟，读者根本看不出这是什么
-	return '\ufeff' + content; // byte order mark             | Good，对于非打印字符，使用转义，并在必要时写上注释
+```java
+String unitAbbrev = "μs";                                 | 赞，即使没有注释也非常清晰
+String unitAbbrev = "\u03bcs"; // "μs"                    | 允许，但没有理由要这样做
+String unitAbbrev = "\u03bcs"; // Greek letter mu, "s"    | 允许，但这样做显得笨拙还容易出错
+String unitAbbrev = "\u03bcs";                            | 很糟，读者根本看不出这是什么
+return '\ufeff' + content; // byte order mark             | Good，对于非打印字符，使用转义，并在必要时写上注释
+```
 
 >> Tip: 永远不要由于害怕某些程序可能无法正确处理非ASCII字符而让你的代码可读性变差。当程序无法正确处理非ASCII字符时，它自然无法正确运行，
 你就会去fix这些问题的了。(言下之意就是大胆去用非ASCII字符，如果真的有需要的话)
@@ -182,9 +184,9 @@ return new MyClass() {
 
 示例：
 
-{% highlight java %}
+```java
 void doNothing() {}
-{% endhighlight %}
+```
 
 ### 4.2 块缩进：2个空格
 
@@ -272,13 +274,13 @@ void doNothing() {}
 
 以下示例先展示未对齐的代码，然后是对齐的代码：
 
-{% highlight java %}
+```java
 private int x; // this is fine
 private Color color; // this too
 
 private int   x;      // permitted, but future edits
 private Color color;  // may leave it unaligned
-{% endhighlight %}
+```
 
 >> Tip：对齐可增加代码可读性，但它为日后的维护带来问题。考虑未来某个时候，我们需要修改一堆对齐的代码中的一行。
 这可能导致原本很漂亮的对齐代码变得错位。很可能它会提示你调整周围代码的空白来使这一堆代码重新水平对齐(比如程序员想保持这种水平对齐的风格)，
@@ -297,9 +299,9 @@ private Color color;  // may leave it unaligned
 
 没有方法和文档的枚举类可写成数组初始化的格式：
 
-{% highlight java %}
+```java
 private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }
-{% endhighlight %}
+```
 
 由于枚举类也是一个类，因此所有适用于其它类的格式规则也适用于枚举类。
 
@@ -320,7 +322,7 @@ private enum Suit { CLUBS, HEARTS, SPADES, DIAMONDS }
 
 数组初始化可以写成块状结构，比如，下面的写法都是OK的：
 
-{% highlight java %}
+```java
 new int[] {
   0, 1, 2, 3 
 }
@@ -337,9 +339,8 @@ new int[] {
   2, 3
 }
 
-new int[]
-    {0, 1, 2, 3}
-{% endhighlight %}
+new int[]{0, 1, 2, 3}
+```
 
 ##### 4.8.3.2 非C风格的数组声明
 
@@ -360,7 +361,7 @@ new int[]
 在一个switch块内，每个语句组要么通过`break, continue, return`或抛出异常来终止，要么通过一条注释来说明程序将继续执行到下一个语句组，
 任何能表达这个意思的注释都是OK的(典型的是用`// fall through`)。这个特殊的注释并不需要在最后一个语句组(一般是`default`)中出现。示例：
 
-{% highlight java %}
+```java
 switch (input) {
   case 1:
   case 2:
@@ -372,7 +373,7 @@ switch (input) {
   default:
     handleLargeNumber(input);
 }
-{% endhighlight %}
+```
 
 ##### 4.8.4.3 default的情况要写出来
 
@@ -382,23 +383,23 @@ switch (input) {
 
 注解紧跟在文档块后面，应用于类、方法和构造函数，一个注解独占一行。这些换行不属于自动换行(第4.5节，自动换行)，因此缩进级别不变。例如：
 
-{% highlight java %}
+```java
 @Override
 @Nullable
 public String getNameIfPresent() { ... }
-{% endhighlight %}
+```
 
 **例外**：单个的注解可以和签名的第一行出现在同一行。例如：
 
-{% highlight java %}
+```java
 @Override public int hashCode() { ... }
-{% endhighlight %}
+```
 
 应用于字段的注解紧随文档块出现，应用于字段的多个注解允许与字段出现在同一行。例如：
 
-{% highlight java %}
+```java
 @Partial @Mock DataLoader loader;
-{% endhighlight %}
+```
 
 参数和局部变量注解没有特定规则。
 
@@ -409,12 +410,12 @@ public String getNameIfPresent() { ... }
 块注释与其周围的代码在同一缩进级别。它们可以是`/* ... */`风格，也可以是`// ...`风格。对于多行的`/* ... */`注释，后续行必须从`*`开始，
 并且与前一行的`*`对齐。以下示例注释都是OK的。
 
-{% highlight java %}
+```java
 /*
  * This is          // And so           /* Or you can
  * okay.            // is this.          * even do this. */
  */
-{% endhighlight %}
+```
 
 注释不要封闭在由星号或其它字符绘制的框架里。
 
@@ -424,9 +425,9 @@ public String getNameIfPresent() { ... }
 
 类和成员的modifiers如果存在，则按Java语言规范中推荐的顺序出现。
 
-{% highlight java %}
+```java
 public protected private abstract static final transient volatile synchronized native strictfp
-{% endhighlight %}
+```
 
 ## <a id="Naming">命名约定</a>
 
@@ -467,7 +468,7 @@ public protected private abstract static final transient volatile synchronized n
 考虑它是否真的感觉像是一个常量。例如，如果任何一个该实例的观测状态是可变的，则它几乎肯定不会是一个常量。
 只是永远不`打算`改变对象一般是不够的，它要真的一直不变才能将它示为常量。
 
-{% highlight java %}
+```java
 // Constants
 static final int NUMBER = 5;
 static final ImmutableList<String> NAMES = ImmutableList.of("Ed", "Ann");
@@ -482,7 +483,7 @@ static final Set<String> mutableCollection = new HashSet<String>();
 static final ImmutableSet<SomeMutableType> mutableElements = ImmutableSet.of(mutable);
 static final Logger logger = Logger.getLogger(MyClass.getName());
 static final String[] nonEmptyArray = {"these", "can", "change"};
-{% endhighlight %}
+```
 
 这些名字通常是名词或名词短语。
 
@@ -556,7 +557,7 @@ static final String[] nonEmptyArray = {"these", "can", "change"};
 
 如果它确实是不需要在catch块中做任何响应，需要做注释加以说明(如下面的例子)。
 
-{% highlight java %}
+```java
 try {
   int i = Integer.parseInt(response);
   return handleNumericResponse(i);
@@ -564,29 +565,29 @@ try {
   // it's not numeric; that's fine, just continue
 }
 return handleTextResponse(response);
-{% endhighlight %}
+```
 
 **例外**：在测试中，如果一个捕获的异常被命名为`expected`，则它可以被不加注释地忽略。下面是一种非常常见的情形，用以确保所测试的方法会抛出一个期望中的异常，
 因此在这里就没有必要加注释。
 
-{% highlight java %}
+```java
 try {
   emptyStack.pop();
   fail();
 } catch (NoSuchElementException expected) {
 }
-{% endhighlight %}
+```
 
 ### 6.3 静态成员：使用类进行调用
 
 使用类名调用静态的类成员，而不是具体某个对象或表达式。
 
-{% highlight java %}
+```java
 Foo aFoo = ...;
 Foo.aStaticMethod(); // good
 aFoo.aStaticMethod(); // bad
 somethingThatYieldsAFoo().aStaticMethod(); // very bad
-{% endhighlight %}
+```
 
 ### 6.4 Finalizers: 禁用
 
@@ -603,19 +604,19 @@ somethingThatYieldsAFoo().aStaticMethod(); // very bad
 
 Javadoc块的基本格式如下所示：
 
-{% highlight java %}
+```java
 /**
  * Multiple lines of Javadoc text are written here,
  * wrapped normally...
  */
 public int method(String p1) { ... }
-{% endhighlight %}
+```
 
 或者是以下单行形式：
 
-{% highlight java %}
+```java
 /** An especially short bit of Javadoc. */
-{% endhighlight %}
+```
 
 基本格式总是OK的。当整个Javadoc块能容纳于一行时(且没有Javadoc标记@XXX)，可以使用单行形式。
 

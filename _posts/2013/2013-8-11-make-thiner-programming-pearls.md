@@ -343,7 +343,7 @@ pointnum中的元素是一个4B的int，
 
 **插入排序**
 
-{% highlight cpp %}
+```cpp
 // 版本1
 void InsertSort(int a[], int n) {
     for(int i=1; i<n; ++i)
@@ -360,7 +360,7 @@ void InsertSort1(int a[], int n) {
         a[j] = t;
     }
 }
-{% endhighlight %}
+```
 
 **快速排序**
 
@@ -378,7 +378,7 @@ void InsertSort1(int a[], int n) {
 则慢指针slow向前走一步，然后交换快慢指针指向的元素。一次划分结束后，
 再递归对左右两侧的元素进行快排。代码如下：
 
-{% highlight cpp %}
+```cpp
 // 数组快排
 void QSort(int a[], int head, int end) {
     if(a==NULL || head==end) return;
@@ -393,11 +393,11 @@ void QSort(int a[], int head, int end) {
     QSort(a, head, slow);
     QSort(a, slow+1, end);
 }
-{% endhighlight %}
+```
 
 排序数组a只需要调用QSort(a, 0, n)即可。该思路同样可以很容易地在链表上实现：
 
-{% highlight cpp %}
+```cpp
 // 单链表快排
 void qsort(Node *head, Node *end){
     if(head==NULL || head==end) return;
@@ -414,7 +414,7 @@ void qsort(Node *head, Node *end){
     qsort(head, slow);
     qsort(slow->next, end);
 }
-{% endhighlight %}
+```
 
 排序头指针为head的单链表只需调用qsort(head, NULL)即可。
 
@@ -435,7 +435,7 @@ void qsort(Node *head, Node *end){
 最终会停在分界线上，分界线左边都是小于等于它的元素，右边都是大于它的元素。
 这样就避免了最后还要交换一次pivot的操作，代码也变得美观许多。
 
-{% highlight cpp %}
+```cpp
 int partition(int a[], int low, int high){
     int pivot = a[low], i=low, j=high;
     while(i < j){
@@ -453,12 +453,12 @@ void quicksort(int a[], int first, int last){
         quicksort(a, k+1, last);
     }
 }
-{% endhighlight %}
+```
 
 当然，如果对于partition函数，你如果觉得大循环内的两个swap还是做了些无用功的话，
 也可以把pivot的赋值放到最后一步，而不是在这个过程中swap来swap去的。代码如下：
 
-{% highlight cpp %}
+```cpp
 int partition(int a[], int low, int high){
     int pivot = a[low], i=low, j=high;
     while(i<j){
@@ -470,7 +470,7 @@ int partition(int a[], int low, int high){
     a[i] = pivot;
     return i;
 }
-{% endhighlight %}
+```
 
 如果数组基本有序，那随机选择pivot(而不像上面那样选择第一个做为pivot)
 会得到更好的性能。在partition函数里，我们只需要在数组中随机选一个元素，
@@ -506,7 +506,7 @@ Sorting and Searching》；Robert Sedgewick的《Algorithms》；
 比如m=3, n=5，那么一种可能输出是0，2，3(要求有序)。实现1来自Knuth的TAOCP，
 时间复杂度O(n)：
 
-{% highlight cpp %}
+```cpp
 void GenKnuth(int m, int n) {
 	for(int i=0; i<n; ++i) {
 		if((bigrand()%(n-i)) < m) {
@@ -515,13 +515,13 @@ void GenKnuth(int m, int n) {
 		}
 	}
 }
-{% endhighlight %}
+```
 
 其中，bigrand()的作用是返回一个很大的随机整数。
 
 实现2：在一个初始为空的集合里面插入随机整数，直到个数足够。代码如下：
 
-{% highlight cpp %}
+```cpp
 void GenSets(int m, int n) {
 	set<int> s;
 	while(s.size() < m)
@@ -530,12 +530,12 @@ void GenSets(int m, int n) {
 	for(i=s.begin(); i!=s.end(); ++i)
 		cout<<*i<<endl;
 }
-{% endhighlight %}
+```
 
 实现3：把包含整数0～n-1的数组顺序打乱，然后把前m个元素排序输出。
 该方法的性能通常不如Knuth的算法。代码如下：
 
-{% highlight cpp %}
+```cpp
 void GenShuf(int m, int n) {
 	int x[n];
 	for(int i=0; i<n; ++i)
@@ -548,7 +548,7 @@ void GenShuf(int m, int n) {
 	for(int i=0; i<m; ++i)
 		cout<<x[i]<<endl;
 }
-{% endhighlight %}
+```
 
 深入阅读：Don Knuth的《The Art of Computer Programming, 
 Volume 2: Seminumerical Algorithms》
@@ -560,7 +560,7 @@ Volume 2: Seminumerical Algorithms》
 
 其中，二叉搜索树应该熟练掌握，以下是一种实现：
 
-{% highlight cpp %}
+```cpp
 struct Node {
     int data;
     Node *lchild, *rchild, *parent;
@@ -716,13 +716,13 @@ void BST::Remove(Node* z) {
             s->lchild->parent = s->parent;
     }
 }
-{% endhighlight %}
+```
 
 ## <a id="Heap">堆</a>
 
 本章主要介绍堆，下面是关于堆的一些主要操作：
 
-{% highlight cpp %}
+```cpp
 // 最大堆实现, 数组下标从1开始，a[0]不使用。
 
 // 交换两数
@@ -776,13 +776,13 @@ void HeapSort(int a[], int n) {
         ShiftDown(a, i-1, 1);
     }
 }
-{% endhighlight %}
+```
 
 ## <a id="String">字符串</a>
 
 程序1：循环输入并将每个单词插入集合S(忽略重复单词)，然后排序输出。
 
-{% highlight cpp %}
+```cpp
 int main(void) {
 	set<string> s;
 	set<string>::iterator j;
@@ -793,11 +793,11 @@ int main(void) {
 		cout<<*j<<endl;
 	return 0;
 }
-{% endhighlight %}
+```
 
 程序2：单词计数
 
-{% highlight cpp %}
+```cpp
 int main(void) {
 	map<string, int> m;
 	map<string, int>::iterator j;
@@ -808,11 +808,11 @@ int main(void) {
 		cout<<j->first<<" "<<j->second<<endl;
 	return 0;
 }
-{% endhighlight %}
+```
 
 程序3：建立自己的哈希表(散列表)，以下是一种实现：
 
-{% highlight cpp %}
+```cpp
 class Hash {
 public:
     Hash(): seed_(131), size_(0) {
@@ -861,7 +861,7 @@ private:
     Node node_[kNodeSize];
     Node* head_[kHashSize];
 };
-{% endhighlight %}
+```
 
 **后缀数组**
 
@@ -892,11 +892,11 @@ private:
 	
 其中，比较函数cmp如下：
 
-{% highlight cpp %}
+```cpp
 inline bool cmp(char* p, char*q) {
     return strcmp(p, q) < 0;
 }
-{% endhighlight %}
+```
 
 这时，我们再输出pc[i]，会得到排序后的结果：
 

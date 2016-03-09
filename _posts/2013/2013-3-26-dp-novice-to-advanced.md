@@ -154,7 +154,7 @@ OK，分析到这，我觉得状态转移方程已经很明显了，如果我们
 
 Talk is cheap, show me the code:
 
-{% highlight cpp %}
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -178,7 +178,7 @@ int main(){
     cout<<lis(A, 6)<<endl;
     return 0;
 }
-{% endhighlight %}
+```
 
 该算法的时间复杂度是O(n^2 )，并不是最优的解法。
 还有一种很巧妙的算法可以将时间复杂度降到O(nlogn)，网上已经有各种文章介绍它，

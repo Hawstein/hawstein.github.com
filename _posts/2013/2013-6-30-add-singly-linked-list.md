@@ -69,7 +69,7 @@ OK，我们把这个问题具体化一下吧：(这里就不再考虑从低到�
 
 代码如下：
 
-{% highlight cpp %}
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -198,5 +198,5 @@ int main(){
         cout<<(int)ans1->data;
     return 0;
 }
-{% endhighlight %}
+```
 

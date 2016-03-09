@@ -116,7 +116,7 @@ the + operator.
 中定义的一个值)。与乘法相同，我们都先对a和b取绝对值，然后不断地从a中减去b，
 相应的商数加1。直到a已经不够给b减了，再根据a和b的符号决定是否给商数加上负号即可。
 
-{% highlight cpp %}
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -174,7 +174,7 @@ int main(){
     }
     return 0;
 }
-{% endhighlight %}
+```
 
 ## 题目10.5
 
@@ -217,7 +217,7 @@ passes the most number of points.
 CTCI书上给出了一种解决方案，就是重写哈希编码方式hashCode和Object类的
 equals方法。
 
-{% highlight java %}
+```java
 @Override  
 public int hashCode()  {
 	int sl = (int)(slope * 1000);
@@ -234,14 +234,14 @@ public boolean equals(Object o) {
 	}
 	return false;
 }      
-{% endhighlight %}
+```
 
 c++的STL标准里没有hash map，于是我用map来模拟，并写一个hashcode
 函数将一条直线转换为一个整型码。
 这样当两直线的斜率和截距相差都小于epsilon时，都将被映射到一个整数，
 从而认为它们是一条直线。
 
-{% highlight cpp %}
+```cpp
 #include <iostream>
 #include <map>
 #include <cmath>
@@ -320,7 +320,7 @@ int main(){
     l.print();
     return 0;
 }
-{% endhighlight %}
+```
 
 
 ## 题目10.7
@@ -366,7 +366,7 @@ factors are 3, 5, and 7.
 
 代码如下：
 
-{% highlight cpp %}
+```cpp
 #include <iostream>
 #include <queue>
 using namespace std;
@@ -411,7 +411,7 @@ int main(){
         cout<<get_num(i)<<endl;
     return 0;
 }
-{% endhighlight %}
+```
 	
 全书题解目录：
 

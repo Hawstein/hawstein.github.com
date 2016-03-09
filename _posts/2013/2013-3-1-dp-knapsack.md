@@ -56,14 +56,14 @@ d(i-1,j-V[i-1]) + W[i-1] }。注意讨论前i个宝石装入背包的时候，
 其实是在考查第i-1个宝石装不装入背包（因为宝石是从0开始编号的）。至此，
 状态和状态转移方程都已经有了。接下来，直接上代码。
 
-{% highlight cpp %}
+```cpp
 for(int i=0; i<=n; ++i){
     for(int j=0; j<=C; ++j){
         d[i][j] = i==0 ? 0 : d[i-1][j];
         if(i>0 && j>=V[i-1])  d[i][j] >?= d[i-1][j-V[i-1]]+W[i-1];
     }
  }
-{% endhighlight %}
+```
 
 i=0时，d(i, j)为什么为0呢？因为前0个宝石装入背包就是没东西装入，所以最大价值为0。
 if语句里，j>=V[i-1]说明只有当背包剩余体积j大于等于i-1号宝石的体积时，
@@ -71,7 +71,7 @@ if语句里，j>=V[i-1]说明只有当背包剩余体积j大于等于i-1号宝�
 前0个宝石装入背包的情况是边界，直接等于0，只有i>0才有必要讨论，
 我是装呢还是不装呢。简单吧，核心算法就这么一丁点，接下来上完整代码knapsack.cpp。
 
-{% highlight cpp %}
+```cpp
 /**0-1 knapsack d(i, j)表示前i个物品装到剩余容量为j的背包中的最大重量**/
 #include<cstdio>
 using namespace std;
@@ -100,7 +100,7 @@ int main(){
 	fclose(stdout);
 	return 0;
 }
-{% endhighlight %}
+```
 
 其中freopen函数将标准输入流重定向到文件data.in，
 这比运行程序时一点点手输要方便许多，将标准输出流重定向到data.out。
@@ -142,7 +142,7 @@ data.out为算法输出结果，对应该测试用例，输出结果如下：
 （不知不觉中我们就用了不完全归纳法哈），当d(i, j)>d(i-1, j)时，x(i-1)=1;OK，
 上代码：
 
-{% highlight cpp %}
+```cpp
 //输出打印方案
 int j = C;
 for(int i=n; i>0; --i){
@@ -152,11 +152,11 @@ for(int i=n; i>0; --i){
     }
 }
 for(int i=0; i<n; ++i)  printf("%d ", x[i]);
-{% endhighlight %}
+```
 
 好了，加入这部分内容，knapsack.cpp变为如下：
 
-{% highlight cpp %}
+```cpp
 /**0-1 knapsack d(i, j)表示前i个物品装到剩余容量为j的背包中的最大重量**/
 #include<cstdio>
 using namespace std;
@@ -197,7 +197,7 @@ int main(){
 	fclose(stdout);
 	return 0;
 }
-{% endhighlight %}
+```
 
 data.out输出结果变为：
 
@@ -217,7 +217,7 @@ data.out输出结果变为：
 O(nC)，这个是可以进一步优化的。首先，我们先把数组V和W去掉，
 因为它们没有保存的必要，改为一边读入一边计算：
 
-{% highlight cpp %}
+```cpp
 int V = 0, W = 0;
 for(int i=0; i<=n; ++i){
     if(i>0) scanf("%d %d", &V,&W);
@@ -226,7 +226,7 @@ for(int i=0; i<=n; ++i){
         if(j>=V && i>0) d[i][j] >?= d[i-1][j-V]+W;
     }
 }
-{% endhighlight %}
+```
 
 好了，接下来让我们继续压榨空间复杂度。保存状态值我们开了一个二维数组d，
 在看过把一维数组V和W变为一个变量后，我们是不是要思考一下，
@@ -248,7 +248,7 @@ d(i-1, j)变为d(j)。当我们要计算d(i, j)时，只需要比较d(j)和d(j-V
 d(i-1, j-1-V)+W }，它不会再用到d(i-1,j)的值！所以，
 即使该位置的值被更新了也无所谓。好，上代码：
 
-{% highlight cpp %}
+```cpp
 memset(d, 0, sizeof(d));
 for(int i=0; i<=n; ++i){
     if(i>0) scanf("%d %d", &V,&W);
@@ -256,11 +256,11 @@ for(int i=0; i<=n; ++i){
         if(j>=V && i>0) d[j] >?= d[j-V]+W;
     }
 }
-{% endhighlight %}
+```
 
 优化后的完整代码如下，此时空间复杂度仅为`O(C)`。
 
-{% highlight cpp %}
+```cpp
 /**0-1 knapsack d(i, j)表示前i个物品装到剩余容量为j的背包中的最大重量**/
 #include<cstdio>
 #include<cstdlib>
@@ -288,6 +288,6 @@ int main(){
 	fclose(stdout);
 	return 0;
 }
-{% endhighlight %}
+```
 
 OK，背包问题暂时先讲这么多，以后接着讲。
