@@ -516,7 +516,7 @@ Scala 的类型推导，尤其是左侧类型推导以及闭包推导，可以�
 
 ### <a name='return'>Return 语句</a>
 
-__闭包中避免使用 return__。`return` 会被编译器转成 ``scala.runtime.NonLocalReturnControl`` 异常的 ``try/catch`` 语句，这可能会导致意外行为。请看下面的例子：
+__闭包中避免使用 return__。`return` 会被编译器转成 `scala.runtime.NonLocalReturnControl` 异常的 `try/catch` 语句，这可能会导致意外行为。请看下面的例子：
 
 ```scala
 def receive(rpc: WebSocketRPC): Option[Response] = {
