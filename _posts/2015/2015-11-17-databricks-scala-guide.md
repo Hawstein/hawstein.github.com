@@ -518,15 +518,15 @@ Scala 的类型推导，尤其是左侧类型推导以及闭包推导，可以�
 
 __闭包中避免使用 return__。`return` 会被编译器转成 ``scala.runtime.NonLocalReturnControl`` 异常的 ``try/catch`` 语句，这可能会导致意外行为。请看下面的例子：
 
-  ```scala
-  def receive(rpc: WebSocketRPC): Option[Response] = {
-    tableFut.onComplete { table =>
-      if (table.isFailure) {
-        return None // Do not do that!
-      } else { ... }
-    }
+```scala
+def receive(rpc: WebSocketRPC): Option[Response] = {
+  tableFut.onComplete { table =>
+    if (table.isFailure) {
+      return None // Do not do that!
+    } else { ... }
   }
-  ```
+}
+```
 
 `.onComplete` 方法接收一个匿名闭包并把它传递到一个不同的线程中。这个闭包最终会抛出一个 `NonLocalReturnControl` 异常，并在 __一个不同的线程中__被捕获，而这里执行的方法却没有任何影响。
 
