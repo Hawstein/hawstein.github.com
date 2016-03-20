@@ -753,15 +753,15 @@ __优先考虑使用 `java.util.concurrent.ConcurrentHashMap` 而非 `scala.coll
 
 注意，对于 case 1 和 case 2，不要让集合的视图或迭代器从保护区域逃逸。这可能会以一种不明显的方式发生，比如：返回了 `Map.keySet` 或 `Map.values`。如果需要传递集合的视图或值，生成一份数据拷贝再传递。
 
-  ```scala
-  val map = java.util.Collections.synchronizedMap(new java.util.HashMap[String, String])
+```scala
+val map = java.util.Collections.synchronizedMap(new java.util.HashMap[String, String])
 
-  // This is broken!
-  def values: Iterable[String] = map.values
+// This is broken!
+def values: Iterable[String] = map.values
 
-  // Instead, copy the elements
-  def values: Iterable[String] = map.synchronized { Seq(map.values: _*) }
-  ```
+// Instead, copy the elements
+def values: Iterable[String] = map.synchronized { Seq(map.values: _*) }
+```
 
 ### <a name='concurrency-sync-vs-atomic'>显式同步 vs 原子变量 vs @volatile</a>
 
@@ -771,26 +771,26 @@ __优先考虑使用 `java.util.concurrent.ConcurrentHashMap` 而非 `scala.coll
 
 优先考虑使用原子变量而非显式同步的情况：（1）一个对象的所有临界区更新都被限制在单个变量里并且预期会有竞争情况出现。原子变量是无锁的并且允许更为有效的竞争。（2）同步被明确地表示为 `getAndSet` 操作。例如：
 
-  ```scala
-  // good: 明确又有效地表达了下面的并发代码只执行一次
-  val initialized = new AtomicBoolean(false)
+```scala
+// good: 明确又有效地表达了下面的并发代码只执行一次
+val initialized = new AtomicBoolean(false)
+...
+if (!initialized.getAndSet(true)) {
   ...
-  if (!initialized.getAndSet(true)) {
-    ...
-  }
+}
 
-  // poor: 下面的同步就没那么明晰，而且会出现不必要的同步
-  val initialized = false
+// poor: 下面的同步就没那么明晰，而且会出现不必要的同步
+val initialized = false
+...
+var wasInitialized = false
+synchronized {
+  wasInitialized = initialized
+  initialized = true
+}
+if (!wasInitialized) {
   ...
-  var wasInitialized = false
-  synchronized {
-    wasInitialized = initialized
-    initialized = true
-  }
-  if (!wasInitialized) {
-    ...
-  }
-  ```
+}
+```
 
 ### <a name='concurrency-private-this'>私有字段</a>
 
