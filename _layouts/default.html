@@ -23,9 +23,11 @@
     <link rel="stylesheet" href="/assets/css/syntax.css" type="text/css" media="screen" charset="utf-8" />
 
     <link rel="shortcut icon" href="/assets/ico/favicon.ico">
-      <!-- Fonts -->
-      <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
-      </head>
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+    <!-- GrowingIO JS SDK-->
+    {% include growingio.js %}
+  </head>
 
       <body>
 	{% include header.html %}
@@ -36,6 +38,5 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="/assets/js/app.js"></script>
 	{% include google-analytics.js %}
-        {% include growingio.js %}
       </body>
 </html>
