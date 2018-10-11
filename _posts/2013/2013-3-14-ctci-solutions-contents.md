@@ -23,73 +23,42 @@ title: Cracking the coding interview--问题与解答
 **Chapter 1 | Arrays and Strings**
 
 1.1
-[Implement an algorithm to determine if a string has all unique 
-characters. What if you can not use additional data structures?
-](/posts/1.1.html)
+[Implement an algorithm to determine if a string has all unique characters. What if you can not use additional data structures?](/posts/1.1.html)
 
 1.2
-[Write code to reverse a C-Style String. (C-String means that “abcd” 
-is represented as five characters, including the null character.)
-](/posts/1.2.html)
+[Write code to reverse a C-Style String. (C-String means that “abcd” is represented as five characters, including the null character.)](/posts/1.2.html)
 
 1.3
-[Design an algorithm and write code to remove the duplicate characters in a string
-without using any additional buffer. NOTE: One or two additional variables are fine.
-An extra copy of the array is not.
-FOLLOW UP
-Write the test cases for this method.
-](/posts/1.3.html)
+[Design an algorithm and write code to remove the duplicate characters in a string without using any additional buffer. NOTE: One or two additional variables are fine. An extra copy of the array is not.FOLLOW UP Write the test cases for this method.](/posts/1.3.html)
 
 1.4
-[Write a method to decide if two strings are anagrams or not.
-](/posts/1.4.html)
+[Write a method to decide if two strings are anagrams or not.](/posts/1.4.html)
 
 1.5
-[Write a method to replace all spaces in a string with ‘%20’.
-](/posts/1.5.html)
+[Write a method to replace all spaces in a string with ‘%20’.](/posts/1.5.html)
 
 1.6
-[Given an image represented by an NxN matrix, where each pixel in the image is 4
-bytes, write a method to rotate the image by 90 degrees. Can you do this in place?
-](/posts/1.6.html)
+[Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes, write a method to rotate the image by 90 degrees. Can you do this in place?](/posts/1.6.html)
 
 1.7
-[Write an algorithm such that if an element in an MxN matrix is 0, its entire row and
-column is set to 0.
-](/posts/1.7.html)
+[Write an algorithm such that if an element in an MxN matrix is 0, its entire row and column is set to 0.](/posts/1.7.html)
 
 1.8
-[Assume you have a method isSubstring which checks if one word is a substring of
-another. Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using
-only one call to isSubstring (i.e., “waterbottle” is a rotation of “erbottlewat”).
-](/posts/1.8.html)
+[Assume you have a method isSubstring which checks if one word is a substring of another. Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using only one call to isSubstring (i.e., “waterbottle” is a rotation of “erbottlewat”).](/posts/1.8.html)
 
 **Chapter 2 | Linked Lists**
 
 2.1
-[Write code to remove duplicates from an unsorted linked list.
-FOLLOW UP
-How would you solve this problem if a temporary buffer is not allowed?
-](/posts/2.1.html)
+[Write code to remove duplicates from an unsorted linked list. FOLLOW UP How would you solve this problem if a temporary buffer is not allowed?](/posts/2.1.html)
 
 2.2
-[Implement an algorithm to find the nth to last element of a singly linked list.
-](/posts/2.2.html)
+[Implement an algorithm to find the nth to last element of a singly linked list.](/posts/2.2.html)
 
 2.3
-[Implement an algorithm to delete a node in the middle of a single linked list, given
-only access to that node.
-EXAMPLE
-Input: the node ‘c’ from the linked list a->b->c->d->e
-Result: nothing is returned, but the new linked list looks like a->b->d->e
-](/posts/2.3.html)
+[Implement an algorithm to delete a node in the middle of a single linked list, given only access to that node. EXAMPLE Input: the node ‘c’ from the linked list a->b->c->d->e Result: nothing is returned, but the new linked list looks like a->b->d->e](/posts/2.3.html)
 
 2.4
-[You have two numbers represented by a linked list, where each node contains a single 
-digit. The digits are stored in reverse order, such that the 1’s digit is at the head of
-the list. Write a function that adds the two numbers and returns the sum as a linked
-list.
-EXAMPLE
+[You have two numbers represented by a linked list, where each node contains a single digit. The digits are stored in reverse order, such that the 1’s digit is at the head of the list. Write a function that adds the two numbers and returns the sum as a linked list. EXAMPLE
 Input: (3 -> 1 -> 5) + (5 -> 9 -> 2)
 Output: 8 -> 0 -> 8
 ](/posts/2.4.html)
@@ -189,10 +158,7 @@ dreds of nodes. Create an algorithm to decide if T2 is a subtree of T1.
 ](/posts/4.7.html)
 
 4.8
-[You are given a binary tree in which each node contains a value. Design an algorithm
-to print all paths which sum up to that value. Note that it can be any path in the tree
-- it does not have to start at the root.
-](/posts/4.8.html)
+[You are given a binary tree in which each node contains a value. Design an algorithm to print all paths which sum up to that value. Note that it can be any path in the tree - it does not have to start at the root.](/posts/4.8.html)
 
 **Chapter 5 | Bit Manipulation**
 
