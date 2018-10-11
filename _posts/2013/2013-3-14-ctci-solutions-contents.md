@@ -20,7 +20,7 @@ title: Cracking the coding interview--问题与解答
 
 ## 目录
 
-**Chapter 1 | Arrays and Strings**
+### Chapter 1 | Arrays and Strings
 
 1.1
 [Implement an algorithm to determine if a string has all unique characters. What if you can not use additional data structures?](/posts/1.1.html)
@@ -46,7 +46,7 @@ title: Cracking the coding interview--问题与解答
 1.8
 [Assume you have a method isSubstring which checks if one word is a substring of another. Given two strings, s1 and s2, write code to check if s2 is a rotation of s1 using only one call to isSubstring (i.e., “waterbottle” is a rotation of “erbottlewat”).](/posts/1.8.html)
 
-**Chapter 2 | Linked Lists**
+### Chapter 2 | Linked Lists
 
 2.1
 [Write code to remove duplicates from an unsorted linked list. FOLLOW UP How would you solve this problem if a temporary buffer is not allowed?](/posts/2.1.html)
@@ -73,7 +73,7 @@ input: A -> B -> C -> D -> E -> C (the same C as earlier)
 output: C
 ](/posts/2.5.html)
 
-**Chapter 3 | Stacks and Queues**
+### Chapter 3 | Stacks and Queues
 
 3.1
 [Describe how you could use a single array to implement three stacks.
@@ -119,7 +119,7 @@ tions about how the stack is implemented. The following are the only functions t
 should be used to write this program: push | pop | peek | isEmpty.
 ](/posts/3.6.html)
 
-**Chapter 4 | Trees and Graphs**
+### Chapter 4 | Trees and Graphs
 
 4.1
 [Implement a function to check if a tree is balanced. For the purposes of this question,
@@ -160,7 +160,7 @@ dreds of nodes. Create an algorithm to decide if T2 is a subtree of T1.
 4.8
 [You are given a binary tree in which each node contains a value. Design an algorithm to print all paths which sum up to that value. Note that it can be any path in the tree - it does not have to start at the root.](/posts/4.8.html)
 
-**Chapter 5 | Bit Manipulation**
+### Chapter 5 | Bit Manipulation
 
 5.1
 [You are given two 32-bit numbers, N and M, and two bit positions, i and j. Write a
@@ -204,15 +204,15 @@ takes constant time.
 Write code to find the missing integer. Can you do it in O(n) time?
 ](/posts/5.7.html)
 
-**Chapter 6 | Brain Teasers**
+### Chapter 6 | Brain Teasers
 
 [Cracking the coding interview--Q6.1~Q6.6](/posts/brain-teasers.html)
 
-**Chapter 7 | Object Oriented Design**
+### Chapter 7 | Object Oriented Design
 
 XDDDDDD
 
-**Chapter 8 | Recursion**
+### Chapter 8 | Recursion
 
 8.1
 [Write a method to generate the nth Fibonacci number.
@@ -263,7 +263,7 @@ a chess board so that none of them share the same row, column or
 diagonal.
 ](/posts/8.8.html)
 
-**Chapter 9 | Sorting and Searching**
+### Chapter 9 | Sorting and Searching
 
 9.1
 [You are given two sorted arrays, A and B, and A has a large enough 
@@ -319,17 +319,17 @@ Output: The longest tower is length 6 and includes from top to bottom: (56, 90)
 (60,95) (65,100) (68,110) (70,150) (75,190)
 ](/posts/9.7.html)
 
-**Chapter 10 | Mathematical**
+### Chapter 10 | Mathematical
 
 [Cracking the coding interview--Q10.1~Q10.7
 ](/posts/ctci-ch10-math.html)
 
-**Chapter 11 | Testing**
+### Chapter 11 | Testing
 
 [Cracking the coding interview--Q11.1~Q11.6
 ](/posts/ctci-ch11-testing.html)
 
-**Chapter 12 | System Design and Memory Limits**
+### Chapter 12 | System Design and Memory Limits
 
 12.1
 [If you were integrating a feed of end of day stock price 
@@ -379,7 +379,7 @@ detect the duplicate documents?
 It should support efficient range queries. How would you do it?
 ](/posts/12.7.html)
 
-**Chapter 13 | C++**
+### Chapter 13 | C++
 
 13.1
 [Write a method to print the last K lines of an input file using C++.
@@ -423,11 +423,11 @@ structures.
 [Write a smart pointer (smart_ptr) class.
 ](/posts/13.9.html)
 
-**Chapter 14 | Java**
+### Chapter 14 | Java
 
 Pass
 
-**Chapter 15 | Databases**
+### Chapter 15 | Databases
 
 15.1
 [Write a method to find the number of employees in each department.
@@ -454,7 +454,7 @@ to return a list of the honor roll students (top 10%), sorted by
 their grade point average.
 ](/posts/15.5.html)
 
-**Chapter 16 | Low Level**
+### Chapter 16 | Low Level
 
 16.1
 [Explain the following terms: virtual memory, page fault, thrashing.
@@ -471,7 +471,7 @@ array. Minimize the number of calls to malloc and make sure that the
 memory is accessible by the notation arr[i][j].	
 ](/posts/16.10.html)
 
-**Chapter 17 | Networking**
+### Chapter 17 | Networking
 
 17.1
 [Explain what happens, step by step, after you type a URL into a 
@@ -500,7 +500,7 @@ handles reliable delivery (explain ACK mechanism), flow control
 (explain TCP sender’s / receiver’s window) and congestion control.	
 ](/posts/17.5.html)
 
-**Chapter 18 | Threads and Locks**
+### Chapter 18 | Threads and Locks
 
 18.1
 [What’s the difference between a thread and a process?
@@ -529,7 +529,7 @@ Can you design a mechanism to make sure that all the methods will be
 executed in sequence?
 ](/posts/18.5.html)
 
-**Chapter 19 | Moderate**
+### Chapter 19 | Moderate
 
 19.1
 [Write a function to swap a number in place without temporary 
@@ -588,7 +588,7 @@ implement rand7() using rand5()).
 which sum to a specified value.	
 ](/posts/19.11.html)
 
-**Chapter 20 | Hard**
+### Chapter 20 | Hard
 
 20.1
 [Write a function that adds two numbers. You should not use + or any 
