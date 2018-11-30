@@ -20,6 +20,7 @@ title: AlgoCasts 用心做好每一个算法视频
 
 * 2018-09-25：AlgoCasts 正式上线，视频数量：**40**。
 * 2018-10-26：AlgoCasts 上线一个月，视频日更一个月，视频数量：**70**。可以通过[微博](https://weibo.com/hawsteinstudio)，[Twitter](https://twitter.com/hawsteinstudio)，以及微信 `Hawstein-Studio` 关注每日更新。
+* 2018-11-26：AlgoCasts 上线两个月，视频数量：**100**。正式在朋友圈宣传，着手准备录制下一批视频。
 
 ## 前言
 
