@@ -4,8 +4,6 @@ category: AlgoCasts
 title: AlgoCasts 10 月小结
 ---
 
-<hr>
-
 不知不觉，[AlgoCasts](https://algocasts.io) 已经上线一个月了。这一个月做了不少事情，收获满满。
 
 <img width="250px" src="/assets/img/2018/11/6/applaud.jpg" />

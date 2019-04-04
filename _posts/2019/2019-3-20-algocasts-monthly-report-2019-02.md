@@ -4,8 +4,6 @@ category: AlgoCasts
 title: AlgoCasts 2019 年 2 月小结
 ---
 
-## 正文
-
 又到了写小结的日子，这次听的歌单是「Dream pop 颅内云端%梦幻与眩晕的艺术」。
 
 这个月除了做算法视频，主要就做了以下三件事情。

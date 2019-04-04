@@ -4,8 +4,6 @@ category: AlgoCasts
 title: AlgoCasts 11 月小结
 ---
 
-## 正文
-
 一眨眼，一个月又过去了，[AlgoCasts](https://algocasts.io) 又活了一个月，不容易（此处有掌声）。
 
 把 Wunderlist 上 11 月完成的事情一项项过了一遍，感慨良多。整个 11 月最重要的事情就是完成了 Plan 100 剩余视频的录制，这是我设定的一个 milestone，对我来说意义还是挺重大的。毕竟鲁迅先生曾说过，已经完成 100 个视频的录制了，1000 个还会远么？以此自勉。
