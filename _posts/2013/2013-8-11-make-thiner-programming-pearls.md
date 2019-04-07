@@ -1,7 +1,10 @@
 ---
 layout: post
-category: Reading
-title: 把《编程珠玑》读薄
+title: "把《编程珠玑》读薄"
+author: "Hawstein"
+header-style: text
+tags:
+  - Reading
 ---
 
 ## 目录
@@ -96,7 +99,7 @@ title: 把《编程珠玑》读薄
 第二步对所有的单词按照其签名进行排序，这样一来，变位词就会聚集到一起。
 第三步将变位词分组，形成变位词集。示意图如下：
 
-<img src="/assets/img/2013/8/11/anagrams.png" />
+<img src="/img/2013/8/11/anagrams.png" />
 
 ## <a id="DataSP">数据决定程序结构</a>
 
@@ -153,7 +156,7 @@ Steve McConnell的《代码大全》；《Rapid Development》；
 该程序的作用是对三维空间中n个物体的运动进行仿真。从图中可以看出，
 一个程序可以从多方面进行性能提升，而其中算法和数据结构的选择又显得尤为重要。
 
-<img src="/assets/img/2013/8/11/improve.png" />
+<img src="/img/2013/8/11/improve.png" />
 
 从设计层面提升程序性能：
 
@@ -298,7 +301,7 @@ so，just skip this chapter。
 假设我们有一个200 x 200的矩阵(共40000个元素)，里面只有2000个元素有值，
 其它的都为0，示意图如下：
 
-<img src="/assets/img/2013/8/11/matrix.png" />
+<img src="/img/2013/8/11/matrix.png" />
 
 显然这是一个稀疏矩阵，直接用一个200 x 200
 的二维数组来存储这些数据会造成大量的空间浪费，共需要200x200x4B=160KB。
@@ -309,7 +312,7 @@ so，just skip this chapter。
 使用数组表示所有的列，同时使用链表来表示给定列中的活跃元素。
 如下图所示：
 
-<img src="/assets/img/2013/8/11/sparse_matrix.png" />
+<img src="/img/2013/8/11/sparse_matrix.png" />
 
 该结构中，有200个指针(colhead)和2000条记录(每条记录是两个整数和一个指针)，
 占用空间是200x4B + 2000x12B = 24800B = 24.8KB，
@@ -319,7 +322,7 @@ so，just skip this chapter。
 
 我们可以开三个数组来保存这些数，如下图所示：
 
-<img src="/assets/img/2013/8/11/3array.png" />
+<img src="/img/2013/8/11/3array.png" />
 
 firstincol是一个长度为201的数组，对于第i列，在数组row中，
 下标为firstincol[i]到firstincol[i+1]-1对应的行元素非0，
@@ -929,7 +932,7 @@ inline bool cmp(char* p, char*q) {
 后缀数组是处理字符串的有力工具，常见的两种实现方法是：倍增算法和DC3算法。
 推荐阅读以下材料来学习后缀数组：
 
->> 许智磊，《后缀数组》
+> 许智磊，《后缀数组》
 
->> 罗穗骞，《后缀数组——处理字符串的有力工具》
+> 罗穗骞，《后缀数组——处理字符串的有力工具》
 

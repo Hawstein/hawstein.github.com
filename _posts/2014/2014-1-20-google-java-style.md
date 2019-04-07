@@ -1,7 +1,10 @@
 ---
 layout: post
-category: Java
-title:  Google Java编程风格指南
+title: "Google Java 编程风格指南"
+author: "Hawstein"
+header-style: text
+tags:
+  - Java
 ---
 
 ## 目录
@@ -65,7 +68,7 @@ title:  Google Java编程风格指南
 
 对于剩余的非ASCII字符，是使用实际的Unicode字符(比如∞)，还是使用等价的Unicode转义符(比如\u221e)，取决于哪个能让代码更易于阅读和理解。
 
->> Tip: 在使用Unicode转义符或是一些实际的Unicode字符时，建议做些注释给出解释，这有助于别人阅读和理解。
+> Tip: 在使用Unicode转义符或是一些实际的Unicode字符时，建议做些注释给出解释，这有助于别人阅读和理解。
 
 例如：
 
@@ -77,7 +80,7 @@ String unitAbbrev = "\u03bcs";                            | 很糟，读者根�
 return '\ufeff' + content; // byte order mark             | Good，对于非打印字符，使用转义，并在必要时写上注释
 ```
 
->> Tip: 永远不要由于害怕某些程序可能无法正确处理非ASCII字符而让你的代码可读性变差。当程序无法正确处理非ASCII字符时，它自然无法正确运行，
+> Tip: 永远不要由于害怕某些程序可能无法正确处理非ASCII字符而让你的代码可读性变差。当程序无法正确处理非ASCII字符时，它自然无法正确运行，
 你就会去fix这些问题的了。(言下之意就是大胆去用非ASCII字符，如果真的有需要的话)
 
 ## <a id="SFStruct">源文件结构</a>
@@ -212,7 +215,7 @@ void doNothing() {}
 
 我们并没有全面，确定性的准则来决定在每一种情况下如何自动换行。很多时候，对于同一段代码会有好几种有效的自动换行方式。
 
->> Tip: 提取方法或局部变量可以在不换行的情况下解决代码过长的问题(是合理缩短命名长度吧)
+> Tip: 提取方法或局部变量可以在不换行的情况下解决代码过长的问题(是合理缩短命名长度吧)
 
 #### 4.5.1 从哪里断开
 
@@ -264,7 +267,7 @@ void doNothing() {}
 1. 类型和变量之间：List<String> list。
 1. 数组初始化中，大括号内的空格是可选的，即`new int[] {5, 6}`和`new int[] { 5, 6 }`都是可以的。
 
->> Note：这个规则并不要求或禁止一行的开关或结尾需要额外的空格，只对内部空格做要求。
+> Note：这个规则并不要求或禁止一行的开关或结尾需要额外的空格，只对内部空格做要求。
 
 #### 4.6.3 水平对齐：不做要求
 
@@ -282,7 +285,7 @@ private int   x;      // permitted, but future edits
 private Color color;  // may leave it unaligned
 ```
 
->> Tip：对齐可增加代码可读性，但它为日后的维护带来问题。考虑未来某个时候，我们需要修改一堆对齐的代码中的一行。
+> Tip：对齐可增加代码可读性，但它为日后的维护带来问题。考虑未来某个时候，我们需要修改一堆对齐的代码中的一行。
 这可能导致原本很漂亮的对齐代码变得错位。很可能它会提示你调整周围代码的空白来使这一堆代码重新水平对齐(比如程序员想保持这种水平对齐的风格)，
 这就会让你做许多的无用功，增加了reviewer的工作并且可能导致更多的合并冲突。
 
@@ -419,7 +422,7 @@ public String getNameIfPresent() { ... }
 
 注释不要封闭在由星号或其它字符绘制的框架里。
 
->> Tip：在写多行注释时，如果你希望在必要时能重新换行(即注释像段落风格一样)，那么使用`/* ... */`。
+> Tip：在写多行注释时，如果你希望在必要时能重新换行(即注释像段落风格一样)，那么使用 `/* ... */`。
 
 #### 4.8.7 Modifiers
 
@@ -543,7 +546,7 @@ static final String[] nonEmptyArray = {"these", "can", "change"};
 
 加星号处表示可以，但不推荐。
 
->> Note：在英语中，某些带有连字符的单词形式不唯一。例如："nonempty"和"non-empty"都是正确的，因此方法名`checkNonempty`和`checkNonEmpty`也都是正确的。
+> Note：在英语中，某些带有连字符的单词形式不唯一。例如："nonempty"和"non-empty"都是正确的，因此方法名`checkNonempty`和`checkNonEmpty`也都是正确的。
 
 ## <a id="Practice">编程实践</a>
 
@@ -593,8 +596,7 @@ somethingThatYieldsAFoo().aStaticMethod(); // very bad
 
 极少会去重写`Object.finalize`。
 
->> Tip：不要使用finalize。如果你非要使用它，请先仔细阅读和理解[Effective Java](http://books.google.com/books?isbn=8131726592)
-第7条款：“Avoid Finalizers”，然后不要使用它。
+> Tip：不要使用finalize。如果你非要使用它，请先仔细阅读和理解 [Effective Java](http://books.google.com/books?isbn=8131726592) 第7条款：“Avoid Finalizers”，然后不要使用它。
 
 ## <a id="Javadoc">Javadoc</a>
 
@@ -637,7 +639,7 @@ public int method(String p1) { ... }
 这只是一个小片段，可以是一个名词短语或动词短语，但不是一个完整的句子。它不会以`A {@code Foo} is a...`或`This method returns...`开头,
 它也不会是一个完整的祈使句，如`Save the record...`。然而，由于开头大写及被加了标点，它看起来就像是个完整的句子。
 
->> Tip：一个常见的错误是把简单的Javadoc写成`/** @return the customer ID */`，这是不正确的。它应该写成`/** Returns the customer ID. */`。
+> Tip：一个常见的错误是把简单的Javadoc写成`/** @return the customer ID */`，这是不正确的。它应该写成`/** Returns the customer ID. */`。
 
 ### 7.3 哪里需要使用Javadoc
 
@@ -649,7 +651,7 @@ public int method(String p1) { ... }
 
 单元测试类中的测试方法可能是不言自明的最常见例子了，我们通常可以从这些方法的描述性命名中知道它是干什么的，因此不需要额外的文档说明。
 
->> Tip：如果有一些相关信息是需要读者了解的，那么以上的例外不应作为忽视这些信息的理由。例如，对于方法名`getCanonicalName`，
+> Tip：如果有一些相关信息是需要读者了解的，那么以上的例外不应作为忽视这些信息的理由。例如，对于方法名`getCanonicalName`，
 就不应该忽视文档说明，因为读者很可能不知道词语`canonical name`指的是什么。
 
 #### 7.3.2 例外：重写

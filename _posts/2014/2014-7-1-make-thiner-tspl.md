@@ -1,7 +1,11 @@
 ---
 layout: post
-category: Reading
-title: 把《The Swift Programming Language》读薄
+title: "把《The Swift Programming Language》读薄"
+author: "Hawstein"
+header-style: text
+tags:
+  - Reading
+  - Swift
 ---
 
 ## 目录

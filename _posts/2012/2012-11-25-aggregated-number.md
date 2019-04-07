@@ -1,7 +1,10 @@
 ---
 layout: post
-category: Programming
-title: 聚合数(aggregated number)
+title: "聚合数(aggregated number)"
+author: "Hawstein"
+header-style: text
+tags:
+  - Algorithm
 ---
 
 ## 题目

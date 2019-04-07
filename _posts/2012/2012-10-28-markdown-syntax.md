@@ -1,7 +1,10 @@
 ---
 layout: post
-category: Markdown
-title: Markdown的常用语法及Emacs下的快捷键
+title: "Markdown 的常用语法及 Emacs 下的快捷键"
+author: "Hawstein"
+header-style: text
+tags:
+  - Markdown
 ---
 
 ## Markdown的常用语法

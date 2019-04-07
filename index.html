@@ -1,27 +1,46 @@
 ---
-layout: default
-title: Hawstein's Blog
+layout: page
+description: "Make something people love"
 ---
-{% assign first_post = site.posts.first %}
-<div id="post">
-<h1> <a href = "{{ first_post.url }}">
-{{ first_post.title }}
-</a></h1>
 
-<div class="authoring">
-  {{ first_post.date | date: "%B %e, %Y" }}
+{% for post in paginator.posts %}
+<div class="post-preview">
+    <a href="{{ post.url | prepend: site.baseurl }}">
+        <h2 class="post-title">
+            {{ post.title }}
+        </h2>
+        {% if post.subtitle %}
+        <h3 class="post-subtitle">
+            {{ post.subtitle }}
+        </h3>
+        {% endif %}
+        <div class="post-content-preview">
+            {% if post.lang == 'en' %}
+                {{ post.content | strip_html | truncate:300 }}
+            {% else %}
+                {{ post.content | strip_html | truncate:200 }}
+            {% endif %}
+        </div>
+    </a>
+    <p class="post-meta">
+        {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} | {{ post.date | date: "%B %-d, %Y" }}
+    </p>
 </div>
-<div style="line-height:180%;color:#339999;">
-  作者：Hawstein<br>
-  出处：<a href="{{ page.url }}">http://www.hawstein.com{{ page.url }}</a><br>
-  声明：本文采用以下协议进行授权： <a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">自由转载-非商用-非衍生-保持署名|Creative Commons BY-NC-ND 3.0</a> ，转载请注明作者及出处。<br><br>
-</div>
-{{ first_post.content }}
-</div>
+<hr>
+{% endfor %}
 
-<h1> Newest 10 Posts </h1>
-<ul class="posts">
-  {% for post in site.posts limit:10 %}
-  <li><span class="post_date">{{ post.date | date: "%B %e, %Y" }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
-  {% endfor %}
+<!-- Pager -->
+{% if paginator.total_pages > 1 %}
+<ul class="pager">
+    {% if paginator.previous_page %}
+    <li class="previous">
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&larr; Newer Posts</a>
+    </li>
+    {% endif %}
+    {% if paginator.next_page %}
+    <li class="next">
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Older Posts &rarr;</a>
+    </li>
+    {% endif %}
 </ul>
+{% endif %}

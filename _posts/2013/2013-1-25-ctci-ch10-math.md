@@ -1,7 +1,11 @@
 ---
 layout: post
-category: Programming
-title: Cracking the coding interview--Q10.1~Q10.7
+title: "Cracking the coding interview--Q10.1~Q10.7"
+author: "Hawstein"
+header-style: text
+tags:
+  - Algorithm
+  - CC150
 ---
 
 ## 题目10.1
@@ -338,7 +342,7 @@ factors are 3, 5, and 7.
 
 首先，我们可以将满足条件的前几个数列出来，以此寻找解题思路。
 
-<img src="/assets/img/2013/1/25/table.png" />
+<img src="/img/2013/1/25/table.png" />
 
 一种简单的思路就是对于已经列出的数，我们依次去乘以3，5，7得到一组数
 然后找出最小且还没有列出的数，加入到这个列表。然后重复上面的步骤：
@@ -415,7 +419,7 @@ int main(){
 	
 全书题解目录：
 
-[Cracking the coding interview--问题与解答](/posts/ctci-solutions-contents.html)
+[Cracking the coding interview--问题与解答](/2013/03/14/ctci-solutions-contents/)
 
 全书的C++代码托管在Github上：
 

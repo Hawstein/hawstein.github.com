@@ -1,7 +1,11 @@
 ---
 layout: post
-category: Programming
-title: Cracking the coding interview--Q6.1~Q6.6
+title: "Cracking the coding interview--Q6.1~Q6.6"
+author: "Hawstein"
+header-style: text
+tags:
+  - Algorithm
+  - CC150
 ---
 
 ## 题目6.1
@@ -38,7 +42,7 @@ why it’s impossible).
 http://en.wikipedia.org/wiki/Mutilated_chessboard_problem)。
 这道题目的答案是不能。为什么呢？先让我们来看看下面的图。
 
-<img src="/assets/img/2013/1/5/chessboard.png" />
+<img src="/img/2013/1/5/chessboard.png" />
 
 如果不去掉对角的两个方格，我们可以用32个多米诺骨牌把棋盘完全覆盖，
 每个骨牌覆盖两个方格，共覆盖了32*2=64个方格。并且，
@@ -212,7 +216,7 @@ toggles only locker number one hundred, how many lockers are open?
 
 全书题解目录：
 
-[Cracking the coding interview--问题与解答](/posts/ctci-solutions-contents.html)
+[Cracking the coding interview--问题与解答](/2013/03/14/ctci-solutions-contents/)
 
 全书的C++代码托管在Github上：
 

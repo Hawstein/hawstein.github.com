@@ -1,7 +1,11 @@
 ---
 layout: post
-category: Linux
-title: awk常用命令
+title: "AWK 常用命令"
+author: "Hawstein"
+header-style: text
+tags:
+  - Linux
+  - AWK
 ---
 
 1. 打印passwd文件每一行的全部内容(显示在终端)

@@ -1,7 +1,16 @@
 ---
 layout: post
+title: "限制你上某些网站的Chrome插件——Website Postponer"
+author: "Hawstein"
+header-style: text
+tags:
+  - Chrome Extension
+---
+
+---
+layout: post
 category: Programming
-title: 限制你上某些网站的Chrome插件——Website Postponer
+title: 
 ---
 
 ## 前言
@@ -51,7 +60,7 @@ do list里把微博和人人放到晚上10点后才上的task。我可以设置�
 添加完网站，设置完时间，你就无法在这个时间之前访问这些上了黑名单的网站了。
 无图无真相，上图才是王道。
 
-<img src="/assets/img/2012/12/14/option.png" />
+<img src="/img/2012/12/14/option.png" />
 
 这个图看起来果然很傻很天真，纯table搞出来的。以后如果有需要再做得漂亮一些，
 现在这样就OK了。
@@ -109,14 +118,14 @@ background.js。这个background.js在扩展的整个生命周期都存在。
 Page Actions：
 page action是什么呢，一图胜千言。从开发文档中盗张图来用：
 
-<img src="/assets/img/2012/12/14/pageaction.png" />
+<img src="/img/2012/12/14/pageaction.png" />
 
 那个地址栏中的RSS应用(黄色的那个图标)就使用了page action。
 
 说到page action，就要顺便提一下browser action，browser action是什么呢？
 还是看图：
 
-<img src="/assets/img/2012/12/14/browseraction.png" />
+<img src="/img/2012/12/14/browseraction.png" />
 
 那个gmail应用就使用了browser action。
 
@@ -126,7 +135,7 @@ page action是什么呢，一图胜千言。从开发文档中盗张图来用：
 所以最后选了page action，并设置它只在扩展页中出现。即，你只有进入了Chrome的设置
 中的扩展程序项，它才会显示出来。看图：
 
-<img src="/assets/img/2012/12/14/ext.png" />
+<img src="/img/2012/12/14/ext.png" />
 
 只有在上述页面中，才会显示红色圈里的图标。点击它，进入选项页进行设置。选项页后面
 会讲。
@@ -389,7 +398,7 @@ OK，这就是我写的一个简单的Chrome插件。有时间再去改进它。
 
 如果有兴趣安装玩一下，请戳下面的链接：
 
-[WebsitePostponer](/assets/dl/WebsitePostponer.crx)
+[WebsitePostponer](/dl/WebsitePostponer.crx)
 
 源代码在我的GitHub上：
 

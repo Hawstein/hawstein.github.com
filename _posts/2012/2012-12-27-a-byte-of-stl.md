@@ -1,7 +1,11 @@
 ---
 layout: post
-category: Programming
-title: 简明STL教程
+title: "简明 STL 教程"
+author: "Hawstein"
+header-style: text
+tags:
+  - C++
+  - STL
 ---
 
 ## 前言

@@ -1,7 +1,11 @@
 ---
 layout: post
-category: Python
-title: 微信公众平台：程序员的面试吧
+title: "微信公众平台：程序员的面试吧"
+author: "Hawstein"
+header-style: text
+tags:
+  - Python
+  - 公众号
 ---
 
 ## 前言
@@ -35,15 +39,15 @@ title: 微信公众平台：程序员的面试吧
 
 无图无真相的年代，还是放上几张图吧：
 
-<img src="/assets/img/2013/7/18/1.jpg" />
+<img src="/img/2013/7/18/1.jpg" />
 
-<img src="/assets/img/2013/7/18/2.jpg" />
-<img src="/assets/img/2013/7/18/3.jpg" />
+<img src="/img/2013/7/18/2.jpg" />
+<img src="/img/2013/7/18/3.jpg" />
 
-<img src="/assets/img/2013/7/18/4.jpg" />
-<img src="/assets/img/2013/7/18/5.jpg" />
+<img src="/img/2013/7/18/4.jpg" />
+<img src="/img/2013/7/18/5.jpg" />
 
-<img src="/assets/img/2013/7/18/6.jpg" />
-<img src="/assets/img/2013/7/18/7.jpg" />
+<img src="/img/2013/7/18/6.jpg" />
+<img src="/img/2013/7/18/7.jpg" />
 
 

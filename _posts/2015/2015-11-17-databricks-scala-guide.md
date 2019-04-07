@@ -1,7 +1,10 @@
 ---
 layout: post
-category: Scala
-title: Databricks Scala 编程风格指南
+title: "Databricks Scala 编程风格指南"
+author: "Hawstein"
+header-style: text
+tags:
+  - Scala
 ---
 
 ## 声明

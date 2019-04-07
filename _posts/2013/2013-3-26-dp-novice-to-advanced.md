@@ -1,7 +1,11 @@
 ---
 layout: post
-category: Data Structure & Algorithm
-title: 动态规划：从新手到专家
+title: "动态规划：从新手到专家"
+author: "Hawstein"
+header-style: text
+tags:
+  - Algorithm
+  - Data Structure
 ---
 
 ## 前言
@@ -84,11 +88,11 @@ the code!
 
 伪代码如下：
 
-<img src="/assets/img/2013/3/26/pseudocode.png" />
+<img src="/img/2013/3/26/pseudocode.png" />
 
 下图是当i从0到11时的解：
 
-<img src="/assets/img/2013/3/26/sum.png" />
+<img src="/img/2013/3/26/sum.png" />
 
 从上图可以得出，要凑够11元至少需要3枚硬币。
 
@@ -150,7 +154,7 @@ OK，分析到这，我觉得状态转移方程已经很明显了，如果我们
 分析完了，上图：(第二列表示前i个数中LIS的长度，
 第三列表示，LIS中到达当前这个数的上一个数的下标，根据这个可以求出LIS序列)
 
-<img src="/assets/img/2013/3/26/lis.png" />
+<img src="/img/2013/3/26/lis.png" />
 
 Talk is cheap, show me the code:
 
@@ -232,7 +236,7 @@ S[i][j]有两种计算方式：1.对于每一行，从左向右计算，然后�
 
 伪代码如下：
 
-<img src="/assets/img/2013/3/26/2d-dp.png" />
+<img src="/img/2013/3/26/2d-dp.png" />
 
 以下两道题来自topcoder，练习用的。
 
@@ -271,7 +275,7 @@ S[i][j]有两种计算方式：1.对于每一行，从左向右计算，然后�
 
 伪代码：
 
-<img src="/assets/img/2013/3/26/shortest-path.png" />
+<img src="/img/2013/3/26/shortest-path.png" />
 
 下面有几道topcoder上的题以供练习：
 
@@ -306,11 +310,11 @@ S[i][j]有两种计算方式：1.对于每一行，从左向右计算，然后�
 我们得到了三条从顶走到底的路径。对于这一点的理解可以稍微减小问题的难度。
 于是，我们可以将这3条路径记为左，中，右路径。对于两条相交路径(如下图)：
 
-<img src="/assets/img/2013/3/26/intersect.png" />
+<img src="/img/2013/3/26/intersect.png" />
 
 在不影响结果的情况下，我们可以将它们视为两条不相交的路径：
 
-<img src="/assets/img/2013/3/26/no-intersect.png" />
+<img src="/img/2013/3/26/no-intersect.png" />
 
 这样一来，我们将得到左，中，右3条路径。此外，如果我们要得到最优解，
 路径之间不能相交(除了左上角和右下角必然会相交的格子)。因此对于每一行y(

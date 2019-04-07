@@ -1,7 +1,10 @@
 ---
 layout: post
-category: Programming
-title: 求两个单链表的和
+title: "求两个单链表的和"
+author: "Hawstein"
+header-style: text
+tags:
+  - Algorithm
 ---
 
 ## 题目

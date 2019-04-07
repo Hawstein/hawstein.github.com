@@ -1,7 +1,10 @@
 ---
 layout: post
-category: AlgoCasts
-title: AlgoCasts 用心做好每一个算法视频
+title: "AlgoCasts 用心做好每一个算法视频"
+author: "Hawstein"
+header-style: text
+tags:
+  - AlgoCasts
 ---
 
 ## 目录
@@ -26,7 +29,11 @@ title: AlgoCasts 用心做好每一个算法视频
 
 丑媳妇早晚要见公婆，忙活了一段时间，觉得是时候把产品放出来和大家见个面了。先来看个介绍视频：
 
-<video width="640" height="360" controls>
+<video style="width: 100%;
+              height: 100%;
+              max-width: 640px;
+              display: block;
+              margin: 0px auto" controls>
   <source src="https://dpv.videocc.net/496b71353d/1/496b71353d98a7a7ef384ceceb6b3311_2.mp4" type="video/mp4">
 </video>
 

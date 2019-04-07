@@ -1,7 +1,11 @@
 ---
 layout: post
-category: Data Structure & Algorithm
-title: 动态规划之背包问题（一）
+title: "动态规划之背包问题（一）"
+author: "Hawstein"
+header-style: text
+tags:
+  - Algorithm
+  - Data Structure
 ---
 
 一切都要从一则故事说起。
@@ -234,7 +238,7 @@ for(int i=0; i<=n; ++i){
 这个二维数组中的每个状态值我们真的有必要都保存么？
 让我们先来看一下以下的一张示意图（参照《算法竞赛入门经典》P169的图画的）
 
-<img src="/assets/img/2013/3/1/pic.png" />
+<img src="/img/2013/3/1/pic.png" />
 
 由上面那一小段优化过后的代码可知，状态转移方程为：d(i, j)=max{ d(i-1, j), 
 d(i-1, j-V)+W }，也就是在计算d(i, j)时我们用到了d(i-1,j)和d(i-1, j-V)的值。

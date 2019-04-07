@@ -1,7 +1,12 @@
 ---
 layout: post
-category: Data Structure & Algorithm
-title: C/C++字符串处理
+title: "C/C++字符串处理"
+author: "Hawstein"
+header-style: text
+tags:
+  - Algorithm
+  - Data Structure
+  - C++
 ---
 
 ## 前言

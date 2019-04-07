@@ -1,7 +1,11 @@
 ---
 layout: post
-category: AlgoCasts
-title: AlgoCasts 12 月小结 - 2018
+title: "AlgoCasts 2018 年 12 月小结"
+author: "Hawstein"
+header-style: text
+tags:
+  - AlgoCasts
+  - 小结
 ---
 
 AlgoCasts 的 12 月小结如期在 1 月中旬发布了！有句俗语叫，小结会迟到，但从不缺席 233。
@@ -30,11 +34,11 @@ OJ/难度/类别这几个标签一直是用户呼声比较高的，于是在这�
 
 网站经过几次迭代和小调整后，目前的列表页和详情页（播放页）如下：
 
-<img width="400px" src="/assets/img/2019/1/algocasts-list-tags.png" />
-<img width="400px" src="/assets/img/2019/1/algocasts-detail-tags.png" />
+<img width="400px" src="/img/2019/1/algocasts-list-tags.png" />
+<img width="400px" src="/img/2019/1/algocasts-detail-tags.png" />
 
 大概就这些，可能还有一些被我忘记了。hmm，既然忘记了，就让它随风去吧。「记得」还是「忘记」，都随缘就好。
 
 如果有任何疑问，或者只是想和我聊聊，都可以扫码加微信。
 
-<img width="250px" src="/assets/img/2018/11/6/hawstein-studio-wechat.jpeg" />
+<img width="250px" src="/img/2018/11/6/hawstein-studio-wechat.jpeg" />

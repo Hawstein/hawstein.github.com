@@ -1,7 +1,10 @@
 ---
 layout: post
-category: Reading
-title: 把《把时间当作朋友》读薄
+title: "把《把时间当作朋友》读薄"
+author: "Hawstein"
+header-style: text
+tags:
+  - Reading
 ---
 
 ## 目录

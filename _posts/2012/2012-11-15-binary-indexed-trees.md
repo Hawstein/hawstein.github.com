@@ -1,7 +1,11 @@
 ---
 layout: post
-category: Data Structure & Algorithm
-title: 树状数组(Binary Indexed Trees)
+title: "树状数组(Binary Indexed Trees)"
+author: "Hawstein"
+header-style: text
+tags:
+  - Algorithm
+  - Data Structure
 ---
 
 ## 前言
@@ -78,16 +82,16 @@ tree[idx]=f[idx-2^r +1]+...+f[idx]，见表1.1和1.2，你就会一目了然。
 responsible for indexes from (idx-2^r +1)to idx)
 
 <div align="center">
-<img src="/assets/img/2012/11/1.1.png" />
+<img src="/img/2012/11/1.1.png" />
 </div>
 <div align="center">
-<img src="/assets/img/2012/11/1.2.png" />
+<img src="/img/2012/11/1.2.png" />
 </div>
 <div align="center">
-<img src="/assets/img/2012/11/1.3.png" />
+<img src="/img/2012/11/1.3.png" />
 </div>
 <div align="center">
-<img src="/assets/img/2012/11/1.4.png" />
+<img src="/img/2012/11/1.4.png" />
 </div>
 
 假设我们要得到索引为13的累积频率(即c[13])，在二进制表示中，13=1101。因此，
@@ -118,7 +122,7 @@ num & -num = a1b & a^- 1b = (0...0)1(0...0)
 (C++代码如下)
 
 <center>
-<img src="/assets/img/2012/11/readcf.png" />
+<img src="/img/2012/11/readcf.png" />
 </center>
 
 为什么可以这么做呢？关键是tree数组设计得好。我们知道，tree数组是这么定义的：
@@ -137,7 +141,7 @@ f[idx]，即c[idx]的结果。
 	c[1101]=f[1]+...+f[13]=tree[1101]+tree[1100]+tree[1000]
 	
 <center>
-<img src="/assets/img/2012/11/1.5.png" />
+<img src="/img/2012/11/1.5.png" />
 </center>
 
 **read**函数迭代的次数是idx二进制表示中位的个数，其最大值为log(MaxVal)。
@@ -155,13 +159,13 @@ tree数组增加val：tree[idx]　+= val。然后idx更新为idx加上其最后�
 当idx不大于MaxVal时，不断重复上面的两个操作。详情见以下C++函数：
 
 <center>
-<img src="/assets/img/2012/11/change.png" />
+<img src="/img/2012/11/change.png" />
 </center>
 
 接下来让我们来看一个例子，当idx=5时：
 
 <center>
-<img src="/assets/img/2012/11/1.6.png" />
+<img src="/img/2012/11/1.6.png" />
 </center>
 
 使用上面的算法或者按照图1.6的箭头所示去操作，我们即可更新BIT。
@@ -210,7 +214,7 @@ f[idx] = read[idx] - read[idx-1]。即前idx个数的和减去前idx-1个数的�
 可知，经过一定的循环后，其值必然会等于z)。下面是C++函数：
 
 <center>
-<img src="/assets/img/2012/11/readf.png" />
+<img src="/img/2012/11/readf.png" />
 </center>
 
 下面我们来看看根据这个算法，f[12]是怎么计算出来的：
@@ -218,7 +222,7 @@ f[idx] = read[idx] - read[idx-1]。即前idx个数的和减去前idx-1个数的�
 首先，计算z值：z = 12 - (12 & -12) = 8，sum = tree[12] = 11(见表1.1)
 
 <center>
-<img src="/assets/img/2012/11/1.7.png" />
+<img src="/img/2012/11/1.7.png" />
 </center>
 
 对比该算法及调用两次read函数的方法，当idx为奇数时，该算法的时间复杂度仅为O(1)，
@@ -238,7 +242,7 @@ f[idx]-(c-1)\*f[idx]/c = f[idx]/c。用一个for循环即可将所有的tree元�
 代码如下：
 
 <center>
-<img src="/assets/img/2012/11/scale0.png" />
+<img src="/img/2012/11/scale0.png" />
 </center>
 
 上面的方法似乎有点绕，其实，我们有更快的方法。除法是线性操作，而tree数组中的元素
@@ -247,7 +251,7 @@ f[idx]-(c-1)\*f[idx]/c = f[idx]/c。用一个for循环即可将所有的tree元�
 O(MaxVal*log MaxVal)，而下面的程序只需要O(MaxVal)的时间：
 
 <center>
-<img src="/assets/img/2012/11/scale1.png" />
+<img src="/img/2012/11/scale1.png" />
 </center>
 
 	时间复杂度：O(MaxVal)
@@ -267,14 +271,14 @@ C++函数如下：(如果c数组中存在多个cumFre，find函数返回任意�
 的idx值)
 
 <center>
-<img src="/assets/img/2012/11/find.png" />
+<img src="/img/2012/11/find.png" />
 </center>
 
 来看一个例子，当要查找的累积频率是21时，下面的过程将展示算法是如何进行的：
 (这里我就不翻译了，偷个懒)
 
 <center>
-<img src="/assets/img/2012/11/iter.png" />
+<img src="/img/2012/11/iter.png" />
 </center>
 
 	时间复杂度：O(log MaxVal)
@@ -296,23 +300,23 @@ BIT可被扩展到多维的情况。假设在一个布满点的平面上(坐标�
 其中update函数如下：
 
 <center>
-<img src="/assets/img/2012/11/update2d.png" />
+<img src="/img/2012/11/update2d.png" />
 </center>
 
 其中updatey函数与update函数是相似的：
 
 <center>
-<img src="/assets/img/2012/11/updatey.png" />
+<img src="/img/2012/11/updatey.png" />
 </center>
 
 以上两个函数可以整合成一个函数：
 
 <center>
-<img src="/assets/img/2012/11/updateinter.png" />
+<img src="/img/2012/11/updateinter.png" />
 </center>
 
 <center>
-<img src="/assets/img/2012/11/1.8.png" />
+<img src="/img/2012/11/1.8.png" />
 </center>
 
 其它函数的修改也非常相似，这里就不一一写出来了。此外，BIT也可被扩展到n维的情况。
@@ -345,7 +349,7 @@ BIT可被扩展到多维的情况。假设在一个布满点的平面上(坐标�
   的[update](#change)函数和[read](#readcf)函数。
   
 <center>
-<img src="/assets/img/2012/11/2.0.png" />
+<img src="/img/2012/11/2.0.png" />
 </center>
   
 ## <a id="conclusion">总结</a>

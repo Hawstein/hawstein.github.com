@@ -1,7 +1,11 @@
 ---
 layout: post
-category: System Design
-title: 如何用C++实现一个LRU Cache
+title: "如何用 C++ 实现一个 LRU Cache"
+author: "Hawstein"
+header-style: text
+tags:
+  - Algorithm
+  - System Design
 ---
 
 ## 什么是LRU Cache

@@ -1,7 +1,10 @@
 ---
 layout: post
-category: Python
-title: Pyglet教程
+title: "Pyglet 教程"
+author: "Hawstein"
+header-style: text
+tags:
+  - Python
 ---
 
 ## 前言

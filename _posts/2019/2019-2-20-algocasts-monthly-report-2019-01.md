@@ -1,7 +1,11 @@
 ---
 layout: post
-category: AlgoCasts
-title: AlgoCasts 2019 年 1 月小结
+title: "AlgoCasts 2019 年 1 月小结"
+author: "Hawstein"
+header-style: text
+tags:
+  - AlgoCasts
+  - 小结
 ---
 
 拖延了好久，终于决定在这样一个月圆之夜（农历 16），听着随手点开的「汽水糖果柠檬软萌萝莉」歌单，安静地坐下来，写下 2019 年 1 月小结。
@@ -32,4 +36,4 @@ Plan ∞ 目前定价是 1024，购买情况比我想象的要好不少，感谢
 
 One more thing，AlgoCasts 上的注册用户越来越多，不过毕竟付费用户还只占 1/3。对于其他注册用户，有热心的同学建议可以开个免费的「算法交流学习群」，给大家提供一个交流的地方。So, here we go: // 如果达到人数限制，可以加我微信 Hawstein-Studio 拉你进群。
 
-<img width="250px" src="/assets/img/2019/2/algo-study-group.jpg" />
+<img width="250px" src="/img/2019/2/algo-study-group.jpg" />

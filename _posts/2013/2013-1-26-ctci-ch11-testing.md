@@ -1,7 +1,11 @@
 ---
 layout: post
-category: Programming
-title: Cracking the coding interview--Q11.1~Q11.6
+title: "Cracking the coding interview--Q11.1~Q11.6"
+author: "Hawstein"
+header-style: text
+tags:
+  - Algorithm
+  - CC150
 ---
 
 ## 题目11.1
@@ -208,7 +212,7 @@ How would you test an ATM in a distributed banking system?
 
 全书题解目录：
 
-[Cracking the coding interview--问题与解答](/posts/ctci-solutions-contents.html)
+[Cracking the coding interview--问题与解答](/2013/03/14/ctci-solutions-contents/)
 
 全书的C++代码托管在Github上：
 

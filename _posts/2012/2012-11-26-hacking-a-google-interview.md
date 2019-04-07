@@ -1,7 +1,12 @@
 ---
 layout: post
-title: Hacking a Google Interview
-category: Programming
+title: "Hacking a Google Interview"
+author: "Hawstein"
+header-style: text
+tags:
+  - Algorithm
+  - Interview
+  - Google
 ---
 
 ## 前言

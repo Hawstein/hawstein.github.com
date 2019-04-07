@@ -1,7 +1,10 @@
 ---
 layout: post
-category: Linux
-title: Linux Mint 12下的GLX问题
+title: "Linux Mint 12 下的 GLX 问题"
+author: "Hawstein"
+header-style: text
+tags:
+  - Linux
 ---
 
 ## 起因

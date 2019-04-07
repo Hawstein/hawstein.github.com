@@ -1,7 +1,10 @@
 ---
 layout: post
-category: Programming
-title: Google C++编程风格指南
+title: "Google C++ 编程风格指南"
+author: "Hawstein"
+header-style: text
+tags:
+  - C++
 ---
 
 ## 前言

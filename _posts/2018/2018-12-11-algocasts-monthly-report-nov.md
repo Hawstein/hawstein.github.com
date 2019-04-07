@@ -1,7 +1,11 @@
 ---
 layout: post
-category: AlgoCasts
-title: AlgoCasts 11 月小结
+title: "AlgoCasts 2018 年 11 月小结"
+author: "Hawstein"
+header-style: text
+tags:
+  - AlgoCasts
+  - 小结
 ---
 
 一眨眼，一个月又过去了，[AlgoCasts](https://algocasts.io) 又活了一个月，不容易（此处有掌声）。
@@ -54,4 +58,4 @@ title: AlgoCasts 11 月小结
 
 如果有任何疑问，或者只是想和我聊聊，都可以扫码加微信。
 
-<img width="250px" src="/assets/img/2018/11/6/hawstein-studio-wechat.jpeg" />
+<img width="250px" src="/img/2018/11/6/hawstein-studio-wechat.jpeg" />

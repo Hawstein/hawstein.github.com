@@ -1,39 +1,51 @@
 ---
-layout: default
-title: About
+layout: page
+title: "About"
+description: "Make something people love"
+header-img: "img/mbp-bg.jpg"
+multilingual: false
 ---
-<div id="post">
 
-  <h1>关于我</h1>
-  <p>
-    <ul>
-    <li><s>后端工程师 @ 豌豆荚</s></li>
-    <li><s>后端技术负责人 @ GrowingIO</s></li>
-    <li>作者 @ <a href='https://algocasts.io'>AlgoCasts.IO</a></li>
-    <li>Scala 选手</li>
-    <li>Scala Meetup 北京组织者</li>
-    <li>Akka 贡献者</li>
-    <li><a href='https://item.jd.com/12518824.html'>Reactive Design Pattern</a> 译者</li>
-    </ul>
-  </p>
+<!-- Language Selector -->
+<!-- <select class="sel-lang" onchange= "onLanChange(this.options[this.options.selectedIndex].value)">
+    <option value="0" selected> 中文 Chinese </option>
+    <option value="1"> 英文 English </option>
+</select> -->
 
-  <h1>足迹</h1>
-  <p>
-    <ul>
-	  <li>tomhawstein AT gmail DOT com</li>
-    <li><a href='https://twitter.com/Hawstein'>Twitter</a></li>
-	  <li><a href='http://weibo.com/hawstein'>Weibo</a></li>
-	  <li><a href='http://hawstein.com'>Blog</a></li>
-    <li><a href='https://github.com/hawstein'>GitHub</a></li>
-	  <li><a href='https://www.zhihu.com/people/hawstein/'>Zhihu</a></li>
-	  <li><a href='http://www.douban.com/people/53411557/'>Douban</a></li>
-    </ul>
-  </p>
-
-  <h1>微信</h1>
-  <p>
-    <img style="width:300px;height:300px" src="/assets/img/hawstein-studio-wechat.jpeg">
-  </p>
-
+<!-- Chinese Version -->
+<div class="zh post-container">
+    {% capture about_zh %}{% include about/zh.md %}{% endcapture %}
+    {{ about_zh | markdownify }}
 </div>
 
+<!-- English Version -->
+<!-- <div class="en post-container">
+    {% capture about_en %}{% include about/en.md %}{% endcapture %}
+    {{ about_en | markdownify }}
+</div> -->
+
+
+{% if site.disqus_username %}
+<!-- disqus 评论框 start -->
+<div class="comment">
+    <div id="disqus_thread" class="disqus-thread">
+
+    </div>
+</div>
+<!-- disqus 评论框 end -->
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "{{site.disqus_username}}";
+    var disqus_identifier = "{{site.disqus_username}}/{{page.url}}";
+    var disqus_url = "{{site.url}}{{page.url}}";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+{% endif %}
