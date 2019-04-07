@@ -5,7 +5,7 @@ header-img: img/mbp-bg.jpg
 email: tomhawstein@gmail.com
 description: "程序员、创作者、生活艺术家与自我改造者 | 这里是 Hawstein 的个人博客，记录生活点滴。"
 keyword: "Hawstein, AlgoCasts, Maker, Indie Hacker, Self-employed Programmer, Hawstein 工作室, Hawstein 的博客, 自雇程序员, 算法, Scala, Akka"
-url: "http://hawstein.com"              # your host, for absolute URL
+url: "http://www.hawstein.com"              # your host, for absolute URL
 baseurl: ""                             # for example, '/blog' if your blog hosted on 'host/blog'
 
 # Publish posts or collection documents with a future date.
