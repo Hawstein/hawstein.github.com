@@ -6,4 +6,4 @@
 
 如果想使用这个模板写博客，可以移步这里：[huxblog-boilerplate](https://github.com/Huxpro/huxblog-boilerplate)。
 
-如果非要 clone 我这个，请一定记得把 `ga_track_id` 以及 `disqus_username` 改成你自己的，感谢！
+如果非要 clone 我这个，请一定记得把 `ga_track_id` 、 `disqus_username` 以及其他相关配置改成你自己的，感谢！
