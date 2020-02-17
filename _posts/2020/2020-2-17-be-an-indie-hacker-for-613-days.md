@@ -81,4 +81,9 @@ Indie Hacker 还会面临其他困境，比如说怎么处理那么多的自由�
 
 ### 福利时间
 
+* 网站地址：[https://algocasts.io](https://algocasts.io)
+* 活动优惠码：**613**
+* 活动折扣：**8 折**
+* 截止日期：**2020 年 2 月 29 日 23 时 33 分（北京时间）**
+
 ![](/img/2020/2/algocasts-campaign-p200-613.jpg)
