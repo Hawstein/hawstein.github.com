@@ -2,7 +2,7 @@
 
 以下是一些可以找到我的地方：
 
-- tomhawstein AT gmail DOT com
+- tomhawstein 圈A gmail 点 com
 - [Twitter](https://twitter.com/hawstein)
 - [GitHub](https://github.com/hawstein)
 - [YouTube](https://www.youtube.com/channel/UCehd_0QQXDr9PMEerTAQUBw)
@@ -10,6 +10,3 @@
 - [Weibo](http://weibo.com/hawstein)
 - [Douban](http://www.douban.com/people/53411557/)
 
-##### 微信
-
-<img style="width:300px;height:300px" src="/img/hawstein-studio-wechat.jpeg">
