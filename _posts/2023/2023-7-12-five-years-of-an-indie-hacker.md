@@ -1,8 +1,10 @@
 ---
 layout: post
 title: "一个独立创造者的五年"
+description: "时间过得真快啊，游离在这个巨大系统之外，已经 5 年了。"
 author: "Hawstein"
 header-style: text
+og-image: "/img/2023/7/live-freely.jpg"
 tags:
   - Indie Hacker
   - SaaS
