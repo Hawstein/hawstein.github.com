@@ -1,14 +1,18 @@
 ---
 layout: post
 title: "从一期播客说起"
+description: "创造者之间的礼尚往来"
 author: "Hawstein"
 header-style: text
+og-image: "/img/2025/8/random-walk.jpg"
 tags:
   - Indie Hacker
   - Podcast
 ---
 
-最近作客「捕蛇者说」，录了一期播客。万万没想到，主播 [laike9m](https://x.com/laike9m_) 为此还写了篇文章，叫 [我最喜欢的一期《捕蛇者说》](https://laike9m.com/blog/my-favorite-pythonhunter,166/)。作为一个友善的人，我觉得我也应该回应一篇文章。我愿把这种行为叫做「创造者之间的礼尚往来」。
+![](/img/2025/8/random-walk.jpg)
+
+最近作客「捕蛇者说」，录了一期播客。万万没想到，主播 [laike9m](https://x.com/laike9m_) 为此还写了篇文章，叫 [我最喜欢的一期《捕蛇者说》](https://laike9m.com/blog/my-favorite-pythonhunter,166/)。作为一个友善的人，我觉得我也应该回应一篇文章。我愿把这种行为叫做「**创造者之间的礼尚往来**」。
 
 既然决定坐下来写篇文章，那就写长一点吧。
 
@@ -36,7 +40,7 @@ tags:
 
 >  I find that when I’m speaking, I do best when I’m not thinking about what I’m going to say and I won’t even hear what I’m going to say until it comes out of my mouth.  
 
-当然，我觉得，「即兴的总是最好的」这里的「最好」是针对参与者本人的最好。即，只与自己比。同样是即兴，我与孟岩和 Naval 可能还差了十万八千里。
+当然，我觉得，「即兴的总是最好的」这里的「最好」是针对参与者本人的最好。即，只与自己比。同样是即兴，我与孟岩和 Naval 可能还差了很远。
 
 不过话说回来，当我回去听这一期播客，能发现许多不太完美的地方。因为听播客的时候，更多的理性与思考参与了进来。
 
